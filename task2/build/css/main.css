@@ -1,4 +1,111 @@
+*,
+::after,
+::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+img {
+  display: block;
+}
+a {
+  text-decoration: none;
+}
+button {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+button:focus {
+  outline: none;
+}
 html,
 body {
-  font-size: 67.5%;
+  font-size: 65.5%;
+  font-family: "Fjalla One", Arial, Helvetica, sans-serif;
+  line-height: 1.2;
+}
+.page {
+  background: #2a2a2a url("../images/bg-page.jpg") top center repeat-y;
+  background-size: 100% auto;
+}
+.page._home {
+  padding-top: 188px;
+}
+.container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+.header {
+  position: absolute;
+  top: 70px;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background-color: #383838;
+}
+.header__row {
+  display: flex;
+}
+.header__logo {
+  margin-right: auto;
+}
+.logo {
+  display: inline-block;
+  margin: -11px 0;
+  padding: 18px 22px;
+  background-color: #b297c4;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 4.4rem;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+.nav__list {
+  display: flex;
+}
+.nav__item {
+  border-left: 1px solid #292929;
+}
+.nav__item:last-child {
+  border-right: 1px solid #292929;
+}
+.nav__link {
+  display: inline-block;
+  padding: 22px 24px;
+  background-color: transparent;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  line-height: 1.1;
+  color: #fff;
+  transition: color 0.25s ease-out, background 0.25s ease-out;
+}
+.nav__link._active,
+.nav__link:hover {
+  background-color: #2a2a2a;
+  color: #b297c4;
+}
+.nav__button {
+  position: relative;
+  display: none;
+  width: 30px;
+  height: 30px;
+}
+.nav__button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: block;
+  height: 5px;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 10px 0 #fff, 0 20px 0 #fff;
 }
