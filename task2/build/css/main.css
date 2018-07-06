@@ -30,6 +30,14 @@ button {
 button:focus {
   outline: none;
 }
+input {
+  background-color: transparent;
+  border: none;
+  font-family: inherit;
+}
+input:focus {
+  outline: none;
+}
 html,
 body {
   font-size: 65.5%;
@@ -49,6 +57,74 @@ body {
   padding: 0 15px;
   margin: 0 auto;
 }
+.block {
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 1px 18px rgba(42,42,42,0.2);
+}
+.title {
+  font-size: 1.7rem;
+  color: #747474;
+  text-transform: uppercase;
+}
+.link {
+  font-family: Oxygen, Arial, Helvetica, sans-serif;
+  font-size: 1.3rem;
+  color: #979797;
+  letter-spacing: 0.04em;
+  transition: color 0.25s ease-out;
+}
+.link:hover {
+  color: #b297c4;
+}
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  padding: 0;
+}
+.features__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 25%;
+  max-width: 25%;
+  flex-basis: 25%;
+  padding: 30px 30px 36px;
+  text-align: center;
+}
+.features__item:not(:last-child) {
+  position: relative;
+}
+.features__item:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -5px;
+  display: block;
+  width: 10px;
+  background: url("../images/features-shadow.png") top center no-repeat;
+  background-size: contain;
+}
+.features__icon {
+  margin: 0 auto 10px;
+}
+.features__content {
+  margin-top: auto;
+}
+.features__title {
+  margin-bottom: 0.3em;
+}
+.features__link {
+  display: inline-block;
+  padding-bottom: 1px;
+  border-bottom: 1px solid currentColor;
+}
 .header {
   position: absolute;
   top: 70px;
@@ -66,7 +142,9 @@ body {
 .intro-slider__slider {
   position: relative;
   border: 20px solid #fff;
-  border-radius: 5px;
+  border-top-left-radius: 5px;
+  border-top-left-radius: 5px;
+  border-bottom: none;
 }
 .intro-slider__arrow {
   position: absolute;
@@ -161,6 +239,27 @@ body {
   text-transform: uppercase;
   letter-spacing: -0.02em;
 }
+.main-content {
+  background-color: #f0f0f0;
+}
+.main-content__features {
+  margin-bottom: 57px;
+}
+.main-content__row {
+  padding-bottom: 30px;
+  display: flex;
+  align-items: flex-start;
+}
+.main-content__sidebar {
+  width: 25%;
+  max-width: 25%;
+  flex-basis: 25%;
+}
+.main-content__articles {
+  width: 75%;
+  max-width: 75%;
+  flex-basis: 75%;
+}
 .nav__list {
   display: flex;
 }
@@ -202,4 +301,91 @@ body {
   border-radius: 5px;
   background-color: #fff;
   box-shadow: 0 10px 0 #fff, 0 20px 0 #fff;
+}
+.news__title {
+  margin-bottom: 0.3em;
+}
+.news__item {
+  display: flex;
+  align-items: flex-start;
+  padding: 20px 0;
+}
+.news__item:not(:last-child) {
+  border-bottom: 1px solid #f0f0f0;
+}
+.news__item:last-child {
+  padding-bottom: 10px;
+}
+.news__image-outer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  border-radius: 5px;
+  background-color: #b297c4;
+}
+.news__content {
+  flex-grow: 1;
+  padding-left: 18px;
+}
+.news__text {
+  margin-bottom: 0.3em;
+  color: #b297c4;
+  font-size: 1.3rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.news__link {
+  text-decoration: underline;
+  line-height: 1.6;
+}
+.search-bar__title {
+  margin-bottom: 0.8em;
+}
+.search-bar__form {
+  display: flex;
+  height: 32px;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+}
+.search-bar__input {
+  padding: 9px;
+  flex-grow: 1;
+  line-height: 1;
+  font-size: 1.4rem;
+  font-family: Oxygen, Arial, Helvetica, sans-serif;
+  color: #747474;
+}
+.search-bar__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  flex-shrink: 0;
+}
+.search-bar__icon {
+  width: 16px;
+  height: auto;
+}
+.sub-menu__title {
+  margin-bottom: 0.8em;
+}
+.sub-menu__item {
+  display: block;
+  padding: 11px 10px 9px 0;
+}
+.sub-menu__item:not(:last-child) {
+  border-bottom: 1px solid #f0f0f0;
+}
+.sub-menu__link::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-top: 2px solid #b297c4;
+  border-right: 2px solid #b297c4;
+  transform: rotate(45deg);
+  margin-right: 24px;
 }

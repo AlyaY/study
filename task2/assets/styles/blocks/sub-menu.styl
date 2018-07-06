@@ -1,0 +1,18 @@
+.sub-menu
+    &__title
+        margin-bottom 0.8em
+    &__item 
+        display block
+        padding 11px 10px 9px 0
+        &:not(:last-child)
+            border-bottom 1px solid $gray
+    &__link
+        &::before
+            content: ''
+            display inline-block
+            width 6px
+            height 6px
+            border-top: 2px solid $primary
+            border-right: 2px solid $primary
+            transform: rotate(45deg)
+            margin-right 24px
