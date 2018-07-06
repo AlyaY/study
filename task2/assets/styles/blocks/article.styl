@@ -1,0 +1,42 @@
+.article
+    position relative
+    overflow hidden
+    padding-bottom 50px
+    margin-bottom 0
+    align-self: start
+    &__title
+        margin-bottom 1em
+    &__image
+        width 100%
+        height auto
+        border-radius: $br
+        &-outer
+            margin-bottom 26px
+    &__text
+        margin-bottom 2em
+        font-family $ffOxygen
+        font-size: 1.3rem
+        color: #979797
+        letter-spacing .04em          
+        line-height 1.5
+    &__button
+        position absolute
+        bottom 0
+        left 0
+        right 0
+        height 50px
+        padding 18px 20px
+        background-color $primary
+        color: $light
+        font-size: 1.3rem
+        text-transform uppercase
+        letter-spacing .02em          
+        line-height 1
+        &:hover
+            .article__icon
+                transform translateX(30%)
+    &__icon
+        display inline-block
+        margin 0 8px
+        transform translateX(0)
+        transition: transform .3s ease-out
