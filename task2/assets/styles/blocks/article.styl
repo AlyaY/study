@@ -10,8 +10,17 @@
         width 100%
         height auto
         border-radius: $br
+        &._sm
+            width calc(50% - 10px)
+            margin-bottom 20px
         &-outer
             margin-bottom 26px
+            &._sm
+                display: flex
+                align-items: flex-start
+                justify-content space-between
+                flex-wrap: wrap
+                margin-bottom 0
     &__text
         margin-bottom 2em
         font-family $ffOxygen

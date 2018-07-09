@@ -202,8 +202,19 @@ body {
   height: auto;
   border-radius: 5px;
 }
+.article__image._sm {
+  width: calc(50% - 10px);
+  margin-bottom: 20px;
+}
 .article__image-outer {
   margin-bottom: 26px;
+}
+.article__image-outer._sm {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 0;
 }
 .article__text {
   margin-bottom: 2em;
