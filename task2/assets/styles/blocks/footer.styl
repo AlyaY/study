@@ -3,7 +3,7 @@
     &__row
         display flex
         flex-wrap: wrap
-        margin-right -30px
+        margin-right -($defaultMargin)
         margin-bottom 40px
         &:not(:last-child)
             border-bottom 1px solid rgba($light, .2)
@@ -11,7 +11,7 @@
         width 25%
         max-width 25%
         flex-basis 25%
-        padding-right 30px
+        padding-right $defaultMargin
         margin-bottom 26px
     &__text
         color: #a5a5a5
@@ -27,4 +27,46 @@
             &:hover
                 text-decoration underline
     &__breadcrumbs
-        flex-grow 1    
+        flex-grow 1  
+
+
+@media $max-md 
+    .footer
+        padding-top 36px
+        padding-bottom 12px
+        &__col
+            width 50%
+            max-width 50%
+            flex-basis 50%
+            margin-bottom 20px
+
+
+@media $max-sm 
+    .footer
+        &__row
+            margin-right -($defaultMarginSM)
+        &__col
+            padding-right $defaultMarginSM
+        &__text
+            font-size: 1.2rem
+
+
+@media (max-width: 520px)
+    .footer
+        padding-top 36px
+        padding-bottom 12px
+        &__row
+            margin-right 0
+            margin-bottom $defaultMarginSM
+        &__col
+            padding-right 0
+            width 100%
+            max-width 100%
+            flex-basis 100%
+            margin-bottom 14px
+            text-align center
+        &__text
+            display inline-block
+            &:not(:last-child)
+                margin-right 0.4em
+      

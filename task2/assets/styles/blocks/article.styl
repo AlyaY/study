@@ -1,11 +1,9 @@
 .article
     align-self: start
     padding-bottom 1px
-    &__content
-        position relative
-        overflow hidden
-        padding-bottom 50px
-        margin-bottom 0
+    position relative
+    overflow hidden
+    padding-bottom 50px
     &__title
         margin-bottom 1em
     &__image
@@ -42,3 +40,23 @@
         margin 0 8px
         transform translateX(0)
         transition: transform .3s ease-out
+
+
+@media $max-sm
+    .article
+        &__image
+            position absolute
+            left 0
+            right 0
+            top 50%
+            transform translateY(-50%)
+            &-outer
+                position relative
+                height 120px
+                margin-bottom 18px
+                border-radius: $br
+                overflow hidden
+        &__button
+            height 42px
+            padding 14px 20px
+            font-size: 1.2rem

@@ -19,3 +19,51 @@
         max-width: 75%
         flex-basis: 75%
         padding-right $defaultMargin
+
+
+@media $max-md 
+    .main-content
+        color: blue
+        &__features
+            margin-bottom $defaultMargin
+        &__row
+            flex-direction column-reverse
+        &__sidebar
+            display flex
+            flex-wrap: wrap
+            justify-content space-between
+            // align-items: flex-start
+            width: 100%
+            max-width: 100%
+            flex-basis: 100%
+        &__search-bar
+            width 100%
+        &__sub-menu
+        &__news
+            width calc(50% - 15px)   
+        &__articles
+            padding-right 0
+            width: 100%
+            max-width: 100%
+            flex-basis: 100%
+
+
+@media $max-sm 
+    .main-content
+        &__features
+            margin-bottom $defaultMarginSM
+        &__articles
+            grid-gap: 1px $defaultMarginSM
+            grid-template-columns: repeat(2, 1fr);
+        &__sub-menu
+        &__news
+            width calc(50% - 7.5px)    
+
+
+@media (max-width: 520px)
+    .main-content
+        &__sub-menu
+        &__news
+            width 100%  
+        &__articles
+            display block

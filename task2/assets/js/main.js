@@ -1,10 +1,12 @@
 window.onload = function() {
     var $gridElems = $('.js-gridElement'),
         $grid = $('.js-gridWrapper'),
-        $slider = $('.js-slider');
+        $slider = $('.js-slider'),
+        $menuButton = $('.js-menuButton');
 
     $slider.length && initSlider($slider);
     $gridElems.length && $grid.length && initGrid($gridElems, $grid);
+    $menuButton.length && menuToggle($menuButton);
 }
 
 function initSlider($slider) {
@@ -39,10 +41,21 @@ function updateGrid($elems, settings) {
 }
 
 function resizeGridItem(elem, settings) {
-
-    rowSpan = Math.ceil(($(elem).height() + settings.columnGap + settings.rowGap) / (settings.rowHeight+settings.rowGap)); 
+    rowSpan = Math.ceil(($(elem).outerHeight() + settings.columnGap + settings.rowGap) / (settings.rowHeight+settings.rowGap)); 
     // <-- (element height) / (grid row height )
     
     $(elem).css('grid-row-end', 'span ' + rowSpan);
- }
+}
 
+function menuToggle($menuButton) {
+
+    $menu = $('.js-menu');
+
+    $menuButton.on('click', function() {
+        $menu.toggleClass('_open');
+    });
+
+    $menu.find('a').on('click', function() {
+        $menu.removeClass('_open');
+    });
+}

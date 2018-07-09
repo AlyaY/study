@@ -7,6 +7,7 @@ body
 .page
     background: $dark url('../images/bg-page.jpg') top center repeat-y 
     background-size: 100% auto
+    overflow hidden
     &._home
         padding-top 188px   
 
@@ -17,7 +18,7 @@ body
     margin: 0 auto   
 
 .block    
-    margin-bottom 30px
+    margin-bottom $defaultMargin
     padding 20px
     background-color $light
     border-radius: $br
@@ -36,3 +37,23 @@ body
     transition: color .25s ease-out
     &:hover 
         color: $primary
+
+
+@media $max-md
+    .page
+        &._home
+            padding-top 120px  
+
+    .title
+        font-size: 1.6rem
+
+    .link
+        font-size: 1.2rem
+
+
+@media $max-sm
+    .container
+        padding 0 $defaultMarginSM  
+    
+    .block    
+        margin-bottom $defaultMarginSM

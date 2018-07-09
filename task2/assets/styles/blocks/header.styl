@@ -1,12 +1,18 @@
 .header
     position: absolute
+    z-index 1
     top: 70px
     left: 0
     right: 0
-    height 60px
     background-color: $dark-light
     &__row
         display: flex
+        align-items: center
     &__logo
+        position relative
+        z-index 2
         margin-right: auto
 
+@media $max-md
+    .header    
+        top 30px
