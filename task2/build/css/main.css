@@ -352,7 +352,7 @@ body {
     display: none;
   }
 }
-@media (max-width: 412px) {
+@media (max-width: 520px) {
   .features__item {
     width: 100%;
     max-width: 100%;
@@ -572,7 +572,7 @@ body {
     font-size: 3rem;
   }
 }
-@media (max-width: 412px) {
+@media (max-width: 520px) {
   .intro-slider__icon {
     max-width: 40px;
   }
@@ -603,7 +603,7 @@ body {
     font-size: 3rem;
   }
 }
-@media (max-width: 412px) {
+@media (max-width: 520px) {
   .logo {
     font-size: 2.6rem;
   }
@@ -635,9 +635,6 @@ body {
   padding-right: 30px;
 }
 @media (max-width: 1024px) {
-  .main-content {
-    color: #00f;
-  }
   .main-content__features {
     margin-bottom: 30px;
   }
