@@ -14,18 +14,19 @@
         flex-basis: 25%
         padding 30px 30px 36px
         text-align center
-        &:not(:last-child)
+        overflow hidden
+        &:not(:first-child)
             position relative
             &::before
                 content: ''
                 position: absolute
                 top 0
                 bottom 0
-                right -5px
+                left -5px
                 display: block
-                width 10px
-                background url('../images/features-shadow.png') top center no-repeat
-                background-size contain
+                transform: rotate(4deg)
+                box-shadow: 2px 0 20px 4px rgba(0, 0,0, .4)
+
     &__icon
         margin: 0 auto 10px
     &__content
