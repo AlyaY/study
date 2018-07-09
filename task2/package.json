@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "gulpfile.js",
-  "dependencies": {
-    "gulp": "^3.9.1"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "browser-sync": "^2.24.5",
+    "gulp": "^3.9.1",
     "gulp-stylus": "^2.7.0"
   },
   "scripts": {

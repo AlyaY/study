@@ -899,6 +899,10 @@ body {
   height: 6px;
   border-top: 2px solid #b297c4;
   border-right: 2px solid #b297c4;
-  transform: rotate(45deg);
+  transform: translateX(0) rotate(45deg);
+  transition: transform 0.25s ease-out;
   margin-right: 24px;
+}
+.sub-menu__link:hover::before {
+  transform: translateX(100%) rotate(45deg);
 }

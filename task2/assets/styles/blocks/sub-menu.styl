@@ -14,5 +14,9 @@
             height 6px
             border-top: 2px solid $primary
             border-right: 2px solid $primary
-            transform: rotate(45deg)
+            transform: translateX(0) rotate(45deg)
+            transition: transform .25s ease-out
             margin-right 24px
+        &:hover
+            &::before
+                transform: translateX(100%) rotate(45deg)

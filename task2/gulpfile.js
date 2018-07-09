@@ -1,11 +1,12 @@
 var gulp = require('gulp');
 var stylus = require('gulp-stylus');
+var browserSync = require('browser-sync').create();
 
 var buildDerectory = 'build/';
 
 gulp.task('style', function () {
     gulp.src('assets/styles/main.styl')
-    .pipe(stylus())
+    .pipe(stylus().on('error', console.error.bind(console)))
     .pipe(gulp.dest(buildDerectory + 'css'));
 });
 
@@ -24,19 +25,20 @@ gulp.task('copy:js', function() {
     .pipe(gulp.dest(buildDerectory + 'js'));
 });
 
-gulp.task('watch:style', function () {
+gulp.task('serve', function() {
+    browserSync.init({
+        server: {
+            baseDir: './' + buildDerectory
+        }
+    });
+
+    gulp.watch("assets/**/*.*").on('change', browserSync.reload);
+
+    gulp.watch('assets/images/*', ['copy:images']);
+    gulp.watch('assets/index.html', ['copy:index']);
+    gulp.watch('assets/js/*.js', ['copy:js']);
     gulp.watch('assets/styles/**/*.styl', ['style']);
 });
 
-gulp.task('watch:js', function () {
-    gulp.watch('assets/js/*.js', ['copy:js']);
-});
+gulp.task('default', ['serve']);
 
-gulp.task('watch:index', function () {
-    gulp.watch('assets/index.html', ['copy:index']);
-});
-gulp.task('watch:images', function () {
-    gulp.watch('assets/images/*', ['copy:images']);
-});
-
-gulp.task('default', ['watch:style', 'watch:index', 'watch:images', 'watch:js']);
