@@ -1,0 +1,59 @@
+html
+body
+    font-size: 65.5%
+    font-family: $ffFjalla
+    line-height: 1.2
+
+.page
+    background: $dark url('../images/bg-page.jpg') top center repeat-y 
+    background-size: 100% auto
+    overflow hidden
+    &._home
+        padding-top 188px   
+
+.container
+    width: 100%
+    max-width: 1230px
+    padding: 0 $defaultMargin
+    margin: 0 auto   
+
+.block    
+    margin-bottom $defaultMargin
+    padding 20px
+    background-color $light
+    border-radius: $br
+    box-shadow: 0 1px 18px rgba($dark, .2)
+
+.title
+    font-size: 1.7rem
+    color #747474
+    text-transform uppercase  
+
+.link
+    font-family $ffOxygen
+    font-size: 1.3rem
+    color: #979797
+    letter-spacing .04em  
+    transition: color .25s ease-out
+    &:hover 
+        color: $primary
+
+
+@media $max-md
+    .page
+        &._home
+            padding-top 120px  
+
+    .title
+        font-size: 1.6rem
+
+    .link
+        font-size: 1.2rem
+
+
+@media $max-sm
+    .container
+        padding 0 $defaultMarginSM  
+    
+    .block    
+        margin-bottom $defaultMarginSM

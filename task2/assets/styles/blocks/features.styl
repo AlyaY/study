@@ -1,0 +1,67 @@
+.features
+    display: flex
+    flex-wrap: wrap
+    justify-content center
+    border-top-right-radius 0
+    border-top-left-radius 0
+    padding 0
+    &__item
+        display flex
+        flex-direction column
+        align-items: center
+        width: 25%
+        max-width: 25%
+        flex-basis: 25%
+        padding 30px 30px 36px
+        text-align center
+        overflow hidden
+        &:not(:first-child)
+            position relative
+            &::before
+                content: ''
+                position: absolute
+                top 0
+                bottom 0
+                left -5px
+                display: block
+                transform: rotate(4deg)
+                box-shadow: 2px 0 20px 4px rgba($dark, .4)
+    &__icon
+        max-width 60px
+        margin: 0 auto 10px
+    &__content
+        margin-top auto    
+    &__title
+        margin-bottom 0.3em
+    &__link
+        display inline-block
+        padding-bottom 1px
+        text-decoration: underline
+      
+        
+@media $max-md
+    .features
+        &__item
+            padding 24px 12px
+        &__icon
+            max-width 40px
+
+
+@media $max-sm
+    .features
+        &__item
+            width: 50%
+            max-width: 50%
+            flex-basis: 50%
+            border: 1px solid rgba($dark-light, .1)
+            &:not(:first-child)
+                &::before
+                    display none
+
+
+@media $max-xs
+    .features
+        &__item
+            width: 100%
+            max-width: 100%
+            flex-basis: 100%

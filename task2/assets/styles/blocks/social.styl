@@ -1,0 +1,19 @@
+.social
+    display flex
+    &__item
+        &:not(:last-child)
+            margin-right 10px
+    &__link
+        display block
+        width 20px
+        height 20px
+        border-radius: 3px
+    &__icon
+        width 100%
+        height auto    
+
+
+@media $max-xs
+    .social
+        justify-content center
+  
