@@ -188,7 +188,6 @@ body {
   }
 }
 .article {
-  align-self: start;
   padding-bottom: 1px;
   position: relative;
   overflow: hidden;
@@ -643,8 +642,7 @@ body {
 .main-content__articles {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  grid-gap: 1px 30px;
-  grid-auto-rows: 1px;
+  grid-column-gap: 30px;
   width: 75%;
   max-width: 75%;
   flex-basis: 75%;
