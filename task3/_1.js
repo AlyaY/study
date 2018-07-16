@@ -144,9 +144,10 @@ console.log(videos.reduce(function (result, { id, title }) {
 }, {}));
 
 
-  // д)
-
-  var movieLists = [{
+// д) Привести данные к указанному виду, boxarts преобразовать в boxart где значение
+// это ссылка на видео размером 150х200. Используйте следующие функции filter, map,
+// concat.
+var movieLists = [{
     name: "Instant Queue",
     videos: [{
         "id": 70111470,
@@ -218,15 +219,15 @@ console.log(videos.reduce(function (result, { id, title }) {
     }]
 }];
 
-console.log(
-  movieLists
-  .map(function(value) { 
-      return (value.videos.map(function(video){
-        var url = video.boxarts.filter(function(boxart){
-          return boxart.width === 150 && boxart.height;
-        })[0].url;
+console.log(movieLists
+  .reduce((result, value) => { 
+    return result.concat(value.videos);
+  }, [])
+  .map((video) => {
+     var url = video.boxarts.filter((boxart) => {
+         return boxart.width === 150 && boxart.height;
+     })[0].url;
       
-        return {id: video.id, title: video.title, boxarts: url};
-      }));
+    return {id: video.id, title: video.title, boxarts: url};
   })
 );

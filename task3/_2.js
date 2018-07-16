@@ -11,7 +11,6 @@ var voltron = new Robot("Voltron");
 
 // #1 Выведите результат сложения 0 и 1
 // “Human can count to 1”
-
 console.log(add(0, 1));
 
 
