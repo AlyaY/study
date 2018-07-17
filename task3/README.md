@@ -14,7 +14,18 @@ a) Создать свою реализацию функции map для мас
 * 5 - https://jsbin.com/zafakidaqu/edit?js,console    
   
 **Задание 3** - https://jsbin.com/rowucocomu/edit?js,console,output  
-**Задание 4** - https://jsbin.com/muluxibubo/edit?js,console  
-**Задание 5** -   
+  
+### Задание 4
+A) https://jsbin.com/xevukenozu/edit?js,console  
+Б) https://jsbin.com/behufacise/edit?js,console  
+В) https://jsbin.com/tocupetine/edit?js,console  
+Г) https://jsbin.com/jexowuhuli/edit?js,console  
+
+### Задание 5
+#### Что не так с этим кодом ? Предложить исправленную версию.  
+1) https://jsbin.com/jilicajuba/edit?js,console  
+2) https://jsbin.com/pirobijavu/edit?js,console  
+3) https://jsbin.com/gawununafo/edit?js,console  
+4) https://jsbin.com/gazasopeho/edit?js,console  
 
 

@@ -61,10 +61,37 @@ promise.then((res) => { console.log(res) }, (err) => { console.error('Error', er
 
 
 // Г) Программа должна генерировать от 1 до 10 асинхронных функций,
-// которые должны вывести в консоль номер функции и через сколько
-// времени(так же определяется случайно от 1 до 10) сработал в ней
-// console.log.Все эти функции должны работать параллельно.После
+// которые должны вывести в консоль номер функции и через сколькоv времени(так же определяется случайно от 1 до 10) 
+// сработал в ней console.log.
+// Все эти функции должны работать параллельно.После
 // окончания работы этих функций должен вывестись console.log
 // поздравляющий вас с окончанием работы и отображающий сколько
-// времени понадобилось на выполнение(максимальное значение 10
-// конечно)
+// времени понадобилось на выполнение(максимальное значение 10 конечно)
+
+var randomNumber = () => (Math.round(Math.random() * 9) + 1);
+var numberOfFunctions = randomNumber();
+var startDate = Date.now();
+
+function functionGenerate(index) {
+  
+  return new Promise((resolve, reject) => {
+    
+    let time = randomNumber();
+    
+    setTimeout(() => {
+      console.log('function ' + index + ' : time ' + time);
+      
+      resolve('Ok')
+    }, time);
+  });
+}
+
+var arrayAsyncFunctions = [];
+
+for(let i = 0; i < 10; i++) {
+  arrayAsyncFunctions.push(functionGenerate(i));
+}
+
+Promise.all(arrayAsyncFunctions).then(results => {
+  console.log('Eeeee all finished: ' + (Date.now() - startDate));
+});
