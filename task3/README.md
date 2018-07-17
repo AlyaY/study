@@ -13,7 +13,8 @@ a) Создать свою реализацию функции map для мас
 * 1-4 - https://jsbin.com/zahanonaxu/edit?js,console    
 * 5 - https://jsbin.com/zafakidaqu/edit?js,console    
   
-**Задание 3** - https://jsbin.com/rowucocomu/edit?js,console,output  
+### Задание 3
+https://jsbin.com/rowucocomu/edit?js,console,output   
   
 ### Задание 4
 A) https://jsbin.com/xevukenozu/edit?js,console  
