@@ -45,33 +45,32 @@ var newReleases = [{
     "bookmark": [{ id: 432534, time: 65876586 }]
 }];
 
-console.log(newReleases.map(function (value) {
-    return { id: value.id, title: value.title };
-}));
+console.log(newReleases.map(({ id, title }) => ({ id, title })));
 
 
 // в) Создать свою реализацию функции filter для массивов
-Array.prototype.filter = function (cb) {
+Array.prototype.filter = function (predicateFunction) {
     var newArray = [];
 
     for (var i = 0; i < this.length; i++) {
-        cb(this[i], i, this) && newArray.push(this[i]);
+        predicateFunction(this[i], i, this) && newArray.push(this[i]);
     }
 
     return newArray;
 };
 
-console.log(JSON.stringify([1, 2, 3].filter(function (x) { return x > 2 })) === "[3]");
+console.log(JSON.stringify([1, 2, 3].filter((x) => (x > 2))) === "[3]");
 
 
 // г) Выведите массив ids для видео у которых рейтинг 5.0. В качестве входных данных
 // используйте newReleases из предыдущих заданий.
 console.log(
     newReleases
-        .filter(function (value) { return value.id > 5; })
-        .map(function (value) { return value.id; })
+        .filter(({ rating }) =>
+            rating.every((val) => val == 5)
+        )
+        .map(({ id }) => id)
 );
-
 
 // д) Создать свою реализацию функции reduce для массивов
 Array.prototype.reduce = function (combiner, initialValue) {
@@ -84,16 +83,14 @@ Array.prototype.reduce = function (combiner, initialValue) {
     return accumulator;
 }
 
-console.log([1, 2, 3].reduce(function (memo, item) { return memo + item; }) === 6);
-console.log([1, 2, 3].reduce(function (memo, item) { return memo + item; }, 10) === 16);
+console.log([1, 2, 3].reduce((memo, item) => { return memo + item; }) === 6);
+console.log([1, 2, 3].reduce((memo, item) => { return memo + item; }, 10) === 16);
 
 
 // е) С помощью функции reduce получить максимальное значение в массиве
 var ratings = [2, 3, 1, 4, 5];
 
-console.log(ratings.reduce(function (max, current) {
-    return max > current ? max : current;
-}));
+console.log(ratings.reduce((max, current) => (max > current ? max : current)));
 
 
 // ж) С помощью функций map, reduce, вывести url у которого самая большая площадь
@@ -117,10 +114,9 @@ var boxarts = [{
 
 console.log(
     boxarts
-        .map(function (boxart) { return { ...boxart, suqare: (boxart.width * boxart.height) } })
-        .reduce(function (max, current) {
-            return (max.suqare > current.suqare) ? max : current;
-        }).url
+        .map((boxart) => ({ ...boxart, suqare: (boxart.width * boxart.height) }))
+        .reduce((max, current) => (max.suqare > current.suqare) ? max : current)
+        .url
 );
 
 
@@ -139,14 +135,20 @@ var videos = [{
     "title": "Bad Boys"
 }];
 
-console.log(videos.reduce(function (result, { id, title }) {
-    return { ...result, [id]: title }
-}, {}));
+console.log( videos.reduce((result, { id, title }) => ({ ...result, [id]: title }), {}) );
 
 
 // д) Привести данные к указанному виду, boxarts преобразовать в boxart где значение
-// это ссылка на видео размером 150х200. Используйте следующие функции filter, map,
-// concat.
+// это ссылка на видео размером 150х200. Используйте следующие функции filter, map, concat.
+
+// ожидаемый результат
+// [
+// {"id": 70111470,"title": "Die Hard","boxart":"http://cdn-0.nflximg.com / images / 2891 / DieHard150.jpg" }
+// {"id": 654356453,"title": "Bad Boys","boxart":"http://cdn-0.nflximg.com / images / 2891 / BadBoys150.jpg" },
+// {"id": 65432445,"title": "The Chamber","boxart":"http://cdn-0.nflximg.com / images / 2891 / TheChamber150.jpg" },
+// {"id": 675465,"title": "Fracture","boxart":"http://cdn-0.nflximg.com / images / 2891 / Fracture150.jpg" },
+// ];
+
 var movieLists = [{
     name: "Instant Queue",
     videos: [{
@@ -220,14 +222,16 @@ var movieLists = [{
 }];
 
 console.log(movieLists
-  .reduce((result, value) => { 
-    return result.concat(value.videos);
-  }, [])
-  .map((video) => {
-     var url = video.boxarts.filter((boxart) => {
-         return boxart.width === 150 && boxart.height;
-     })[0].url;
-      
-    return {id: video.id, title: video.title, boxarts: url};
-  })
+    .reduce((result, { videos }) => {
+
+        return result.concat(videos);
+    }, [])
+    .map(({ boxarts, id, title }) => {
+
+        var url = boxarts.filter(({ width, height }) => {
+            return width === 150 && height;
+        })[0].url;
+
+        return { id, title, boxarts: url };
+    })
 );
