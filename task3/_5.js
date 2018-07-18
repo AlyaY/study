@@ -1,84 +1,100 @@
-//Задание 5
-
 // Что не так с этим кодом ? Предложить исправленную версию.
-// 1)
-// loadVideosAsync().then(function (videos) {
-//     loadMetaAsync().then(function (meta) {
-//         DoSomething(videos, meta);
-//     });
-// });
 
-Promise.all([loadVideosAsync(), loadMetaAsync()])
-    .then(function ([videos, meta]) {
-        DoSomething(videos, meta);
+(function () {
+    /** 
+     * 1)
+     * loadVideosAsync().then(function (videos) {
+     *     loadMetaAsync().then(function (meta) {
+     *         DoSomething(videos, meta);
+     *     });
+     * });
+     */
+    Promise.all([loadVideosAsync(), loadMetaAsync()])
+        .then(function ([videos, meta]) {
+            DoSomething(videos, meta);
+        });
+}());
+
+
+(function () {
+    /** 
+     * 2) 
+     * function anAsyncCall() {
+     *     var promise = doSomethingAsync();
+     *     promise.then(function () {
+     *         somethingComplicated();
+     *     });
+     *     return promise;
+     * };
+     */
+
+    function doSomethingAsync() {
+        
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+
+                resolve('result');
+            }, 1000);
+        });
+    }
+
+    function anAsyncCall() {
+        
+        return doSomethingAsync().then(() => {
+            // somethingComplicated();
+            console.log(12);
+            return 21;
+        });
+    };
+
+    anAsyncCall().then(res => { console.log(res); });
+}());
+
+
+(function () {
+    /** 
+     * 3) 
+     * db.getAllDocs().then(function (result) {
+     *     result.rows.forEach(function (row) {
+     *         db.remove(row.doc);
+     *     });
+     * }).then(function () {
+     *     // All docs must be removed!
+     * });
+     */
+    db.getAllDocs().then(function (result) {
+        
+        return Promise.all(result.rows.map(function (row) {
+        
+            return db.remove(row.doc);
+        }));
+    })
+    .then(function () {
+        // All docs are removed!
     });
+}());
 
 
-// 2) 
-// function anAsyncCall() {
-//     var promise = doSomethingAsync();
-//     promise.then(function () {
-//         somethingComplicated();
-//     });
-//     return promise;
-// };
+(function () {
+    /** 
+     * 4) 
+     * doAsync().then(function () {
+     *     throw new Error('nope');
+     * }, function (err) {
+     *      // I didn't catch your error! :(
+     * });
+     */
+    function doAsync() {
+        
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
 
-function doSomethingAsync() {
-    return new Promise((resolve, reject) => {
+                resolve('result');
+            }, 1000);
+        });
+    }
 
-        setTimeout(() => {
-
-            resolve('result');
-        }, 1000);
-    });
-}
-
-function anAsyncCall() {
-    return doSomethingAsync().then(function () {
-        // somethingComplicated();
-        console.log(12);
-        return 21;
-    });
-};
-
-anAsyncCall().then((res) => { console.log(res); });
-
-
-// 3) 
-// db.getAllDocs().then(function (result) {
-//     result.rows.forEach(function (row) {
-//         db.remove(row.doc);
-//     });
-// }).then(function () {
-//     // All docs must be removed!
-// });
-
-db.getAllDocs().then(function (result) {
-    return Promise.all(result.rows.map(function (row) {
-        return db.remove(row.doc);
-    }));
-}).then(function () {
-    // All docs are removed!
-});
-
-
-// 4) 
-// doAsync().then(function () {
-//     throw new Error('nope');
-// }, function (err) {
-//     // I didn't catch your error! :(
-// });
-
-function doAsync() {
-    return new Promise((resolve, reject) => {
-
-        setTimeout(() => {
-
-            resolve('result');
-        }, 1000);
-    });
-}
-
-doAsync()
-    .then(function () { throw new Error('nope'); })
-    .catch(function (err) { console.log(err); });
+    doAsync()
+        .then(function () { throw new Error('nope'); })
+        .catch(function (err) { console.log(err); });
+}());    
