@@ -1,17 +1,23 @@
 (function () {
     // a) Создать свою реализацию функции map для массивов
+    
+    const taskA = (function () {
+        Array.prototype.map = function (projectionFunction) {
+            const newArray = [];
 
-    Array.prototype.map = function (projectionFunction) {
-        const newArray = [];
+            for (let i = 0; i < this.length; i++) {
+                newArray.push(projectionFunction(this[i], i, this));
+            }
 
-        for (let i = 0; i < this.length; i++) {
-            newArray.push(projectionFunction(this[i], i, this));
-        }
+            return newArray;
+        };
 
-        return newArray;
-    };
+        const myMap = (arr, fn) => arr.map(fn);
 
-    const array = [1, 2, 3].map(x => x + 1);
+        return myMap;
+    }());
+
+    const array = taskA([1, 2, 3], (x => x + 1));
 
     console.log(JSON.stringify(array) === '[2,3,4]');
 }());
@@ -55,26 +61,37 @@
             "bookmark": [{ id: 432534, time: 65876586 }]
         }
     ];
-    const releaseDetails = newReleases.map(({ id, title }) => ({ id, title }));
 
-    console.log(releaseDetails);
+    var taskB = (function () {
+        const transformArray = (list) => list.map(({ id, title }) => ({ id, title }));
+
+        return transformArray;
+    }());
+
+    console.log(taskB(newReleases));
 }());
 
 
 (function () {
     // в) Создать свою реализацию функции filter для массивов
+    
+    const taskC = (function () {
+        Array.prototype.filter = function (predicateFunction) {
+            const newArray = [];
 
-    Array.prototype.filter = function (predicateFunction) {
-        const newArray = [];
+            for (let i = 0; i < this.length; i++) {
+                predicateFunction(this[i], i, this) && newArray.push(this[i]);
+            }
 
-        for (let i = 0; i < this.length; i++) {
-            predicateFunction(this[i], i, this) && newArray.push(this[i]);
-        }
+            return newArray;
+        };
 
-        return newArray;
-    };
+        const myFilter = (arr, fn) => arr.filter(fn);
 
-    const filteredArray = [1, 2, 3].filter(x => x > 2);
+        return myFilter;
+    }());
+
+    const filteredArray = taskC([1, 2, 3], (x => x > 2));
 
     console.log(JSON.stringify(filteredArray) === "[3]");
 }());
@@ -118,30 +135,34 @@
             "bookmark": [{ id: 432534, time: 65876586 }]
         }
     ];
-
-    const bestVideos = newReleases
-        .filter(({ rating }) =>
-            rating.every(val => val === 5)
+    
+    var taskG = (function () {
+        const getIds = (list) => (list
+            .filter(({ rating }) =>
+                rating.every(val => val === 5)
+            )
+            .map(({ id }) => id)
         )
-        .map(({ id }) => id);
-
-    console.log(bestVideos);
+        return getIds;
+    }());
+    
+    console.log(taskG(newReleases));
 }());
 
 
-const taskD = (function () {
+(function () {
     /** 
-     * д) Привести данные к указанному виду, boxarts преобразовать в boxart где значение
-     * это ссылка на видео размером 150х200. Используйте следующие функции filter, map, concat.
-
-     * ожидаемый результат
-     * [
-     * {"id": 70111470,"title": "Die Hard","boxart":"http://cdn-0.nflximg.com / images / 2891 / DieHard150.jpg" }
-     * {"id": 654356453,"title": "Bad Boys","boxart":"http://cdn-0.nflximg.com / images / 2891 / BadBoys150.jpg" },
-     * {"id": 65432445,"title": "The Chamber","boxart":"http://cdn-0.nflximg.com / images / 2891 / TheChamber150.jpg" },
-     * {"id": 675465,"title": "Fracture","boxart":"http://cdn-0.nflximg.com / images / 2891 / Fracture150.jpg" },
-     * ];
-     */
+        * д) Привести данные к указанному виду, boxarts преобразовать в boxart где значение
+        * это ссылка на видео размером 150х200. Используйте следующие функции filter, map, concat.
+   
+        * ожидаемый результат
+        * [
+        * {"id": 70111470,"title": "Die Hard","boxart":"http://cdn-0.nflximg.com / images / 2891 / DieHard150.jpg" }
+        * {"id": 654356453,"title": "Bad Boys","boxart":"http://cdn-0.nflximg.com / images / 2891 / BadBoys150.jpg" },
+        * {"id": 65432445,"title": "The Chamber","boxart":"http://cdn-0.nflximg.com / images / 2891 / TheChamber150.jpg" },
+        * {"id": 675465,"title": "Fracture","boxart":"http://cdn-0.nflximg.com / images / 2891 / Fracture150.jpg" },
+        * ];
+        */
     const movieLists = [
         {
             name: "Instant Queue",
@@ -232,56 +253,65 @@ const taskD = (function () {
         }
     ];
 
-    const updateList = (list = movieLists) => (
-        list
-            .reduce((result, { videos }) => result.concat(videos), [])
-            .map(({ boxarts, id, title }) => {
-                var url = boxarts.find(({ width, height }) => width === 150 && height).url;
+    const taskD = (function () {
 
-                return { id, title, boxarts: url };
-            })
-    )
+        const updateList = (list) => (
+            list
+                .reduce((result, { videos }) => result.concat(videos), [])
+                .map(({ boxarts, id, title }) => {
+                    var url = boxarts.find(({ width, height }) => width === 150 && height).url;
 
-    return updateList;
+                    return { id, title, boxarts: url };
+                })
+        )
+
+        return updateList;
+    }());
+
+    console.log(taskD(movieLists));
 }());
-
-console.log(taskD());
 
 
 (function () {
     // д) Создать свою реализацию функции reduce для массивов
+    
+    const myReduce = (function () {
+        Array.prototype.reduce = function (combiner, initialValue) {
+            var accumulator = initialValue || this.shift();
 
-    Array.prototype.reduce = function (combiner, initialValue) {
-        var accumulator = initialValue || this.shift();
+            for (let i = 0; i < this.length; i++) {
+                accumulator = combiner(accumulator, this[i], i, this);
+            }
 
-        for (let i = 0; i < this.length; i++) {
-            accumulator = combiner(accumulator, this[i], i, this);
+            return accumulator;
         }
 
-        return accumulator;
-    }
+        const myReduce = (arr, fn, initValue) => arr.reduce(fn, initValue);
 
-    const sum1 = [1, 2, 3].reduce((memo, item) => memo + item);
-    const sum2 = [1, 2, 3].reduce((memo, item) => memo + item, 10);
+        return myReduce;
+    }());
 
-    console.log(sum1 === 6);
-    console.log(sum2 === 16);
+    console.log(myReduce([1, 2, 3], ((memo, item) => memo + item)) === 6);
+    console.log(myReduce([1, 2, 3], ((memo, item) => memo + item), 10) === 16);
 }());
 
 
 (function () {
     // е) С помощью функции reduce получить максимальное значение в массиве
-
     const ratings = [2, 3, 1, 4, 5];
-    const maxRatings = ratings.reduce((max, current) => max > current ? max : current);
+    
+    const findMax = (function () {
 
-    console.log(maxRatings);
+        const max = (ratings) => ratings.reduce((max, current) => max > current ? max : current);
+
+        return max;
+    }());
+    console.log(findMax(ratings));
 }());
 
 
-const taskJ = (function () {
+(function () {
     // ж) С помощью функций map, reduce, вывести url у которого самая большая площадь
-
     const boxarts = [
         {
             width: 200,
@@ -305,17 +335,20 @@ const taskJ = (function () {
         }
     ];
 
-    const getUrl = (list = boxarts) => (
-        list
-            .map(boxart => ({ ...boxart, suqare: (boxart.width * boxart.height) }))
-            .reduce((max, current) => max.suqare > current.suqare ? max : current)
-            .url
-    );
+    const taskJ = (function () {
 
-    return getUrl;
+        const getUrl = (list) => (
+            list
+                .map(boxart => ({ ...boxart, suqare: (boxart.width * boxart.height) }))
+                .reduce((max, current) => max.suqare > current.suqare ? max : current)
+                .url
+        );
+
+        return getUrl;
+    }());
+
+    console.log(taskJ(boxarts));
 }());
-
-console.log(taskJ());
 
 
 (function () {
@@ -341,7 +374,13 @@ console.log(taskJ());
         }
     ];
 
-    const newVideos = videos.reduce((result, { id, title }) => ({ ...result, [id]: title }), {});
+    var convertArrayToObject = (function () {
+        const convert = (videos) => (
+            videos.reduce((result, { id, title }) => ({ ...result, [id]: title }), {})
+        );
+        
+        return convert;
+    }());
 
-    console.log(newVideos);
+    console.log(convertArrayToObject(videos));
 }());

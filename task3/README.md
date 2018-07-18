@@ -1,13 +1,13 @@
 ### Задание 1  
-a) Создать свою реализацию функции map для массивов - https://jsbin.com/quvelavawu/edit?js,console   
-б) Переделайте массив так, чтобы объекты были следующего вида { id: …, title: … } - https://jsbin.com/gemudiseba/edit?js,console  
-в) Создать свою реализацию функции filter для массивов - https://jsbin.com/cigapacaha/edit?js,console  
-г) Выведите массив ids для видео у которых рейтинг 5.0 - https://jsbin.com/mayovucebe/edit?js,console  
+a) Создать свою реализацию функции map для массивов - https://jsbin.com/cupegay/edit?js,console   
+б) Переделайте массив так, чтобы объекты были следующего вида { id: …, title: … } - https://jsbin.com/kodipur/edit?js,console  
+в) Создать свою реализацию функции filter для массивов - https://jsbin.com/zovagiy/edit?js,console  
+г) Выведите массив ids для видео у которых рейтинг 5.0 - https://jsbin.com/kenufaf/edit?js,console  
 д) Привести данные к указанному виду - https://jsbin.com/rucusex/edit?js,console  
-д) Создать свою реализацию функции reduce для массивов - https://jsbin.com/cewumuzoqu/edit?js,console  
-е) С помощью функции reduce получить максимальное значение в массиве - https://jsbin.com/fogajehufa/edit?js,console  
+д) Создать свою реализацию функции reduce для массивов - https://jsbin.com/yanojek/edit?js,console  
+е) С помощью функции reduce получить максимальное значение в массиве - https://jsbin.com/cexejag/edit?js,console  
 ж) С помощью функций map, reduce, вывести url у которого самая большая площадь - https://jsbin.com/navacah/edit?js,console  
-з) Преобразуйте массив в объект используя функцию reduce. - https://jsbin.com/xenococuxo/edit?js,console  
+з) Преобразуйте массив в объект используя функцию reduce. - https://jsbin.com/vovoroq/edit?js,console  
   
 ### Задание 2   
 * 1-4 - https://jsbin.com/yehoroq/edit?js,console   
