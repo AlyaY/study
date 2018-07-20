@@ -1,7 +1,7 @@
 (function () {
     // a) Создать свою реализацию функции map для массивов
     
-    const taskA = (function () {
+    (function () {
         Array.prototype.map = function (projectionFunction) {
             const newArray = [];
 
@@ -11,13 +11,9 @@
 
             return newArray;
         };
-
-        const myMap = (arr, fn) => arr.map(fn);
-
-        return myMap;
     }());
-
-    const array = taskA([1, 2, 3], (x => x + 1));
+  
+    const array = [1, 2, 3].map(x => x + 1);
 
     console.log(JSON.stringify(array) === '[2,3,4]');
 }());
@@ -74,8 +70,7 @@
 
 (function () {
     // в) Создать свою реализацию функции filter для массивов
-    
-    const taskC = (function () {
+    (function () {
         Array.prototype.filter = function (predicateFunction) {
             const newArray = [];
 
@@ -85,13 +80,9 @@
 
             return newArray;
         };
-
-        const myFilter = (arr, fn) => arr.filter(fn);
-
-        return myFilter;
     }());
-
-    const filteredArray = taskC([1, 2, 3], (x => x > 2));
+  
+    const filteredArray = [1, 2, 3].filter(x => x > 2);
 
     console.log(JSON.stringify(filteredArray) === "[3]");
 }());
@@ -253,29 +244,28 @@
         }
     ];
 
-    const taskD = (function () {
+    const updateList = (list) => (
+        list
+            .reduce((result, { videos }) => result.concat(videos), [])
+            .map(({ boxarts, id, title }) => {
+                var url = boxarts.find(({ width, height }) => width === 150 && height === 200).url;
 
-        const updateList = (list) => (
-            list
-                .reduce((result, { videos }) => result.concat(videos), [])
-                .map(({ boxarts, id, title }) => {
-                    var url = boxarts.find(({ width, height }) => width === 150 && height).url;
-
-                    return { id, title, boxarts: url };
-                })
-        )
-
-        return updateList;
-    }());
-
-    console.log(taskD(movieLists));
+                return { 
+                  id, 
+                  title, 
+                  boxarts: url 
+                };
+            })
+        );
+    
+    console.log(updateList(movieLists));
 }());
 
 
 (function () {
     // д) Создать свою реализацию функции reduce для массивов
     
-    const myReduce = (function () {
+    (function () {
         Array.prototype.reduce = function (combiner, initialValue) {
             var accumulator = initialValue || this.shift();
 
@@ -285,19 +275,19 @@
 
             return accumulator;
         }
-
-        const myReduce = (arr, fn, initValue) => arr.reduce(fn, initValue);
-
-        return myReduce;
     }());
+    
+    const sum1 = [1, 2, 3].reduce((memo, item) => memo + item);
+    const sum2 = [1, 2, 3].reduce((memo, item) => memo + item, 10);
 
-    console.log(myReduce([1, 2, 3], ((memo, item) => memo + item)) === 6);
-    console.log(myReduce([1, 2, 3], ((memo, item) => memo + item), 10) === 16);
+    console.log(sum1 === 6);
+    console.log(sum2 === 16);
 }());
 
 
 (function () {
     // е) С помощью функции reduce получить максимальное значение в массиве
+    
     const ratings = [2, 3, 1, 4, 5];
     
     const findMax = (function () {
@@ -306,6 +296,7 @@
 
         return max;
     }());
+    
     console.log(findMax(ratings));
 }());
 

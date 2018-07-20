@@ -27,27 +27,15 @@
      *     return promise;
      * };
      */
-
-    function doSomethingAsync() {
-        
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-
-                resolve('result');
-            }, 1000);
-        });
-    }
+    
 
     function anAsyncCall() {
         
-        return doSomethingAsync().then(() => {
-            // somethingComplicated();
-            console.log(12);
-            return 21;
+      return doSomethingAsync().then((res) => {
+            somethingComplicated();
+            return res;
         });
     };
-
-    anAsyncCall().then(res => { console.log(res); });
 }());
 
 

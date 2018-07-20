@@ -35,25 +35,26 @@
      *   должно вывести конечный результат
      * });
      */
+    const delayPromise = (duration, value) => (
+        new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(value);
+            }, duration);
+        })
+    )
 
-    new Promise((resolve, reject) => {
-        setTimeout(() => { resolve(10); }, 3000);
-    })
-        .then(result => new Promise((resolve, reject) => {
+    delayPromise(3000, 10)
+        .then((result) => {
+            console.log(result, );
+
+            return result + 2;
+        })
+        .then((result) => {
             console.log(result);
 
-            resolve(result + 2);
+            return delayPromise(2000, result);
         })
-        )
-        .then(result => new Promise((resolve, reject) => {
-            setTimeout(() => {
-                console.log(result);
-
-                resolve(result + 2);
-            }, 2000);
-        })
-        )
-        .then(result => console.log(result));
+        .then((result) => console.log(result));
 }());
 
 
@@ -84,26 +85,34 @@
      * поздравляющий вас с окончанием работы и отображающий сколько
      * времени понадобилось на выполнение(максимальное значение 10 конечно)
      */
+  
     const startDate = Date.now();
-    const arrayAsyncFunctions = [];
+    
 
-    const randomNumber = () => (Math.round(Math.random() * 9) + 1);
-    const functionGenerate = index => new Promise((resolve, reject) => {
+    const randomNumber = (min, max) => (Math.round(Math.random() * (max - min)) + min);
+    const generateFunction = (index, min, max) => new Promise((resolve, reject) => {
 
-        let time = randomNumber();
+        let time = randomNumber(min, max);
 
         setTimeout(() => {
             console.log('function ' + index + ' : time ' + time);
 
             resolve('Ok')
         }, time);
+
     });
+  
+    const generateArrayOfFunctions = (n, min, max) => {
+        const arrayAsyncFunctions = [];
 
-    for (let i = 0; i < 10; i++) {
-        arrayAsyncFunctions.push(functionGenerate(i));
+        for (let i = 0; i < n; i++) {
+             arrayAsyncFunctions.push(generateFunction(i, min, max));
+        }
+
+        return arrayAsyncFunctions;
     }
-
-    Promise.all(arrayAsyncFunctions).then(results => {
+     
+    Promise.all(generateArrayOfFunctions(10, 1, 10)).then(results => {
         console.log('Eeeee all finished: ' + (Date.now() - startDate));
     });
 }());
