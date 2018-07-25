@@ -1,1 +1,12 @@
 task2/node_modules
+/node_modules
+
+# dependencies
+task4/node_modules
+
+# testing
+task4/coverage
+
+# production
+task4/build
+
