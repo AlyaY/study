@@ -10,22 +10,65 @@ class CounterContainer extends Component {
   }
 
   increment = () => {
+    console.log('-----------------');
+    console.log('--- increment ---');
+
     this.setState({ count: this.state.count + 1 })
   }
 
   decrement = () => {
+    console.log('-----------------');
+    console.log('--- decrement ---');
+
     this.setState((prevState) => {
       return { count: prevState.count > 0 ? prevState.count - 1 : 0 };
     });
   }
 
   reset = () => {
+    console.log('-------------');
+    console.log('--- reset ---');
+
     this.setState({ count: 0 });
   }
 
+  componentDidMount() {
+    console.log('counter || componentDidMount');
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('counter || shouldComponentUpdate');
+
+    return this.state.count !== nextState.count;
+  }
+  componentWillReceiveProps(nextProps) {
+    console.log('counter || UNSAFE_componentWillRecieveProps');
+
+    if(nextProps.action === 'ADD' && this.state.count % 2 === 0) {
+      this.setState({ count: this.state.count + 1 });
+    }
+
+    if(nextProps.action === 'DELETE'  && this.state.count % 2 === 1) {
+      this.setState({ count: this.state.count - 1 });
+    }
+  }
+  componentDidUpdate() {
+    console.log('counter || componentDidUpdate');
+  }
+  componentWillUnmount() {
+    console.log('counter || componentWillUnmount');
+  }
+  // getDerivedStateFromProps() {
+  //   console.log('counter || getDerivedStateFromProps');
+  // }
+  // getSnapshotBeforeUpdate(props, state) {
+  //   console.log('counter || getSnapshotBeforeUpdate', props, state);
+  // }
+
   render() {
+    console.log('counter || render');
+
     const props = {
-      increment: this.increment,
+        increment: this.increment,
         decrement: this.decrement,
         reset: this.reset,
         counter: this.state.count,

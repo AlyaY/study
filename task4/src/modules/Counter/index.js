@@ -1,3 +1,3 @@
-import CounterContainer from './containers/CounterContainer';
+import CounterListContainer from './containers/CounterListContainer'
 
-export default CounterContainer;
+export default CounterListContainer

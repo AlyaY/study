@@ -3,7 +3,6 @@ const styles = {
     textAlign: 'center'
   },
   title: {},
-  text: {},
   btn: {
     margin: '0 8px'
   }
