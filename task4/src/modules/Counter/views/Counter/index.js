@@ -1,37 +1,39 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles'
+import Button from '@material-ui/core/Button'
+import AddIcon from '@material-ui/icons/Add'
+import RemoveIcon from '@material-ui/icons/Remove'
+import RestoreIcon from '@material-ui/icons/SettingsBackupRestoreSharp'
 import style from './styles'
 
-const Counter = ({counter, classes, increment, decrement, reset}) => (
+const Counter = ({ counter, classes, increment, decrement, reset }) => (
   <div className={classes.root}>
-    <h2 className={classes.title}>Counter</h2>
-    <p className={classes.text}>{counter}</p>
+    <h2 className={classes.title}>{counter}</h2>
     <div className={classes.btns}>
       <Button
         className={classes.btn}
         onClick={increment}
-        variant='contained'
+        variant='fab'
         color='primary'
-      >
-        increment
+        aria-label='Add'>
+        <AddIcon />
       </Button>
       <Button
         className={classes.btn}
         onClick={decrement}
-        variant='contained'
+        variant='fab'
         color='primary'
       >
-        decrement
+        <RemoveIcon />
       </Button>
       <Button
         className={classes.btn}
         onClick={reset}
-        variant='contained'
+        variant='fab'
         color='secondary'
       >
-        reset
+        <RestoreIcon />
       </Button>
     </div>
   </div>
