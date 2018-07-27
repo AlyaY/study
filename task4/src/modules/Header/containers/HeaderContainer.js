@@ -9,26 +9,29 @@ class HeaderContainer extends Component {
       routers: [
         {
           path: '/about',
-          component: '',
           name: 'О нас'
         },
         {
           path: '/counters',
-          component: '',
           name: 'Счетчик'
         }
-      ]
+      ],
+      value: 0
     }
   }
 
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
+
   render () {
     const props = {
-      routers: this.state.routers
+      routers: this.state.routers,
+      handleChange: this.handleChange,
+      value: this.state.value
     }
 
-    return (
-      <Header {...props} />
-    )
+    return <Header {...props} />
   }
 }
 
