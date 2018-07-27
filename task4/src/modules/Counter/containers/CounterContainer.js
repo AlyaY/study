@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Counter from '../views/Counter'
-import Actions from '../constants'
+import { ADD, REMOVE } from '../constants'
 
 class CounterContainer extends Component {
   constructor(props) {
@@ -10,7 +10,7 @@ class CounterContainer extends Component {
     };
   }
 
-  isEven = (num) => (num% 2 === 0);
+  isCountEven = () => (this.state.count %  2 === 0);
 
   increment = () => {
     console.log('-----------------');
@@ -46,11 +46,11 @@ class CounterContainer extends Component {
   componentWillReceiveProps(nextProps) {
     console.log('counter || UNSAFE_componentWillRecieveProps');
 
-    if(nextProps.action === Actions.ADD && this.isEven(this.state.count)) {
+    if(nextProps.action === ADD && this.isCountEven()) {
       this.setState({ count: this.state.count + 1 });
     }
 
-    if(nextProps.action === Actions.REMOVE  && !this.isEven(this.state.count)) {
+    if(nextProps.action === REMOVE  && !this.isCountEven()) {
       this.setState({ count: this.state.count - 1 });
     }
   }
