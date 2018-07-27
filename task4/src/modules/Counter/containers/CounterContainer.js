@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import Counter from '../views/Counter'
+import Actions from '../constants'
 
 class CounterContainer extends Component {
   constructor(props) {
@@ -8,6 +9,8 @@ class CounterContainer extends Component {
       count: 0,
     };
   }
+
+  isEven = (num) => (num% 2 === 0);
 
   increment = () => {
     console.log('-----------------');
@@ -43,11 +46,11 @@ class CounterContainer extends Component {
   componentWillReceiveProps(nextProps) {
     console.log('counter || UNSAFE_componentWillRecieveProps');
 
-    if(nextProps.action === 'ADD' && this.state.count % 2 === 0) {
+    if(nextProps.action === Actions.ADD && this.isEven(this.state.count)) {
       this.setState({ count: this.state.count + 1 });
     }
 
-    if(nextProps.action === 'DELETE'  && this.state.count % 2 === 1) {
+    if(nextProps.action === Actions.REMOVE  && !this.isEven(this.state.count)) {
       this.setState({ count: this.state.count - 1 });
     }
   }
@@ -57,12 +60,6 @@ class CounterContainer extends Component {
   componentWillUnmount() {
     console.log('counter || componentWillUnmount');
   }
-  // getDerivedStateFromProps() {
-  //   console.log('counter || getDerivedStateFromProps');
-  // }
-  // getSnapshotBeforeUpdate(props, state) {
-  //   console.log('counter || getSnapshotBeforeUpdate', props, state);
-  // }
 
   render() {
     console.log('counter || render');

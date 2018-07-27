@@ -1,5 +1,4 @@
 const styles = {
-  root: {},
   list: {
     listStyle: 'none',
     display: 'flex',

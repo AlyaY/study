@@ -1,5 +1,7 @@
-import React, { Component } from "react";
-import CounterList from "./../views/CounterList";
+import React, { Component } from 'react'
+import CounterList from './../views/CounterList'
+import CounterButtons from './../views/CounterButtons'
+import Actions from '../constants'
 
 class CounterListContainer extends Component {
   constructor(props) {
@@ -21,7 +23,7 @@ class CounterListContainer extends Component {
     this.setState({
       counters: [...newCounters, { key: this.state.number + 1 }],
       number: this.state.number + 1,
-      action: 'ADD',
+      action: Actions.ADD,
     });
   };
 
@@ -32,7 +34,7 @@ class CounterListContainer extends Component {
       this.setState({
         counters: newCounters.slice(0, -1),
         number: this.state.number - 1,
-        action: 'DELETE',
+        action: Actions.DELETE,
       });
     }
   };
@@ -43,7 +45,7 @@ class CounterListContainer extends Component {
     this.setState({
       counters: newCountres.slice(0, 1),
       number: 1,
-      action: 'RESET',
+      action: Actions.RESET,
     });
   };
 
@@ -66,25 +68,27 @@ class CounterListContainer extends Component {
   componentWillUnmount() {
     console.log('counterList || componentWillUnmount');
   }
-  // getDerivedStateFromProps() {
-  //   console.log('counterList || getDerivedStateFromProps');
-  // }
-  // getSnapshotBeforeUpdate(props, state) {
-  //   console.log('counterList || getSnapshotBeforeUpdate', props, state);
-  // }
 
   render() {
     console.log('counterList || render');
 
-    const props = {
-      action: this.state.action,
-      listData: this.state.counters,
+    const propsButtons = {
       addCounter: this.addCounter,
       deleteCounter: this.deleteCounter,
       resetCounter: this.resetCounter
     };
 
-    return <CounterList {...props} />;
+    const propsList = {
+      action: this.state.action,
+      listData: this.state.counters
+    };
+
+    return (
+      <div>
+        <CounterButtons {...propsButtons} />
+        <CounterList {...propsList} />
+      </div>
+    );
   }
 }
 
