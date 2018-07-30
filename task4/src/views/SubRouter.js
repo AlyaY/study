@@ -1,15 +1,12 @@
 import React from 'react'
-import style from './styles'
 
-import { withStyles } from '@material-ui/core/styles'
-
-import Counter from '../../../Counter'
-import About from '../../../About'
+import Counter from '../pages/Counter'
+import About from '../pages/About'
 import { Switch, Route, Redirect } from 'react-router-dom'
 
-const Main = ({ classes }) => {
+const SubRouter = () => {
   return (
-    <div className={classes.root}>
+    <div>
       <Switch>
         <Route exact path='/' />
         <Route path='/counters' component={Counter} />
@@ -20,4 +17,4 @@ const Main = ({ classes }) => {
   )
 }
 
-export default withStyles(style)(Main)
+export default SubRouter
