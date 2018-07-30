@@ -25,7 +25,7 @@ class HeaderContainer extends Component {
     this.setState({ value });
   };
 
-  componentWillReceiveProps({location: { pathname}}) {
+  componentWillReceiveProps({location: { pathname }}) {
     if(pathname !==  this.state.value) {
       this.setState({ value: pathname });
     }
