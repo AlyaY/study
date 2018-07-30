@@ -8,10 +8,10 @@ const SubRouter = () => {
   return (
     <div>
       <Switch>
-        <Route exact path='/' />
-        <Route path='/counters' component={Counter} />
-        <Route path='/about' component={About} />
-        <Redirect from='*' to='/404' />
+        <Route exact path='/study' />
+        <Route path='/study/counters' component={Counter} />
+        <Route path='/study/about' component={About} />
+        <Redirect from='*' to='/study/404' />
       </Switch>
     </div>
   )

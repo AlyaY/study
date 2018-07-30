@@ -8,12 +8,12 @@ class HeaderContainer extends Component {
     this.state = {
       routers: [
         {
-          path: '/about',
+          path: '/study/about',
           name: 'О нас',
           value: 0
         },
         {
-          path: '/counters',
+          path: '/study/counters',
           name: 'Счетчик',
           value: 1
         }
@@ -23,13 +23,8 @@ class HeaderContainer extends Component {
   }
 
   handleChange = (event, value) => {
-    console.log(event, value);
     this.setState({ value });
   };
-
-  // handleChange = (event, value) => {
-  //   // this.props.history.push(value);
-  // }
 
   render () {
     const props = {
