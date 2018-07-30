@@ -9,20 +9,27 @@ class HeaderContainer extends Component {
       routers: [
         {
           path: '/about',
-          name: 'О нас'
+          name: 'О нас',
+          value: 0
         },
         {
           path: '/counters',
-          name: 'Счетчик'
+          name: 'Счетчик',
+          value: 1
         }
       ],
-      value: 0
+      value: -1
     }
   }
 
   handleChange = (event, value) => {
+    console.log(event, value);
     this.setState({ value });
   };
+
+  // handleChange = (event, value) => {
+  //   // this.props.history.push(value);
+  // }
 
   render () {
     const props = {
@@ -30,7 +37,6 @@ class HeaderContainer extends Component {
       handleChange: this.handleChange,
       value: this.state.value
     }
-
     return <Header {...props} />
   }
 }

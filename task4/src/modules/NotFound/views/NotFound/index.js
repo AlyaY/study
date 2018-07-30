@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/core/styles'
 const NotFound = ({ classes }) => {
   return (
     <div className={classes.root}>
-      <h2>This page is not found</h2>
+      <h2 className={classes.title}>This page is not found</h2>
     </div>
   )
 }

@@ -9,7 +9,9 @@ import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 
 const Header = ({ routers, handleChange, value, classes }) => {
-  const tabs = routers.map(({ path, name }) => (<Tab key={path} label={name} component={Link} to={path} />))
+  const tabs = routers.map(({ path, name, value }) => (
+    <Tab key={path} value={value} label={name} component={Link} to={path} />
+  ))
 
   return (
     <div className={classes.root}>

@@ -1,6 +1,12 @@
 const styles = {
   root: {
-    marginBottom: '30px'
+    display: 'flex',
+    minHeight: '60vh',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  title: {
+    fontSize: '52px'
   }
 }
 
