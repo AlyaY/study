@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Header from '../views/Header'
+import { withRouter } from 'react-router'
 
 class HeaderContainer extends Component {
   constructor (props) {
@@ -9,16 +10,14 @@ class HeaderContainer extends Component {
       routers: [
         {
           path: '/study/about',
-          name: 'О нас',
-          value: 0
+          name: 'О нас'
         },
         {
           path: '/study/counters',
-          name: 'Счетчик',
-          value: 1
+          name: 'Счетчик'
         }
       ],
-      value: -1
+      value: props.location.pathname || ''
     }
   }
 
@@ -36,4 +35,4 @@ class HeaderContainer extends Component {
   }
 }
 
-export default HeaderContainer
+export default withRouter(HeaderContainer)
