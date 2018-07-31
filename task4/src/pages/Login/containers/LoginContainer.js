@@ -22,14 +22,6 @@ class LoginContainer extends Component {
     }
   }
 
-  inputHandle = (event) => {
-    this.setState({ formData: { 
-        ...this.state.formData,
-        [event.target.name]: event.target.value
-      }
-    })
-  };
-
   validateField = (name, value) => {
     switch (name) {
       case 'email' : 
@@ -62,8 +54,6 @@ class LoginContainer extends Component {
     if(isValid) {
       console.log(JSON.stringify(this.state.formData));
 
-      event.target.reset();
-
       this.setState({ 
         formData: {
           password: '',
@@ -85,7 +75,6 @@ class LoginContainer extends Component {
     const props = {
       formData: this.state.formData,
       formErrors: this.state.formErrors,
-      inputHandle: this.inputHandle,
       submitHandler: this.submitHandler
     }
 
