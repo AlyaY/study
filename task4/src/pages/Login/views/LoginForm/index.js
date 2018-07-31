@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/core/styles'
 const LoginForm = ({ formData, formErrors, inputHandle, submitHandler, classes }) => {
   return (
     <div className={classes.root}>
-      <form className={classes.form} onSubmit={submitHandler}>
+      <form className={classes.form} onSubmit={submitHandler} >
         <label className={classes.label}>
           <input
             className={classes.field}
@@ -27,7 +27,7 @@ const LoginForm = ({ formData, formErrors, inputHandle, submitHandler, classes }
         </label>
         <button className={classes.button}>Войти</button>
       </form>
-      <pre> {JSON.stringify(formData)}</pre>
+      <pre>{JSON.stringify(formData)}</pre>
     </div>
   )
 }

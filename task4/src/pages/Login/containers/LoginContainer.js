@@ -23,8 +23,6 @@ class LoginContainer extends Component {
   }
 
   inputHandle = (event) => {
-    console.log(event.target.name, event.target.value, this.state)
-
     this.setState({ formData: { 
         ...this.state.formData,
         [event.target.name]: event.target.value
@@ -61,14 +59,29 @@ class LoginContainer extends Component {
       }
     }
 
-    this.setState({ 
-      formErrors
-    })
+    if(isValid) {
+      console.log(JSON.stringify(this.state.formData));
+
+      event.target.reset();
+
+      this.setState({ 
+        formData: {
+          password: '',
+          email: ''
+        },
+        formErrors: {
+          password: '',
+          email: ''
+        }
+      })
+    } else {
+      this.setState({ 
+        formErrors
+      })
+    }
   }
 
   render () {
-    console.log(this.state)
-
     const props = {
       formData: this.state.formData,
       formErrors: this.state.formErrors,
