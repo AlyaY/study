@@ -1,33 +1,29 @@
 import React, { Component } from 'react'
 import LoginForm from '../views/LoginForm'
+import { validations, errorMessages } from '../constants'
 
 class LoginContainer extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      formData: {
-        password: '',
-        email: ''
-      },
-      formErrors: {
-        password: '',
-        email: ''
-      }
+      password: '',
+      email: '',
+      errorPassword: '',
+      errorEmail: '',
     };
-
-    this.validation = {
-      email: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      password: /[^]{6,}/,
-    }
   }
+
+  handleChange = (event) => {
+    this.setState({ [event.target.name]: event.target.value })
+  };
 
   validateField = (name, value) => {
     switch (name) {
       case 'email' : 
-        return this.validation.email.test(value) ? '' : 'Envalid email';
+        return validations.email.test(value) ? '' : errorMessages.email;
       case 'password' : 
-        return this.validation.password.test(value) ? '' : 'Envalid password'
+        return validations.password.test(value) ? '' : errorMessages.password;
       default:
         break;
     }
@@ -35,47 +31,37 @@ class LoginContainer extends Component {
     return '';
   }
 
-  submitHandler = (event) => {
+  handleSubmit = (event) => {
     event.preventDefault();
 
-    const formErrors = {};
-    let isValid = true;
-    let errorMessage;
-
-    for(let field in this.state.formData) {
-      errorMessage = this.validateField(field, this.state.formData[field]);
-      
-      if(errorMessage) {
-        formErrors[field] = errorMessage;
-        isValid = false;
-      }
-    }
-
-    if(isValid) {
-      console.log(JSON.stringify(this.state.formData));
+    const errorPassword = this.validateField('password', this.state.password);
+    const errorEmail = this.validateField('email', this.state.email);
+    
+    if(!errorPassword && !errorEmail) {
+      console.log(JSON.stringify(this.state));
 
       this.setState({ 
-        formData: {
-          password: '',
-          email: ''
-        },
-        formErrors: {
-          password: '',
-          email: ''
-        }
+        password: '',
+        email: '',
+        errorPassword: '',
+        errorEmail: ''
       })
     } else {
       this.setState({ 
-        formErrors
+        errorPassword,
+        errorEmail
       })
     }
   }
 
   render () {
     const props = {
-      formData: this.state.formData,
-      formErrors: this.state.formErrors,
-      submitHandler: this.submitHandler
+      email: this.state.email,
+      password: this.state.password,
+      errorEmail: this.state.errorEmail,
+      errorPassword: this.state.errorPassword,
+      handleChange: this.handleChange,
+      handleSubmit: this.handleSubmit
     }
 
     return <LoginForm {...props} />

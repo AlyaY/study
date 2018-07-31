@@ -4,39 +4,45 @@ import style from './styles'
 
 import { withStyles } from '@material-ui/core/styles'
 
-const LoginForm = ({ formData, formErrors, submitHandler, classes }) => {
+const LoginForm = ({ email, password, errorEmail, errorPassword, handleChange, handleSubmit, classes }) => {
   return (
     <div className={classes.root}>
-      <form className={classes.form} onSubmit={submitHandler} >
+      <form className={classes.form} onSubmit={handleSubmit} >
         <label className={classes.label}>
           <input
             className={classes.field}
-            value={formData.email}
+            value={email}
+            onChange={handleChange}
             name='email'
             placeholder='Введите ваш email'
           />
-          <span className={classes.errorText}>{formErrors.email}</span>
+          <span className={classes.errorText}>{errorEmail}</span>
         </label>
         <label className={classes.label}>
           <input
             className={classes.field}
-            value={formData.password}
+            value={password}
+            onChange={handleChange}
             name='password'
+            type='password'
             placeholder='Введите ваш пароль'
           />
-          <span className={classes.errorText}>{formErrors.password}</span>
+          <span className={classes.errorText}>{errorPassword}</span>
         </label>
         <button className={classes.button}>Войти</button>
       </form>
-      <pre>{JSON.stringify(formData)}</pre>
+      <pre>{ JSON.stringify({email, password}) }</pre>
     </div>
   )
 }
 
 LoginForm.propTypes = {
-  formData: PropTypes.object.isRequired,
-  formErrors: PropTypes.object.isRequired,
-  submitHandler: PropTypes.func.isRequired
-};
+  email: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  errorEmail: PropTypes.string.isRequired,
+  errorPassword: PropTypes.string.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired
+}
 
 export default withStyles(style)(LoginForm)
