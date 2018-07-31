@@ -15,6 +15,10 @@ class HeaderContainer extends Component {
         {
           path: '/study/counters',
           name: 'Счетчик'
+        },
+        {
+          path: '/study/login',
+          name: 'Войти'
         }
       ],
       value: props.location.pathname || ''
