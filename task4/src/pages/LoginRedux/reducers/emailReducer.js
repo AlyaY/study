@@ -1,11 +1,13 @@
-// import { emailReducers } from '../actions'
+import { UPDATE_EMAIL } from '../actions/constants'
 
-const emailReducer = (state, action) => {
+const initialState = ''
+
+const emailReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'SET_VISIBILITY_FILTER':
-      return {}
+    case UPDATE_EMAIL:
+      return action.payload.email
     default:
-      return {}
+      return initialState
   }
 }
 

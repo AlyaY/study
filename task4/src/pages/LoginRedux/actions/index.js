@@ -1,15 +1,21 @@
+import { LOGIN_SUCCESS, LOGIN_ERROR, UPDATE_EMAIL, UPDATE_PASSWORD } from './constants'
+
 export const updateEmail = email => ({
-  type: 'UPDATE_EMAIL'
+  type: UPDATE_EMAIL,
+  payload: { email: email }
 })
 
 export const updatePassword = password => ({
-  type: 'UPDATE_PASSWORD'
+  type: UPDATE_PASSWORD,
+  payload: { password }
 })
 
-export const updateEmailError = errorMsg => ({
-  type: 'UPDATE_EMAIL_ERROR'
+export const loginSuccess = () => ({
+  type: LOGIN_SUCCESS,
+  payload: {}
 })
 
-export const updatePasswordError = errorMsg => ({
-  type: 'UPDATE_PASSWORD_ERROR'
+export const loginError = errors => ({
+  type: LOGIN_ERROR,
+  payload: errors
 })

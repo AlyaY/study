@@ -4,7 +4,7 @@ import style from './styles'
 
 import { withStyles } from '@material-ui/core/styles'
 
-const LoginForm = ({ email, password, errorEmail, errorPassword, onChange, onSubmit, classes }) => {
+const LoginForm = ({ email, password, errorEmail, errorPassword, onChangeEmail, onChangePassword, onSubmit, classes }) => {
   console.log(this)
 
   return (
@@ -14,7 +14,7 @@ const LoginForm = ({ email, password, errorEmail, errorPassword, onChange, onSub
           <input
             className={classes.field}
             value={email}
-            onChange={onChange}
+            onChange={onChangeEmail}
             name='email'
             placeholder='Введите ваш email'
           />
@@ -24,7 +24,7 @@ const LoginForm = ({ email, password, errorEmail, errorPassword, onChange, onSub
           <input
             className={classes.field}
             value={password}
-            onChange={onChange}
+            onChange={onChangePassword}
             name='password'
             type='password'
             placeholder='Введите ваш пароль'
@@ -43,7 +43,8 @@ LoginForm.propTypes = {
   password: PropTypes.string.isRequired,
   errorEmail: PropTypes.string.isRequired,
   errorPassword: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  onChangeEmail: PropTypes.func.isRequired,
+  onChangePassword: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired
 }
 

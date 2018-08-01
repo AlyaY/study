@@ -1,11 +1,15 @@
-// import { emailErrorReducers } from '../actions'
+import { LOGIN_SUCCESS, LOGIN_ERROR } from '../actions/constants'
 
-const emailErrorReducer = (state, action) => {
+const initialState = ''
+
+const emailErrorReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'SET_VISIBILITY_FILTER':
-      return {}
+    case LOGIN_SUCCESS:
+      return initialState
+    case LOGIN_ERROR:
+      return action.payload.errorEmail
     default:
-      return {}
+      return initialState
   }
 }
 

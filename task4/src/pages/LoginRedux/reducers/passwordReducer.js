@@ -1,11 +1,13 @@
-// import { passwordReducers } from '../actions'
+import { UPDATE_PASSWORD } from '../actions/constants'
 
-const passwordReducer = (state, action) => {
+const initialState = ''
+
+const passwordReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'SET_VISIBILITY_FILTER':
-      return {}
+    case UPDATE_PASSWORD:
+      return action.payload.password
     default:
-      return {}
+      return initialState
   }
 }
 
