@@ -19,6 +19,10 @@ class HeaderContainer extends Component {
         {
           path: '/study/login',
           name: 'Войти'
+        },
+        {
+          path: '/study/login-redux',
+          name: 'Войти с помощью redux'
         }
       ],
       value: props.location.pathname || ''
