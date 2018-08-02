@@ -1,5 +1,5 @@
-import { connect } from 'react-redux'
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import LoginForm from '../views/LoginForm'
 import { validations, errorMessages } from '../constants'
 import { updateEmail, updatePassword, loginSuccess, loginError } from '../actions'

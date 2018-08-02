@@ -5,8 +5,6 @@ import style from './styles'
 import { withStyles } from '@material-ui/core/styles'
 
 const LoginForm = ({ email, password, errorEmail, errorPassword, onChangeEmail, onChangePassword, onSubmit, classes }) => {
-  console.log(this)
-
   return (
     <div className={classes.root}>
       <form className={classes.form} onSubmit={onSubmit} >
