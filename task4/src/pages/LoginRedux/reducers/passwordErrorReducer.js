@@ -1,16 +1,16 @@
-import { LOGIN_SUCCESS, LOGIN_ERROR } from '../actions/constants'
+import { LOGIN_SUCCESS, LOGIN_ERROR } from '../actions/constants';
 
-const initialState = ''
+const initialState = '';
 
 const passwordErrorReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
-      return initialState
+      return initialState;
     case LOGIN_ERROR:
-      return action.payload.errorPassword
+      return action.payload.errorPassword;
     default:
-      return state
+      return state;
   }
 }
 
-export default passwordErrorReducer
+export default passwordErrorReducer;

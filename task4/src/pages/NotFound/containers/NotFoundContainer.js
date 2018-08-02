@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import NotFound from '../views/NotFound'
+import React, { Component } from 'react';
+import NotFound from '../views/NotFound';
 
 class NotFoundContainer extends Component {
   render () {
@@ -7,4 +7,4 @@ class NotFoundContainer extends Component {
   }
 }
 
-export default NotFoundContainer
+export default NotFoundContainer;

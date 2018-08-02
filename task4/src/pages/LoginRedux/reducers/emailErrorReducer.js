@@ -1,16 +1,16 @@
-import { LOGIN_SUCCESS, LOGIN_ERROR } from '../actions/constants'
+import { LOGIN_SUCCESS, LOGIN_ERROR } from '../actions/constants';
 
-const initialState = ''
+const initialState = '';
 
 const emailErrorReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
-      return initialState
+      return initialState;
     case LOGIN_ERROR:
-      return action.payload.errorEmail
+      return action.payload.errorEmail;
     default:
-      return state
+      return state;
   }
 }
 
-export default emailErrorReducer
+export default emailErrorReducer;

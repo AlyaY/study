@@ -1,8 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import style from './styles'
+import React from 'react';
+import PropTypes from 'prop-types';
+import style from './styles';
 
-import { withStyles } from '@material-ui/core/styles'
+import { withStyles } from '@material-ui/core/styles';
 
 const LoginForm = ({ email, password, errorEmail, errorPassword, handleChange, handleSubmit, classes }) => {
   return (
@@ -42,7 +42,7 @@ LoginForm.propTypes = {
   errorEmail: PropTypes.string.isRequired,
   errorPassword: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired
+  handleSubmit: PropTypes.func.isRequired,
 }
 
-export default withStyles(style)(LoginForm)
+export default withStyles(style)(LoginForm);

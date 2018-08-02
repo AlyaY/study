@@ -1,14 +1,14 @@
-import { UPDATE_PASSWORD } from '../actions/constants'
+import { UPDATE_INPUT } from '../actions/constants';
 
-const initialState = ''
+const initialState = '';
 
 const passwordReducer = (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_PASSWORD:
-      return action.payload.password
+    case UPDATE_INPUT:
+      return action.payload.password || state;
     default:
-      return state
+      return state;
   }
 }
 
-export default passwordReducer
+export default passwordReducer;

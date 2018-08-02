@@ -3,11 +3,11 @@ const styles = {
     display: 'flex',
     minHeight: '60vh',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   title: {
-    fontSize: '52px'
+    fontSize: '52px',
   }
 }
 
-export default styles
+export default styles;

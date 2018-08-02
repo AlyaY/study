@@ -1,15 +1,14 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import Success from '../views/Success'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Success from '../views/Success';
 
 class SuccessContainer extends Component {
   render () {
     const props = {
       email: this.props.email,
-      password: this.props.password
-    }
+      password: this.props.password,
+    };
 
-    console.log(this)
     return <Success {...props} />
   }
 }
@@ -21,6 +20,4 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps
-)(SuccessContainer)
-
-// export default SuccessContainer
+)(SuccessContainer);

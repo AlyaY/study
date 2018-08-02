@@ -1,8 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import style from './styles'
+import React from 'react';
+import PropTypes from 'prop-types';
+import style from './styles';
 
-import { withStyles } from '@material-ui/core/styles'
+import { withStyles } from '@material-ui/core/styles';
 
 const Success = ({ email, password, classes }) => {
   return (
@@ -16,7 +16,7 @@ const Success = ({ email, password, classes }) => {
 
 Success.propTypes = {
   email: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired
+  password: PropTypes.string.isRequired,
 }
 
-export default withStyles(style)(Success)
+export default withStyles(style)(Success);

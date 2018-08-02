@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import LoginForm from '../views/LoginForm'
-import { validations, errorMessages } from '../constants'
+import React, { Component } from 'react';
+import LoginForm from '../views/LoginForm';
+import { validations, errorMessages } from '../constants';
 
 class LoginContainer extends Component {
   constructor(props) {
@@ -15,8 +15,8 @@ class LoginContainer extends Component {
   }
 
   handleChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value })
-  };
+    this.setState({ [event.target.name]: event.target.value });
+  }
 
   validateField = (name, value) => {
     switch (name) {
@@ -44,12 +44,12 @@ class LoginContainer extends Component {
         password: '',
         email: '',
         errorPassword: '',
-        errorEmail: ''
+        errorEmail: '',
       })
     } else {
       this.setState({ 
         errorPassword,
-        errorEmail
+        errorEmail,
       })
     }
   }
@@ -61,11 +61,11 @@ class LoginContainer extends Component {
       errorEmail: this.state.errorEmail,
       errorPassword: this.state.errorPassword,
       handleChange: this.handleChange,
-      handleSubmit: this.handleSubmit
-    }
+      handleSubmit: this.handleSubmit,
+    };
 
     return <LoginForm {...props} />
   }
 }
 
-export default LoginContainer
+export default LoginContainer;

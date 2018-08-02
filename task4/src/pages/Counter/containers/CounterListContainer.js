@@ -1,10 +1,11 @@
-import React, { Component } from 'react'
-import CounterWrapper from './../views/CounterWrapper'
-import { ADD, REMOVE, RESET } from '../constants'
+import React, { Component } from 'react';
+import CounterWrapper from './../views/CounterWrapper';
+import { ADD, REMOVE, RESET } from '../constants';
 
 class CounterListContainer extends Component {
   constructor(props) {
     super(props);
+    
     this.state = {
       counters: [
         {
@@ -13,7 +14,7 @@ class CounterListContainer extends Component {
       ],
       number: 1,
       action: '',
-    };
+    }
   }
 
   addCounter = () => {
@@ -24,7 +25,7 @@ class CounterListContainer extends Component {
       number: this.state.number + 1,
       action: ADD,
     });
-  };
+  }
 
   deleteCounter = () => {
     const newCounters = [...this.state.counters];
@@ -36,7 +37,7 @@ class CounterListContainer extends Component {
         action: REMOVE,
       });
     }
-  };
+  }
 
   resetCounter = () => {
     const newCountres = [...this.state.counters];
@@ -46,7 +47,7 @@ class CounterListContainer extends Component {
       number: 1,
       action: RESET,
     });
-  };
+  }
 
   componentDidMount() {
     console.log('counterList || componentDidMount');
@@ -76,7 +77,7 @@ class CounterListContainer extends Component {
       deleteCounter: this.deleteCounter,
       resetCounter: this.resetCounter,
       action: this.state.action,
-      listData: this.state.counters
+      listData: this.state.counters,
     };
 
     return ( <CounterWrapper {...props} />);

@@ -1,11 +1,11 @@
 const styles = {
   root: {
-    textAlign: 'center'
+    textAlign: 'center',
   },
   title: {},
   btn: {
-    margin: '0 8px'
+    margin: '0 8px',
   }
-}
+};
 
-export default styles
+export default styles;

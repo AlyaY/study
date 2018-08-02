@@ -1,13 +1,13 @@
 const styles = {
   root: {
-    marginBottom: '30px'
+    marginBottom: '30px',
   },
   title: {
-    fontSize: '48px'
+    fontSize: '48px',
   },
   text: {
-    fontSize: '20px'
-  }
+    fontSize: '20px',
+  },
 }
 
-export default styles
+export default styles;

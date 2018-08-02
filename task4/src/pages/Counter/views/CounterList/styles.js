@@ -2,12 +2,12 @@ const styles = {
   list: {
     listStyle: 'none',
     display: 'flex',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
   },
   item: {
     width: '25%',
-    marginBottom: '20px'
+    marginBottom: '20px',
   }
 }
 
-export default styles
+export default styles;

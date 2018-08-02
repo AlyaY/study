@@ -1,14 +1,14 @@
-import { UPDATE_EMAIL } from '../actions/constants'
+import { UPDATE_INPUT } from '../actions/constants';
 
-const initialState = ''
+const initialState = '';
 
 const emailReducer = (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_EMAIL:
-      return action.payload.email
+    case UPDATE_INPUT:
+      return action.payload.email || state;
     default:
-      return state
+      return state;
   }
 }
 
-export default emailReducer
+export default emailReducer;

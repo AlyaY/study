@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
-import Header from '../views/Header'
-import { withRouter } from 'react-router'
+import React, { Component } from 'react';
+import Header from '../views/Header';
+import { withRouter } from 'react-router';
 
 class HeaderContainer extends Component {
   constructor (props) {
-    super(props)
+    super(props);
 
     this.state = {
       routers: [
@@ -22,16 +22,16 @@ class HeaderContainer extends Component {
         },
         {
           path: '/study/login-redux',
-          name: 'Войти с помощью redux'
+          name: 'Войти с помощью redux',
         }
       ],
-      value: props.location.pathname || ''
-    }
+      value: props.location.pathname || '',
+    };
   }
 
   handleChange = (event, value) => {
     this.setState({ value });
-  };
+  }
 
   componentWillReceiveProps({location: { pathname }}) {
     if(pathname !==  this.state.value) {
@@ -43,10 +43,11 @@ class HeaderContainer extends Component {
     const props = {
       routers: this.state.routers,
       handleChange: this.handleChange,
-      value: this.state.value
-    }
+      value: this.state.value,
+    };
+
     return <Header {...props} />
   }
 }
 
-export default withRouter(HeaderContainer)
+export default withRouter(HeaderContainer);

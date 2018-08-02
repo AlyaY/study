@@ -1,3 +1,3 @@
-import SuccessContainer from './containers/SuccessContainer'
+import SuccessContainer from './containers/SuccessContainer';
 
-export default SuccessContainer
+export default SuccessContainer;

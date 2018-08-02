@@ -1,17 +1,17 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import style from './styles'
+import style from './styles';
 
-import { withStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-import CounterList from '../CounterList'
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import CounterList from '../CounterList';
 
 const CounterWrapper = ({ action, listData, addCounter, deleteCounter, resetCounter, classes }) => {
   const props = {
     action,
-    listData
-  }
+    listData,
+  };
 
   return (
     <div className={classes.root}>
@@ -33,7 +33,7 @@ const CounterWrapper = ({ action, listData, addCounter, deleteCounter, resetCoun
 CounterWrapper.propTypes = {
   addCounter: PropTypes.func.isRequired,
   deleteCounter: PropTypes.func.isRequired,
-  resetCounter: PropTypes.func.isRequired
+  resetCounter: PropTypes.func.isRequired,
 }
 
-export default withStyles(style)(CounterWrapper)
+export default withStyles(style)(CounterWrapper);
