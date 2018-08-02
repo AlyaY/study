@@ -9,7 +9,7 @@ const passwordErrorReducer = (state = initialState, action) => {
     case LOGIN_ERROR:
       return action.payload.errorPassword
     default:
-      return initialState
+      return state
   }
 }
 

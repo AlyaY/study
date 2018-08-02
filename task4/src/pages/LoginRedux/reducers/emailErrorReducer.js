@@ -9,7 +9,7 @@ const emailErrorReducer = (state = initialState, action) => {
     case LOGIN_ERROR:
       return action.payload.errorEmail
     default:
-      return initialState
+      return state
   }
 }
 

@@ -7,7 +7,7 @@ const emailReducer = (state = initialState, action) => {
     case UPDATE_EMAIL:
       return action.payload.email
     default:
-      return initialState
+      return state
   }
 }
 

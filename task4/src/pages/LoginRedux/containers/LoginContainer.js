@@ -5,9 +5,6 @@ import { validations, errorMessages } from '../constants'
 import { updateEmail, updatePassword, loginSuccess, loginError } from '../actions'
 
 class LoginContainer extends Component {
-  handleChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value })
-  };
 
   validateField = (name, value) => {
     switch (name) {
@@ -29,10 +26,9 @@ class LoginContainer extends Component {
     const errorEmail = this.validateField('email', this.props.email);
     
     if(!errorPassword && !errorEmail) {
-      console.log(JSON.stringify(this.props));
-
+      // console.log(JSON.stringify(this.props));
+      this.props.loginSuccess();
     } else {
-      console.log(errorPassword)
       this.props.loginError({ 
         errorPassword,
         errorEmail
@@ -55,18 +51,11 @@ class LoginContainer extends Component {
   }
 }
 
-// const mapStateToProps = state => ({
-//   password: '',
-//   email: '',
-//   errorPassword: '',
-//   errorEmail: ''
-// })
-
 const mapStateToProps = state => ({
   password: state.loginRedux.passwordReducer,
   email: state.loginRedux.emailReducer,
   errorPassword: state.loginRedux.passwordErrorReducer,
-  errorEmail: state.loginRedux.emailReducer
+  errorEmail: state.loginRedux.emailErrorReducer
 })
 
 const mapDispatchToProps = dispatch => ({

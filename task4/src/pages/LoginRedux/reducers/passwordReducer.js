@@ -7,7 +7,7 @@ const passwordReducer = (state = initialState, action) => {
     case UPDATE_PASSWORD:
       return action.payload.password
     default:
-      return initialState
+      return state
   }
 }
 
