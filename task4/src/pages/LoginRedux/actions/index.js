@@ -2,7 +2,7 @@ import { LOGIN_SUCCESS, LOGIN_ERROR, UPDATE_EMAIL, UPDATE_PASSWORD } from './con
 
 export const updateEmail = email => ({
   type: UPDATE_EMAIL,
-  payload: { email: email }
+  payload: { email }
 })
 
 export const updatePassword = password => ({

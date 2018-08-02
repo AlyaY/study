@@ -26,8 +26,10 @@ class LoginContainer extends Component {
     const errorEmail = this.validateField('email', this.props.email);
     
     if(!errorPassword && !errorEmail) {
-      // console.log(JSON.stringify(this.props));
       this.props.loginSuccess();
+
+      console.log(this.props, this)
+      this.props.history.push('/study/login-redux/success');
     } else {
       this.props.loginError({ 
         errorPassword,

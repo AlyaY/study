@@ -1,15 +1,22 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import style from './styles'
 
 import { withStyles } from '@material-ui/core/styles'
 
-const Success = ({ classes }) => {
+const Success = ({ email, password, classes }) => {
   return (
     <div className={classes.root}>
-      <h2 className={classes.title}>Hey, we’re iTechArt</h2>
-      <p className={classes.text}>As a software development company, iTechArt helps VC-backed startups and fast-growing tech companies build successful, scalable products that users love. Our forte is agile dedicated teams of brilliant minds who rock in Web, Mobile, Big Data, QA & Testing, and DevOps</p>
+      <h2 className={classes.title}>You login success</h2>
+      <p className={classes.text}>Email: {email}</p>
+      <p className={classes.text}>Password: {password}</p>
     </div>
   )
+}
+
+Success.propTypes = {
+  email: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired
 }
 
 export default withStyles(style)(Success)
