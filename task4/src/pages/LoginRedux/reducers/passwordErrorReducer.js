@@ -1,16 +1,11 @@
+import { handleActions } from 'redux-actions';
 import { LOGIN_SUCCESS, LOGIN_ERROR } from '../actions/constants';
 
 const initialState = '';
 
-const passwordErrorReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case LOGIN_SUCCESS:
-      return initialState;
-    case LOGIN_ERROR:
-      return action.payload.errorPassword;
-    default:
-      return state;
-  }
-}
+const passwordErrorReducer = handleActions({
+  [LOGIN_SUCCESS]: () => (initialState),
+  [LOGIN_ERROR]: (state, action) => (action.payload.errorPassword),
+}, initialState);
 
 export default passwordErrorReducer;

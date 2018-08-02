@@ -1,14 +1,10 @@
+import { handleActions } from 'redux-actions';
 import { UPDATE_INPUT } from '../actions/constants';
 
 const initialState = '';
 
-const emailReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case UPDATE_INPUT:
-      return action.payload.email || state;
-    default:
-      return state;
-  }
-}
+const emailReducer = handleActions({
+  [UPDATE_INPUT]: (state, action) => (action.payload.email || state),
+}, initialState);
 
 export default emailReducer;

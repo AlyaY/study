@@ -1,14 +1,10 @@
+import { handleActions } from 'redux-actions';
 import { UPDATE_INPUT } from '../actions/constants';
 
 const initialState = '';
 
-const passwordReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case UPDATE_INPUT:
-      return action.payload.password || state;
-    default:
-      return state;
-  }
-}
+const passwordReducer = handleActions({
+  [UPDATE_INPUT]: (state, action) => (action.payload.password || state),
+}, initialState);
 
 export default passwordReducer;
