@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Success from '../views/Success';
 
@@ -11,6 +12,11 @@ class SuccessContainer extends Component {
 
     return <Success {...props} />
   }
+}
+
+SuccessContainer.propTypes = {
+  email: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
 }
 
 const mapStateToProps = state => ({

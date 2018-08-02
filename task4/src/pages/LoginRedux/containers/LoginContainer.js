@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LoginForm from '../views/LoginForm';
 import { validations, errorMessages } from '../constants';
@@ -32,7 +33,7 @@ class LoginContainer extends Component {
       this.props.loginError({ 
         errorPassword,
         errorEmail,
-      })
+      });
     }
   }
 
@@ -54,7 +55,15 @@ class LoginContainer extends Component {
   }
 }
 
-// LoginContainer
+LoginContainer.propTypes = {
+  password: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  errorPassword: PropTypes.string.isRequired,
+  errorEmail: PropTypes.string.isRequired,
+  loginSuccess: PropTypes.func.isRequired,
+  loginError: PropTypes.func.isRequired,
+  updateInput: PropTypes.func.isRequired,
+}
 
 const mapStateToProps = state => ({
   password: state.loginRedux.passwordReducer,
