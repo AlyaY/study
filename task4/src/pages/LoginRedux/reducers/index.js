@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
-import emailErrorReducer from './emailErrorReducer';
-import emailReducer from './emailReducer';
-import passwordErrorReducer from './passwordErrorReducer';
-import passwordReducer from './passwordReducer';
+import emailError from './emailError';
+import email from './email';
+import passwordError from './passwordError';
+import password from './password';
 
 export default combineReducers({
-  emailErrorReducer,
-  emailReducer,
-  passwordErrorReducer,
-  passwordReducer,
+  emailError,
+  email,
+  passwordError,
+  password,
 });

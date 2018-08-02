@@ -1,9 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 import LoginForm from '../views/LoginForm';
 import { validations, errorMessages } from '../constants';
-import { updateInput, loginSuccess, loginError } from '../actions';
+import { 
+  updatePassword,
+  updateEmail,
+  loginSuccess,
+  loginError
+} from '../actions';
+import {
+  emailSelector,
+  passwordSelector,
+  emailErrorSelector,
+  passwordErrorSelector,
+} from '../selectors';
 
 class LoginContainer extends Component {
 
@@ -37,8 +49,12 @@ class LoginContainer extends Component {
     }
   }
 
-  handleInput = (event) => {
-    this.props.updateInput({ [event.target.name]: event.target.value });
+  onChangePassword = (event) => {
+    this.props.updatePassword({ password: event.target.value });
+  }
+
+  onChangeEmail = (event) => {
+    this.props.updateEmail({ email: event.target.value });
   }
 
   render () {
@@ -47,7 +63,8 @@ class LoginContainer extends Component {
       password: this.props.password,
       errorEmail: this.props.errorEmail,
       errorPassword: this.props.errorPassword,
-      onChange: this.handleInput,
+      onChangePassword: this.onChangePassword,
+      onChangeEmail: this.onChangeEmail,
       onSubmit: this.handleSubmit,
     }
 
@@ -62,20 +79,22 @@ LoginContainer.propTypes = {
   errorEmail: PropTypes.string.isRequired,
   loginSuccess: PropTypes.func.isRequired,
   loginError: PropTypes.func.isRequired,
-  updateInput: PropTypes.func.isRequired,
+  updatePassword: PropTypes.func.isRequired,
+  updateEmail: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
-  password: state.loginRedux.passwordReducer,
-  email: state.loginRedux.emailReducer,
-  errorPassword: state.loginRedux.passwordErrorReducer,
-  errorEmail: state.loginRedux.emailErrorReducer,
+  password: passwordSelector(state),
+  email: emailSelector(state),
+  errorPassword: passwordErrorSelector(state),
+  errorEmail: emailErrorSelector(state),
 });
 
 const mapDispatchToProps = dispatch => ({
   loginSuccess: data => dispatch(loginSuccess(data)),
   loginError: data => dispatch(loginError(data)),
-  updateInput: data => dispatch(updateInput(data)),
+  updatePassword: data => dispatch(updatePassword(data)),
+  updateEmail: data => dispatch(updateEmail(data)),
 });
 
 export default connect(
