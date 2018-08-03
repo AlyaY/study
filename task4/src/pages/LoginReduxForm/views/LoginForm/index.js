@@ -5,30 +5,23 @@ import { reduxForm, Field } from 'redux-form';
 import { withStyles } from '@material-ui/core/styles';
 
 import style from './styles';
-import { validations, errorMessages } from '../../constants';
+import InputField from '../InputField';
 
 const LoginForm = (props) => {
   const { emailValidation, passwordValidation, onSubmit, classes, handleSubmit } = props;
    
-  const renderField = ({ input, label, type, meta: { touched, error }}) => (
-    <label className={classes.label}>
-      <input className={classes.field} {...input} placeholder={label} type={type} />
-      {touched && (error && <span className={classes.errorText}>{error}</span>)}
-    </label>
-  );
-
   return (
     <div className={classes.root}>
       <form className={classes.form} onSubmit={handleSubmit(onSubmit)} >
        <Field
-          component={renderField}
+          component={InputField}
           name='email'
           type='email'
           label='Введите ваш email'
           validate={emailValidation}
         /> 
         <Field
-          component={renderField}
+          component={InputField}
           name='password'
           type='password'
           label='Введите ваш пароль'
