@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import Success from '../views/Success';
 import { emailSelector, passwordSelector } from '../../../selectors';
+
 class SuccessContainer extends Component {
   render () {
     const props = {

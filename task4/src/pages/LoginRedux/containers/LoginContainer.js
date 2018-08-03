@@ -35,14 +35,16 @@ class LoginContainer extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    const errorPassword = this.validateField('password', this.props.password);
-    const errorEmail = this.validateField('email', this.props.email);
+    const { loginSuccess, loginError, password, email, history } = this.props;
+
+    const errorPassword = this.validateField('password', password);
+    const errorEmail = this.validateField('email', email);
     
     if(!errorPassword && !errorEmail) {
-      this.props.loginSuccess();
-      this.props.history.push('/study/login-redux/success');
+      loginSuccess();
+      history.push('/study/login-redux/success');
     } else {
-      this.props.loginError({ 
+      loginError({ 
         errorPassword,
         errorEmail,
       });

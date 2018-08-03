@@ -1,9 +1,9 @@
 import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 
 import NotFound from '../pages/NotFound';
 import Header from '../modules/Header';
 import SubRouter from './SubRouter';
-import { Switch, Route } from 'react-router-dom';
 
 const Router = () => {
   return (

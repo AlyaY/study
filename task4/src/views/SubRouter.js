@@ -1,11 +1,11 @@
 import React from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Counter from '../pages/Counter';
 import About from '../pages/About';
 import Login from '../pages/Login';
 import LoginRedux from '../pages/LoginRedux';
 import Success from '../pages/LoginRedux/pages/Success';
-import { Switch, Route, Redirect } from 'react-router-dom';
 
 const SubRouter = () => {
   return (

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Header from '../views/Header';
 import { withRouter } from 'react-router';
+
+import Header from '../views/Header';
 
 class HeaderContainer extends Component {
   constructor (props) {

@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
-import Counter from '../views/Counter'
-import { ADD, REMOVE } from '../constants'
+import React, { Component } from 'react';
+
+import Counter from '../views/Counter';
+import { ADD, REMOVE } from '../constants';
 
 class CounterContainer extends Component {
   constructor(props) {

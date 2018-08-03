@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import style from './styles';
 
 import { withStyles } from '@material-ui/core/styles';
+
+import style from './styles';
 
 const Success = ({ email, password, classes }) => {
   return (
