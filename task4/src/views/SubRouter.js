@@ -6,6 +6,7 @@ import About from '../pages/About';
 import Login from '../pages/Login';
 import LoginRedux from '../pages/LoginRedux';
 import Success from '../pages/LoginRedux/pages/Success';
+import LoginReduxForm from '../pages/LoginReduxForm';
 
 const SubRouter = () => {
   return (
@@ -17,6 +18,7 @@ const SubRouter = () => {
         <Route path='/study/login' component={Login} />
         <Route path='/study/login-redux/success' component={Success} />
         <Route path='/study/login-redux' component={LoginRedux} />
+        <Route path='/study/login-redux-form' component={LoginReduxForm} />
         <Redirect from='*' to='/study/404' />
       </Switch>
     </div>
