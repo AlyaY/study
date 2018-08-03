@@ -1,7 +1,7 @@
-import React from 'react'
-import style from './styles'
+import React from 'react';
+import style from './styles';
 
-import { withStyles } from '@material-ui/core/styles'
+import { withStyles } from '@material-ui/core/styles';
 
 const NotFound = ({ classes }) => {
   return (
@@ -11,4 +11,4 @@ const NotFound = ({ classes }) => {
   )
 }
 
-export default withStyles(style)(NotFound)
+export default withStyles(style)(NotFound);

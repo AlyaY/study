@@ -1,9 +1,11 @@
-import React from 'react'
+import React from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
-import Counter from '../pages/Counter'
-import About from '../pages/About'
-import Login from '../pages/Login'
-import { Switch, Route, Redirect } from 'react-router-dom'
+import Counter from '../pages/Counter';
+import About from '../pages/About';
+import Login from '../pages/Login';
+import LoginRedux from '../pages/LoginRedux';
+import Success from '../pages/LoginRedux/pages/Success';
 
 const SubRouter = () => {
   return (
@@ -13,10 +15,12 @@ const SubRouter = () => {
         <Route path='/study/counters' component={Counter} />
         <Route path='/study/about' component={About} />
         <Route path='/study/login' component={Login} />
+        <Route path='/study/login-redux/success' component={Success} />
+        <Route path='/study/login-redux' component={LoginRedux} />
         <Redirect from='*' to='/study/404' />
       </Switch>
     </div>
   )
 }
 
-export default SubRouter
+export default SubRouter;

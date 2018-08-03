@@ -5,15 +5,15 @@ import { withStyles } from '@material-ui/core/styles';
 
 import style from './styles';
 
-const LoginForm = ({ email, password, errorEmail, errorPassword, handleChange, handleSubmit, classes }) => {
+const LoginForm = ({ email, password, errorEmail, errorPassword, onChangeEmail, onChangePassword, onSubmit, classes }) => {
   return (
     <div className={classes.root}>
-      <form className={classes.form} onSubmit={handleSubmit} >
+      <form className={classes.form} onSubmit={onSubmit} >
         <label className={classes.label}>
           <input
             className={classes.field}
             value={email}
-            onChange={handleChange}
+            onChange={onChangeEmail}
             name='email'
             placeholder='Введите ваш email'
           />
@@ -23,7 +23,7 @@ const LoginForm = ({ email, password, errorEmail, errorPassword, handleChange, h
           <input
             className={classes.field}
             value={password}
-            onChange={handleChange}
+            onChange={onChangePassword}
             name='password'
             type='password'
             placeholder='Введите ваш пароль'
@@ -42,8 +42,9 @@ LoginForm.propTypes = {
   password: PropTypes.string.isRequired,
   errorEmail: PropTypes.string.isRequired,
   errorPassword: PropTypes.string.isRequired,
-  handleChange: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
+  onChangeEmail: PropTypes.func.isRequired,
+  onChangePassword: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 }
 
-export default withStyles(style)(LoginForm);
+export default withStyles(style)(LoginForm)

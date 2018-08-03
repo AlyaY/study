@@ -1,7 +1,7 @@
 const styles = {
   root: {
-    marginBottom: '30px'
+    marginBottom: '30px',
   }
 }
 
-export default styles
+export default styles;

@@ -1,3 +1,3 @@
-import AboutContainer from './containers/AboutContainer'
+import AboutContainer from './containers/AboutContainer';
 
-export default AboutContainer
+export default AboutContainer;

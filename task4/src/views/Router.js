@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 
-import NotFound from '../pages/NotFound'
-import Header from '../modules/Header'
-import SubRouter from './SubRouter'
-import { Switch, Route } from 'react-router-dom'
+import NotFound from '../pages/NotFound';
+import Header from '../modules/Header';
+import SubRouter from './SubRouter';
 
 const Router = () => {
   return (
@@ -21,4 +21,4 @@ const Router = () => {
   )
 }
 
-export default Router
+export default Router;

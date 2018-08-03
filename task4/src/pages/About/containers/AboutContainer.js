@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
-import About from '../views/About'
+import React, { Component } from 'react';
+
+import About from '../views/About';
 
 class AboutContainer extends Component {
   render () {
@@ -7,4 +8,4 @@ class AboutContainer extends Component {
   }
 }
 
-export default AboutContainer
+export default AboutContainer;

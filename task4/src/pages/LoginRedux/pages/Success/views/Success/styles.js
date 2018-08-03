@@ -7,7 +7,7 @@ const styles = {
   },
   text: {
     fontSize: '20px',
-  }
+  },
 }
 
 export default styles;

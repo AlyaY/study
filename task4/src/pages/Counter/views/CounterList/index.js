@@ -1,10 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import style from './styles'
-import CounterContainer from './../../containers/CounterContainer'
+import { withStyles } from '@material-ui/core/styles';
 
-import { withStyles } from '@material-ui/core/styles'
+import style from './styles';
+import CounterContainer from './../../containers/CounterContainer';
 
 const CounterList = ({ listData, action, classes }) => {
   const list = listData.map(({ key }) => {
@@ -13,14 +13,14 @@ const CounterList = ({ listData, action, classes }) => {
         {<CounterContainer action={action} />}
       </li>
     )
-  })
+  });
 
-  return (<ul className={classes.list}>{list}</ul>)
+  return (<ul className={classes.list}>{list}</ul>);
 }
 
 CounterList.propTypes = {
   action: PropTypes.string.isRequired,
-  listData: PropTypes.array.isRequired
-}
+  listData: PropTypes.array.isRequired,
+};
 
-export default withStyles(style)(CounterList)
+export default withStyles(style)(CounterList);

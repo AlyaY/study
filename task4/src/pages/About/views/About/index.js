@@ -1,7 +1,8 @@
-import React from 'react'
-import style from './styles'
+import React from 'react';
 
-import { withStyles } from '@material-ui/core/styles'
+import { withStyles } from '@material-ui/core/styles';
+
+import style from './styles';
 
 const About = ({ classes }) => {
   return (
@@ -12,4 +13,4 @@ const About = ({ classes }) => {
   )
 }
 
-export default withStyles(style)(About)
+export default withStyles(style)(About);
