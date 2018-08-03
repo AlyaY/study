@@ -1,8 +1,9 @@
 import { handleActions } from 'redux-actions';
-import { updatePassword } from '../actions';
+
+import { submitForm } from '../actions';
 
 const initialState = '';
 
 export default handleActions({
-  [updatePassword]: (state, action) => (action.payload.password),
+  [submitForm]: (state, action) => (action.payload.password),
 }, initialState);

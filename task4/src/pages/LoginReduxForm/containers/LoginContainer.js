@@ -1,44 +1,44 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
 
 import LoginForm from '../views/LoginForm';
 import { validations, errorMessages } from '../constants';
-
+import { submitForm } from '../actions';
+import { emailSelector, passwordSelector } from '../selectors';
 
 class LoginContainer extends Component {
-  constructor(props) {
-    super(props);
-
-    console.log('--------------------', this)
+  
+  handleSubmit = (values) => {
+    this.props.submitForm(values)
+    this.props.history.push('/study/login-redux-form/success');
   }
 
-  handleSubmit = (value) => {
-    console.log(value)
-    value.preventDefault();
+  emailValidation = (value) => {
+    if (!value) {
+      return 'Required'
+    } else if (!validations.email.test(value)) {
+      return errorMessages.email;
+    }
 
-    // const { loginSuccess, loginError, password, email, history } = this.props;
+    return '';
+  }
 
-    // const errorPassword = this.validateField('password', password);
-    // const errorEmail = this.validateField('email', email);
-    
-    // if(!errorPassword && !errorEmail) {
-    //   loginSuccess();
-    //   history.push('/study/login-redux/success');
-    // } else {
-    //   loginError({ 
-    //     errorPassword,
-    //     errorEmail,
-    //   });
-    // }
+  passwordValidation = (value) => {
+    if (!value) {
+      return 'Required'
+    } else if (!validations.password.test(value)) {
+      return errorMessages.password;
+    }
+
+    return '';
   }
 
   render () {
     const props = {
-      // email: this.props.email,
-      // password: this.props.password,
       onSubmit: this.handleSubmit,
+      emailValidation: this.emailValidation,
+      passwordValidation: this.passwordValidation,
     }
 
     return <LoginForm {...props} />
@@ -46,33 +46,22 @@ class LoginContainer extends Component {
 }
 
 LoginContainer.propTypes = {
-  // password: PropTypes.string.isRequired,
-  // email: PropTypes.string.isRequired,
-  // loginSuccess: PropTypes.func.isRequired,
-  // loginError: PropTypes.func.isRequired,
-  // updatePassword: PropTypes.func.isRequired,
-  // updateEmail: PropTypes.func.isRequired,
+  password: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  submitForm: PropTypes.func.isRequired,
 }
 
-const validateField = (values) => {
-  const errors = {};
 
-  if (!values.email) {
-    errors.email = 'Required'
-  } else if (!validations.email.test(values.email)) {
-    errors.email = errorMessages.email;
-  }
- 
-  if (!values.password) {
-    errors.password = 'Required'
-  } else if (!validations.password.test(values.password)) {
-    errors.password = errorMessages.password;
-  }
+const mapStateToProps = state => ({
+  password: passwordSelector(state),
+  email: emailSelector(state),
+});
 
-  return errors;
-}
+const mapDispatchToProps = dispatch => ({
+  submitForm: data => dispatch(submitForm(data)),
+});
 
-export default reduxForm({
-  form: 'login',
-  validate: validateField
-})(LoginContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(LoginContainer);

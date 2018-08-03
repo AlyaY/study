@@ -1,8 +1,9 @@
 import { handleActions } from 'redux-actions';
-import { updateEmail } from '../actions';
+
+import { submitForm } from '../actions';
 
 const initialState = '';
 
 export default  handleActions({
-  [updateEmail]: (state, action) => (action.payload.email),
+  [submitForm]: (state, action) => (action.payload.email),
 }, initialState);

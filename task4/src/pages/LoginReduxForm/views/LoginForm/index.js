@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
+import { reduxForm, Field } from 'redux-form';
 
 import { withStyles } from '@material-ui/core/styles';
 
 import style from './styles';
+import { validations, errorMessages } from '../../constants';
 
-
-const LoginForm = ({ email, password, onSubmit, classes }) => {
-
+const LoginForm = (props) => {
+  const { emailValidation, passwordValidation, onSubmit, classes, handleSubmit } = props;
+   
   const renderField = ({ input, label, type, meta: { touched, error }}) => (
     <label className={classes.label}>
       <input className={classes.field} {...input} placeholder={label} type={type} />
@@ -18,28 +19,36 @@ const LoginForm = ({ email, password, onSubmit, classes }) => {
 
   return (
     <div className={classes.root}>
-      <form className={classes.form} onSubmit={onSubmit} >
+      <form className={classes.form} onSubmit={handleSubmit(onSubmit)} >
        <Field
           component={renderField}
           name='email'
           type='email'
           label='Введите ваш email'
+          validate={emailValidation}
         /> 
         <Field
           component={renderField}
           name='password'
           type='password'
           label='Введите ваш пароль'
+          validate={passwordValidation}
         />
         <button className={classes.button}>Войти</button>
       </form>
-      <pre>{ JSON.stringify({email, password}) }</pre>
+      <pre>{ JSON.stringify({props}) }</pre>
     </div>
   )
 }
 
 LoginForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  emailValidation: PropTypes.func.isRequired,
+  passwordValidation: PropTypes.func.isRequired,
 }
 
-export default withStyles(style)(LoginForm)
+const LoginFormWithStyle = withStyles(style)(LoginForm);
+
+export default reduxForm({
+  form: 'login',
+})(LoginFormWithStyle);
