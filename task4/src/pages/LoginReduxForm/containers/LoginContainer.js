@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import LoginForm from '../views/LoginForm';
 import { validations, errorMessages } from '../constants';
-import { submitForm } from '../actions';
+import { submitForm, updatePassword, updateEmail } from '../actions';
 import { emailSelector, passwordSelector } from '../selectors';
 
 class LoginContainer extends Component {
@@ -34,11 +34,25 @@ class LoginContainer extends Component {
     return '';
   }
 
+  emailOnChange = (event, value) => {
+    this.props.updateEmail({ email: value });
+
+  }
+
+  passwordOnChange = (event, value) => {
+    this.props.updatePassword({ password: value })
+
+  }
+
   render () {
     const props = {
+      email:  this.props.email,
+      password:  this.props.password,
       onSubmit: this.handleSubmit,
       emailValidation: this.emailValidation,
       passwordValidation: this.passwordValidation,
+      emailOnChange: this.emailOnChange,
+      passwordOnChange: this.passwordOnChange,
     }
 
     return <LoginForm {...props} />
@@ -53,12 +67,14 @@ LoginContainer.propTypes = {
 
 
 const mapStateToProps = state => ({
-  password: passwordSelector(state),
   email: emailSelector(state),
+  password: passwordSelector(state),
 });
 
 const mapDispatchToProps = dispatch => ({
   submitForm: data => dispatch(submitForm(data)),
+  updateEmail: data => dispatch(updateEmail(data)),
+  updatePassword: data => dispatch(updatePassword(data)),
 });
 
 export default connect(
