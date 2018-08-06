@@ -22,24 +22,16 @@ class LoginContainer extends Component {
     this.props.history.push('/study/login-redux-form/success');
   }
 
-  emailValidation = (value) => {
-    if (!value) {
-      return 'Required'
-    } else if (!validations.email.test(value)) {
-      return errorMessages.email;
-    }
+  requiredValidation = (value) => {
+    return value ? '' : 'Required';
+  }
 
-    return '';
+  emailValidation = (value) => {
+    return (validations.email.test(value)) ? '' : errorMessages.email;
   }
 
   passwordValidation = (value) => {
-    if (!value) {
-      return 'Required'
-    } else if (!validations.password.test(value)) {
-      return errorMessages.password;
-    }
-
-    return '';
+    return (validations.password.test(value)) ? '' : errorMessages.password;
   }
 
   emailOnChange = (event, value) => {
@@ -57,6 +49,7 @@ class LoginContainer extends Component {
       onSubmit: this.handleSubmit,
       emailValidation: this.emailValidation,
       passwordValidation: this.passwordValidation,
+      requiredValidation: this.requiredValidation,
       emailOnChange: this.emailOnChange,
       passwordOnChange: this.passwordOnChange,
     }

@@ -8,7 +8,18 @@ import style from './styles';
 import InputField from '../InputField';
 
 const LoginForm = (props) => {
-  const { email, password, emailOnChange, passwordOnChange, emailValidation, passwordValidation, onSubmit, classes, handleSubmit } = props;
+  const { 
+    email, 
+    password, 
+    emailOnChange, 
+    passwordOnChange, 
+    emailValidation,
+    passwordValidation,
+    requiredValidation,
+    onSubmit,
+    classes,
+    handleSubmit
+  } = props;
 
   return (
     <div className={classes.root}>
@@ -18,7 +29,7 @@ const LoginForm = (props) => {
           name='email'
           type='email'
           label='Введите ваш email'
-          validate={emailValidation}
+          validate={[requiredValidation, emailValidation]}
           onChange={emailOnChange}
         /> 
         <Field
@@ -26,7 +37,7 @@ const LoginForm = (props) => {
           name='password'
           type='password'
           label='Введите ваш пароль'
-          validate={passwordValidation}
+          validate={[requiredValidation, passwordValidation]}
           onChange={passwordOnChange}
         />
         <button className={classes.button}>Войти</button>
@@ -42,6 +53,7 @@ LoginForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   emailValidation: PropTypes.func.isRequired,
   passwordValidation: PropTypes.func.isRequired,
+  requiredValidation: PropTypes.func.isRequired,
   emailOnChange: PropTypes.func.isRequired,
   passwordOnChange: PropTypes.func.isRequired,
 }
