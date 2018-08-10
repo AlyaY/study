@@ -7,7 +7,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "node task5/app.js"
+    "start": "node task5/server/app.js"
   },
   "dependencies": {
     "express": "~4.16.0"
