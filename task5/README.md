@@ -2,4 +2,4 @@
 
 **Описание:** Создать путь “/api/hello-world”, в который нужно передать параметр name. При открытии этого пути в браузере должно вывести на экран “Hello ${name}”, где name - это присланный параметр. В случае отсутствия параметра, браузер должен вернуть ошибку
 
-githubpage: <https://alyay.github.io/study/login-redux-form>
+githubpage: <https://films--library.herokuapp.com/api/hello-world/alya>

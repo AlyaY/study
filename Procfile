@@ -1,1 +1,1 @@
-web: node task5/app.js
+web: npm run start
