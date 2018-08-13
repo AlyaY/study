@@ -18,7 +18,6 @@ const accessLogStream = rfs('access.log', {
 
 fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
 
-
 app
   .use(bodyParser.json())
   .use(morgan('combined', {stream: accessLogStream}))
