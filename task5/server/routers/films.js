@@ -1,16 +1,27 @@
 const express = require('express');
+const Joi = require('joi');
+
+const filmSchema = require('../models/filmSchema');
+const films = require('../data/films');
+
 const router = express.Router();
 
-let films = [];
+const validateFilm = (film) => {
+    return Joi.validate(film, filmSchema).error;
+}
 
 router.route('/')
     .get((req, res) => {
         res.send(films);
     })
     .post((req, res) => {
-        films.push(req.body);
-
-        res.json(req.body);
+        
+        if(!validateFilm(req.body)) {
+            films.push(req.body);
+            res.json(req.body);
+        } else {
+            res.json({});
+        }
     });
 
 router.route('/:id')
