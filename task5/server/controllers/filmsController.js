@@ -15,7 +15,7 @@ const post = (req, res) => {
     const error = validateFilm(req.body);
 
     if(error) {
-        res.json(error.details[0].message);
+        res.status(400).json(error.details[0].message);
     } else {
         films.push(req.body);
         res.json(req.body);
@@ -24,12 +24,12 @@ const post = (req, res) => {
 
 const put = (req, res) => {
     const { id } = req.params;
-    const category = categories.find((category) => category.id === id);
+    const film = films.find((film) => film.id === id);
 
-    if(category) {
-        res.send(category);
+    if(film) {
+        res.send(film);
     } else {
-        res.send({});
+        res.status(400).send({ error: 'There is no such film'})
     }
 }
 
@@ -37,20 +37,22 @@ const remove = (req, res) => {
     const { id } = req.params;
     let successDeleted = false;
 
-    categories = categories.reduce((allcategories, category) => {
-        if(category.id === id) {
+    films = films.reduce((allfFilms, film) => {
+        if(film.id === id) {
             successDeleted = true;
         } else {
-            allcategories.push(category);
+            allfilms.push(film);
         }
 
-        return allcategories;
+        return allfFilms;
     }, []);
 
     res.send({ success: successDeleted, id });
 }
 
-module.exports.get = get;
-module.exports.post = post;
-module.exports.put = put;
-module.exports.remove = remove;
+module.exports = {
+    get,
+    post,
+    put,
+    remove
+};

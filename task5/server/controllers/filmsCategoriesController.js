@@ -12,24 +12,24 @@ const get = (req, res) => {
 }
 
 const post = (req, res) => {
-    const error = validateFilm(req.body);
+    const error = validatecategory(req.body);
     
     if(error) {
-        res.json(error.details[0].message);
+        res.status(400).json(error.details[0].message);
     } else {
-        films.push(req.body);
+        categories.push(req.body);
         res.json(req.body);
     }
 }
 
 const put = (req, res) => {
     const { id } = req.params;
-    const film = categories.find((film) => film.id === id);
+    const category = categories.find((category) => category.id === id);
 
-    if(film) {
-        res.send(film);
+    if(category) {
+        res.send(category);
     } else {
-        res.send({});
+        res.status(400).send({ error: 'There is no such category'})
     }
 }
 
@@ -37,20 +37,22 @@ const remove = (req, res) => {
     const { id } = req.params;
     let successDeleted = false;
 
-    categories = categories.reduce((allcategories, film) => {
-        if(film.id === id) {
+    categories = categories.reduce((allCategories, category) => {
+        if(category.id === id) {
             successDeleted = true;
         } else {
-            allcategories.push(film);
+            allCategories.push(category);
         }
 
-        return allcategories;
+        return allCategories;
     }, []);
 
     res.send({ success: successDeleted, id });
 }
 
-module.exports.get = get;
-module.exports.post = post;
-module.exports.put = put;
-module.exports.remove = remove;
+module.exports = {
+    get,
+    post,
+    put,
+    remove
+};
