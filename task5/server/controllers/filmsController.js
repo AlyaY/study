@@ -7,6 +7,10 @@ const validateFilm = (film) => {
     return Joi.validate(film, filmSchema).error;
 }
 
+const formErrorArray = (errors) => {
+    return errors.map(error => error.message)
+}
+
 const get = (req, res) => {
     res.send(films);
 }
@@ -15,7 +19,7 @@ const post = (req, res) => {
     const error = validateFilm(req.body);
 
     if(error) {
-        res.status(400).json(error.details[0].message);
+        res.status(400).json({ error: formErrorArray(error.details) });
     } else {
         films.push(req.body);
         res.json(req.body);

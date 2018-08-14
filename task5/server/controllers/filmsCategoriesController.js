@@ -7,6 +7,10 @@ const validateCategory = (category) => {
     return Joi.validate(category, categorySchema).error;
 }
 
+const formErrorArray = (errors) => {
+    return errors.map(error => error.message)
+}
+
 const get = (req, res) => {
     res.send(categories);
 }
@@ -15,7 +19,7 @@ const post = (req, res) => {
     const error = validateCategory(req.body);
     
     if(error) {
-        res.status(400).json(error.details[0].message);
+        res.status(400).json({ error: formErrorArray(error.details) });
     } else {
         categories.push(req.body);
         res.json(req.body);
