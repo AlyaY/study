@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/hello-world/:name*?', (req, res) => {
+router.get('/:name*?', (req, res) => {
     const { name } = req.params;
     
     if(name) {
