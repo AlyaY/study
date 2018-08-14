@@ -17,13 +17,13 @@ const accessLogStream = rfs('access.log', {
   path: logDirectory
 });
 
-// mongoose.connect('mongodb://alya:1qazxsw2#edc@ds119702.mlab.com:19702/film-library', { useNewUrlParser: true });
 mongoose.connect('mongodb://localhost:27017/film-library',  { useNewUrlParser: true })
 mongoose.Promise = global.Promise;
 
 fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
 
 app
+
   .use(bodyParser.json())
   .use(morgan('combined', {stream: accessLogStream}))
   .use('/api', api);

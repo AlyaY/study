@@ -1,12 +1,13 @@
 const Film = require('../models/film');
 
 const get = (req, res) => {
-    Film.find((err, films) => {
-        if (err) {
-            return res.status(400).json({ error });
-        }
-        res.send(films);
-    });
+    Film.find()
+        .then((films) => {
+            res.json(films);
+        })
+        .catch((error) => {
+            res.status(400).json({ error });
+        });
 }
 
 const post = (req, res) => {
@@ -21,26 +22,26 @@ const post = (req, res) => {
 
 const put = (req, res) => {
     const { id } = req.params;
-
-    Film.find({ _id: id }, (error, films) => {
-        if (error) {
-            return res.status(400).json({ error });
-        }
-
-        res.send(films);
-    });
+    
+    Film.findByIdAndUpdate(id, req.body)
+        .then((film) => {
+            res.send(film);
+        })
+        .catch((error) => {
+            res.status(400).json({ error });
+        });
 }
 
 const remove = (req, res) => {
     const { id } = req.params;
 
-    Film.deleteOne({ _id: id }, function (error) {
-        if (error) {
-            return res.status(400).send({ success: false, id });
-        }
-
-        res.send({ success: true, id });
-    });
+    Film.findByIdAndRemove(id)
+        .then((film) => {
+            res.send({ success: true, id, film });
+        })
+        .catch((error) => {
+            res.status(400).send({ success: false, id });
+        })
 }
 
 module.exports = {

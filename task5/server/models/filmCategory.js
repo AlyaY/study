@@ -19,7 +19,7 @@ const FilmCategorySchema = new Schema({
         required: [true, 'Description field is required']
     },
     films: {
-        type: [Schema.Types.ObjectId,],
+        type: [Schema.Types.ObjectId],
         required: [true, 'Films are required']
     }
 });
