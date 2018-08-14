@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const films = require('../data/films');
+let films = require('../data/films');
 const filmSchema = require('../models/filmSchema');
 
 const validateFilm = (film) => {
@@ -47,7 +47,11 @@ const remove = (req, res) => {
         return allfFilms;
     }, []);
 
-    res.send({ success: successDeleted, id });
+    if(successDeleted) {
+        res.send({ success: successDeleted, id });
+    } else {
+        res.status(400).send({ success: successDeleted, id });
+    }
 }
 
 module.exports = {

@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const categories = require('../data/categories');
+let categories = require('../data/categories');
 const categorySchema = require('../models/categorySchema');
 
 const validateCategory = (category) => {
@@ -12,7 +12,7 @@ const get = (req, res) => {
 }
 
 const post = (req, res) => {
-    const error = validatecategory(req.body);
+    const error = validateCategory(req.body);
     
     if(error) {
         res.status(400).json(error.details[0].message);
@@ -47,7 +47,12 @@ const remove = (req, res) => {
         return allCategories;
     }, []);
 
-    res.send({ success: successDeleted, id });
+
+    if(successDeleted) {
+        res.send({ success: successDeleted, id });
+    } else {
+        res.status(400).send({ success: successDeleted, id });
+    }
 }
 
 module.exports = {
