@@ -1,61 +1,46 @@
-const Joi = require('joi');
-
-let films = require('../data/films');
-const filmSchema = require('../models/filmSchema');
-
-const validateFilm = (film) => {
-    return Joi.validate(film, filmSchema).error;
-}
-
-const formErrorArray = (errors) => {
-    return errors.map(error => error.message)
-}
+const Film = require('../models/film');
 
 const get = (req, res) => {
-    res.send(films);
+    Film.find((err, films) => {
+        if (err) {
+            return res.status(400).json({ error });
+        }
+        res.send(films);
+    });
 }
 
 const post = (req, res) => {
-    const error = validateFilm(req.body);
-
-    if(error) {
-        res.status(400).json({ error: formErrorArray(error.details) });
-    } else {
-        films.push(req.body);
-        res.json(req.body);
-    }
+    Film.create(req.body)
+        .then((film) => {
+            res.json(film);
+        })
+        .catch((error) => {
+            res.status(400).json({ error });
+        });
 }
 
 const put = (req, res) => {
     const { id } = req.params;
-    const film = films.find((film) => film.id === id);
 
-    if(film) {
-        res.send(film);
-    } else {
-        res.status(400).send({ error: 'There is no such film'})
-    }
+    Film.find({ _id: id }, (error, films) => {
+        if (error) {
+            return res.status(400).json({ error });
+        }
+
+        res.send(films);
+    });
 }
 
 const remove = (req, res) => {
     const { id } = req.params;
-    let successDeleted = false;
 
-    films = films.reduce((allfFilms, film) => {
-        if(film.id === id) {
-            successDeleted = true;
-        } else {
-            allfilms.push(film);
+    Film.deleteOne({ _id: id }, function (error) {
+        if (error) {
+            return res.status(400).send({ success: false, id });
         }
 
-        return allfFilms;
-    }, []);
-
-    if(successDeleted) {
-        res.send({ success: successDeleted, id });
-    } else {
-        res.status(400).send({ success: successDeleted, id });
-    }
+        res.send({ success: true, id });
+    });
 }
 
 module.exports = {

@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const fs = require('fs');
 const path = require('path');
 const rfs = require('rotating-file-stream');
+const mongoose = require('mongoose');
 
 const api = require('./routers/api');
 
@@ -15,6 +16,10 @@ const accessLogStream = rfs('access.log', {
   interval: '1d',
   path: logDirectory
 });
+
+// mongoose.connect('mongodb://alya:1qazxsw2#edc@ds119702.mlab.com:19702/film-library', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost:27017/film-library',  { useNewUrlParser: true })
+mongoose.Promise = global.Promise;
 
 fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
 

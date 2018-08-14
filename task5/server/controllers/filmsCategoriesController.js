@@ -1,62 +1,47 @@
-const Joi = require('joi');
 
-let categories = require('../data/categories');
-const categorySchema = require('../models/categorySchema');
-
-const validateCategory = (category) => {
-    return Joi.validate(category, categorySchema).error;
-}
-
-const formErrorArray = (errors) => {
-    return errors.map(error => error.message)
-}
+const Category = require('../models/filmCategory');
 
 const get = (req, res) => {
-    res.send(categories);
+    Category.find((err, categories) => {
+        if (err) {
+            return res.status(400).json({ error });
+        }
+        res.send(categories);
+    });
 }
 
 const post = (req, res) => {
-    const error = validateCategory(req.body);
-    
-    if(error) {
-        res.status(400).json({ error: formErrorArray(error.details) });
-    } else {
-        categories.push(req.body);
-        res.json(req.body);
-    }
+    Category.create(req.body)
+        .then((category) => {
+            res.json(category);
+        })
+        .catch((error) => {
+            res.status(400).json({ error });
+        });
 }
 
 const put = (req, res) => {
     const { id } = req.params;
-    const category = categories.find((category) => category.id === id);
 
-    if(category) {
-        res.send(category);
-    } else {
-        res.status(400).send({ error: 'There is no such category'})
-    }
+    Category.find({ _id: id }, (error, categories) => {
+        if (error) {
+            return res.status(400).json({ error });
+        }
+
+        res.send(categories);
+    });
 }
 
 const remove = (req, res) => {
     const { id } = req.params;
-    let successDeleted = false;
-
-    categories = categories.reduce((allCategories, category) => {
-        if(category.id === id) {
-            successDeleted = true;
-        } else {
-            allCategories.push(category);
+    
+    Category.deleteOne({ _id: id }, function (error) {
+        if (error) {
+            return res.status(400).send({ success: false, id });
         }
 
-        return allCategories;
-    }, []);
-
-
-    if(successDeleted) {
-        res.send({ success: successDeleted, id });
-    } else {
-        res.status(400).send({ success: successDeleted, id });
-    }
+        res.send({ success: true, id });
+    });
 }
 
 module.exports = {
