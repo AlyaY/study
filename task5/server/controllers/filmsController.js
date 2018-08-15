@@ -1,7 +1,7 @@
 const Film = require('../models/film');
 
 const get = (req, res) => {
-    Film.find()
+    Film.find({})
         .then((films) => {
             res.json(films);
         })

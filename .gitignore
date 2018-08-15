@@ -1,6 +1,7 @@
 task2/node_modules
 task5/server/node_modules
 task5/server/log
+task5/server/variables.env
 task5/client/node_modules
 /node_modules
 

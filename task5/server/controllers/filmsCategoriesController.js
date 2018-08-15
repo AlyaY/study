@@ -2,12 +2,12 @@
 const Category = require('../models/filmCategory');
 
 const get = (req, res) => {
-    Category.find()
+    Category.find({})
         .then((categories) => {
             res.json(categories);
         })
         .catch((error) => {
-            return res.status(400).json({ error });
+            res.status(400).json({ error });
         });
 }
 
