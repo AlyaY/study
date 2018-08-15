@@ -1,12 +1,12 @@
 const Film = require('../models/film');
 
 const get = (req, res) => {
-    Film.find({})
+    Film.find({}).limit(10)
         .then((films) => {
             res.json(films);
         })
         .catch((error) => {
-            res.status(400).json({ error });
+            res.status(400).json({ error: error.message });
         });
 }
 
@@ -16,7 +16,7 @@ const post = (req, res) => {
             res.json(film);
         })
         .catch((error) => {
-            res.status(400).json({ error });
+            res.status(400).json({ error: error.message });
         });
 }
 
@@ -28,7 +28,7 @@ const put = (req, res) => {
             res.send(film);
         })
         .catch((error) => {
-            res.status(400).json({ error });
+            res.status(400).json({ error: error.message });
         });
 }
 

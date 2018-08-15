@@ -7,7 +7,7 @@ const get = (req, res) => {
             res.json(categories);
         })
         .catch((error) => {
-            res.status(400).json({ error });
+            res.status(400).json({ error: error.message });
         });
 }
 
@@ -17,7 +17,7 @@ const post = (req, res) => {
             res.json(category);
         })
         .catch((error) => {
-            res.status(400).json({ error });
+            res.status(400).json({ error: error.message });
         });
 }
 
@@ -29,7 +29,7 @@ const put = (req, res) => {
             res.send(category);
         })
         .catch((error) => {
-            res.status(400).json({ error });
+            res.status(400).json({ error: error.message });
         });
 }
 

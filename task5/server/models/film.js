@@ -4,10 +4,6 @@ const urlRegex = require('url-regex');
 const Schema = mongoose.Schema;
 
 const FilmSchema = new Schema({
-    id: {
-        type: Schema.Types.ObjectId,
-        // required: [true, 'Id field is required']
-    },
     title: {
         type: String,
         minlength: [3, 'Your title is less than 3 symbols'],
@@ -39,7 +35,7 @@ const FilmSchema = new Schema({
 
                 return isLinksValid && array.length >= 4;
             },
-            message: () => `Arra has invalid links or contains less than 4!`
+            message: () => `Array has invalid links or contains less than 4!`
         },
         required: [true, 'Avatar field is required']
     },
@@ -48,7 +44,11 @@ const FilmSchema = new Schema({
         min: [0, 'Rating should be between 0 & 5'],
         max: [5, 'Too few eggs']
     },
-    category: Schema.Types.ObjectId
+    category: { 
+        type: Schema.Types.ObjectId,
+        ref: 'filmCategory',
+        required: [true, 'Category id is required']
+    }
 });
 
 const Film = mongoose.model('film', FilmSchema);

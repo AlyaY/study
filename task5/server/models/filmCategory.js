@@ -3,10 +3,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const FilmCategorySchema = new Schema({
-    id: {
-        type: Schema.Types.ObjectId,
-        // required: [true, 'Id field is required']
-    },
     title: {
         type: String,
         minlength: [3, 'Your title is less than 3 symbols'],
@@ -18,10 +14,11 @@ const FilmCategorySchema = new Schema({
         maxlength: [500, 'Your description is more than 500 symbols'],
         required: [true, 'Description field is required']
     },
-    films: {
-        type: [Schema.Types.ObjectId],
-        required: [true, 'Films are required']
-    }
+    films: [{ 
+        type: Schema.Types.ObjectId, 
+        ref: 'film',
+        required: [true, 'Film id is required']
+    }]
 });
 
 const FilmCategory = mongoose.model('filmCategory', FilmCategorySchema);
