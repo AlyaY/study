@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const filmJoiSchema = Joi.object().keys({
+const filmJoi = Joi.object().keys({
     title: Joi.string().min(3).required(),
     description: Joi.string().min(3).max(500).required(),
     avatar: Joi.string().uri({
@@ -13,4 +13,4 @@ const filmJoiSchema = Joi.object().keys({
     category: Joi.string()
 });
 
-module.exports = filmJoiSchema;
+module.exports = filmJoi;

@@ -8,6 +8,6 @@ const filmsCategories = require('./filmsCategories');
 router
     .use('/hello-world', helloWorld)
     .use('/films/categories', filmsCategories)
-    .use('/films', films);
+    .use('/films', films );
   
 module.exports = router;

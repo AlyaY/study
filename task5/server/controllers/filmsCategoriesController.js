@@ -2,54 +2,34 @@
 const Joi = require('joi');
 
 const Category = require('../models/filmCategory');
-const filmCategoryJoiSchema = require('../models/filmCategoryJoiSchema');
+const filmCategoryJoi = require('../models/filmCategoryJoi');
 
-const get = (req, res) => {
-    Category.find({})
-        .then((categories) => {
-            res.json(categories);
-        })
-        .catch((error) => {
-            res.status(400).json({ error: error.message });
-        });
+const get = async (req, res) => {
+    const categories = await Category.find({});
+    res.json(categories);
 }
 
-const post = (req, res) => {
-    Category.create(req.body)
-        .then((category) => {
-            res.json(category);
-        })
-        .catch((error) => {
-            res.status(400).json({ error: error.message });
-        });
+const post = async (req, res) => {
+    const category = await Category.create(req.body);
+    res.json(category);
 }
 
-const put = (req, res) => {
+const put = async (req, res) => {
     const { id } = req.params;
 
-    Category.findByIdAndUpdate(id, req.body)
-        .then((category) => {
-            res.send(category);
-        })
-        .catch((error) => {
-            res.status(400).json({ error: error.message });
-        });
+    const category = await Category.findByIdAndUpdate(id, req.body);
+    res.json(category);
 }
 
-const remove = (req, res) => {
+const remove = async (req, res) => {
     const { id } = req.params;
     
-    Category.findByIdAndRemove( id)
-        .then((category) => {
-            res.send({ success: true, id, category });
-        })
-        .catch((error) => {
-            res.status(400).send({ success: false, id });
-        })
+    const category = await Category.findByIdAndRemove( id)
+    res.send({ success: true, id, category });
 }
 
 const checkData = (req, res, next) => {
-    const { error } = Joi.validate(req.body, filmCategoryJoiSchema);
+    const { error } = Joi.validate(req.body, filmCategoryJoi);
 
     if(error) {
         res.status(400).json({ error: error.details[0].message });
