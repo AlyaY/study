@@ -1,12 +1,12 @@
 const express = require('express');
 
-const { get, post, put, remove} = require('../controllers/filmsController');
+const { get, post, put, remove, checkData} = require('../controllers/filmsController');
 
 const router = express.Router();
 
 router.route('/')
     .get(get)
-    .post(post);
+    .post(checkData, post);
 
 router.route('/:id')
     .put(put)

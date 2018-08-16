@@ -1,5 +1,8 @@
 
+const Joi = require('joi');
+
 const Category = require('../models/filmCategory');
+const filmCategoryJoiSchema = require('../models/filmCategoryJoiSchema');
 
 const get = (req, res) => {
     Category.find({})
@@ -45,9 +48,20 @@ const remove = (req, res) => {
         })
 }
 
+const checkData = (req, res, next) => {
+    const { error } = Joi.validate(req.body, filmCategoryJoiSchema);
+
+    if(error) {
+        res.status(400).json({ error: error.details[0].message });
+    } else {
+        next();
+    }
+}
+
 module.exports = {
     get,
     post,
     put,
-    remove
+    remove,
+    checkData
 };

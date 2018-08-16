@@ -1,4 +1,7 @@
+const Joi = require('joi');
+
 const Film = require('../models/film');
+const filmJoiSchema = require('../models/filmJoiSchema')
 
 const get = (req, res) => {
     Film.find({}).limit(10)
@@ -44,9 +47,20 @@ const remove = (req, res) => {
         })
 }
 
+const checkData = (req, res, next) => {
+    const { error } = Joi.validate(req.body, filmJoiSchema);
+
+    if(error) {
+        res.status(400).json({ error: error.details[0].message });
+    } else {
+        next();
+    }
+}
+
 module.exports = {
     get,
     post,
     put,
-    remove
+    remove,
+    checkData
 };

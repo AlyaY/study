@@ -46,8 +46,7 @@ const FilmSchema = new Schema({
     },
     category: { 
         type: Schema.Types.ObjectId,
-        ref: 'filmCategory',
-        required: [true, 'Category id is required']
+        ref: 'filmCategory'
     }
 });
 

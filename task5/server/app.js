@@ -18,17 +18,24 @@ const accessLogStream = rfs('access.log', {
   interval: '1d',
   path: logDirectory
 });
-
-
-mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/film-library`, { useNewUrlParser:true });
-mongoose.Promise = global.Promise;
-
 fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
 
-app
 
-  .use(bodyParser.json())
-  .use(morgan('combined', {stream: accessLogStream}))
-  .use('/api', api);
-  
+mongoose.Promise = global.Promise;
+mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/film-library`, { useNewUrlParser:true })
+  .then(() => {
+    app
+      .use(bodyParser.json())
+      .use(morgan('combined', {stream: accessLogStream}))
+      .use('/api', api);
+    })
+    .catch((err) => {
+      app.get('/', function(req, res){
+        res.send({errro: 'Problem with database connection'});
+      });
+    });
+    
 app.listen(PORT, () => console.log(`This work on ${PORT} port`));
+
+
+  
