@@ -9,6 +9,14 @@ const get = async (req, res) => {
     res.json(categories);
 }
 
+const getFilms = async (req, res) => {
+    const { id } = req.params;
+
+    const {films} = await Category.findById(id).populate('films');
+
+    res.json(films);
+}
+
 const post = async (req, res) => {
     const category = await Category.create(req.body);
     res.json(category);
@@ -40,6 +48,7 @@ const checkData = (req, res, next) => {
 
 module.exports = {
     get,
+    getFilms,
     post,
     put,
     remove,

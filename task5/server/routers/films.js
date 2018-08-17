@@ -13,7 +13,7 @@ router.route('/:page*?')
     .get(asyncHandler(get));
 
 router.route('/:id')
-    .put(asyncHandler(put))
+    .put(checkData, asyncHandler(put))
     .delete(asyncHandler(remove));
   
 module.exports = router;
