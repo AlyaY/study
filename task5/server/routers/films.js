@@ -5,9 +5,12 @@ const { get, post, put, remove, checkData} = require('../controllers/filmsContro
 
 const router = express.Router();
 
+
 router.route('/')
-    .get(asyncHandler(get))
     .post(checkData, asyncHandler(post));
+
+router.route('/:page*?')
+    .get(asyncHandler(get));
 
 router.route('/:id')
     .put(asyncHandler(put))

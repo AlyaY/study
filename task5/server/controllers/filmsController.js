@@ -1,10 +1,18 @@
 const Joi = require('joi');
 
 const Film = require('../models/film');
-const filmJoi = require('../models/filmJoi')
+const filmJoi = require('../models/filmJoi');
+
+const filmsPerPage = 2;
 
 const get = async (req, res) => {
-    const films = await Film.find({});
+    const page = Number.parseInt(req.params.page) || 1;
+    const perPage = Number.parseInt(req.query.perpage) || filmsPerPage;
+    
+    const films = await Film
+        .find({})
+        .skip((perPage * page) - perPage)
+        .limit(perPage);
     res.json(films);
 }
 
