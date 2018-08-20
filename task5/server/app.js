@@ -12,7 +12,7 @@ import api from './routers/api';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const conncectUrl = `mongodb://${process.env}:${process.env.DB_PASS}@${process.env.DB_HOST}/film-library`;
+const conncectUrl = `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/film-library`;
 
 const logDirectory = path.join(__dirname, 'log');
 const accessLogStream = rfs('access.log', {
