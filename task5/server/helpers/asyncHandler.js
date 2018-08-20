@@ -6,4 +6,4 @@ const asyncHandler = fn => (req, res, next) =>
         res.status(400).send({error});
     })
   
-module.exports = asyncHandler;
+export default asyncHandler;

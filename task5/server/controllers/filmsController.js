@@ -1,5 +1,5 @@
-const Film = require('../models/film');
-const {FILMS_PER_PAGE, INITIAL_PAGE} = require('../constants/index');
+import Film from '../models/film';
+import {FILMS_PER_PAGE, INITIAL_PAGE} from '../constants/index';
 
 const get = async (req, res) => {
     const page = Number.parseInt(req.params.page) || INITIAL_PAGE;
@@ -30,9 +30,4 @@ const remove = async (req, res) => {
     res.send({ success: true, film });
 }
 
-module.exports = {
-    get,
-    post,
-    put,
-    remove
-};
+export { get, post, put, remove };

@@ -1,4 +1,4 @@
-const Category = require('../models/filmCategory');
+import Category from '../models/filmCategory';
 
 const get = async (req, res) => {
     const categories = await Category.find({});
@@ -32,10 +32,4 @@ const remove = async (req, res) => {
     res.send({ success: true, id, category });
 }
 
-module.exports = {
-    get,
-    getFilms,
-    post,
-    put,
-    remove
-};
+export { get, getFilms, post, put, remove };

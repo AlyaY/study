@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
@@ -23,4 +23,4 @@ const FilmCategorySchema = new Schema({
 
 const FilmCategory = mongoose.model('filmCategory', FilmCategorySchema);
 
-module.exports = FilmCategory;
+export default FilmCategory;

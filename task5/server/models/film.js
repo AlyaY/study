@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const urlRegex = require('url-regex');
+import mongoose from 'mongoose';
+import urlRegex from 'url-regex';
 
 const Schema = mongoose.Schema;
 
@@ -52,4 +52,4 @@ const FilmSchema = new Schema({
 
 const Film = mongoose.model('film', FilmSchema);
 
-module.exports = Film;
+export default Film;

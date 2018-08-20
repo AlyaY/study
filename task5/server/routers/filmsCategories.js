@@ -1,8 +1,8 @@
-const express = require('express');
+import express from 'express';
 
-const asyncHandler = require('../helpers/asyncHandler');
-const { checkFilmCategoriesData } = require('../middlewares');
-const { get, getFilms, post, put, remove } = require('../controllers/filmsCategoriesController');
+import asyncHandler from '../helpers/asyncHandler';
+import { checkFilmCategoriesData } from '../middlewares';
+import { get, getFilms, post, put, remove } from '../controllers/filmsCategoriesController';
 
 const router = express.Router();
 
@@ -15,4 +15,4 @@ router.route('/:id')
     .put(checkFilmCategoriesData, asyncHandler(put))
     .delete(asyncHandler(remove));
   
-module.exports = router;
+export default router;

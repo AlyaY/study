@@ -1,4 +1,4 @@
-const Joi = require('joi');
+import Joi from 'joi';
 
 const filmCategoryJoi = Joi.object().keys({
     title: Joi.string().min(3).required(),
@@ -6,4 +6,4 @@ const filmCategoryJoi = Joi.object().keys({
     films: Joi.array().items(Joi.string()).required(),
 });
 
-module.exports = filmCategoryJoi;
+export default filmCategoryJoi;

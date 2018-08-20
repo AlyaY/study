@@ -1,14 +1,14 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const morgan = require('morgan');
-const fs = require('fs');
-const path = require('path');
+import express from 'express';
+import bodyParser from 'body-parser';
+import morgan from 'morgan';
+import fs from 'fs';
+import path from 'path';
 require('dotenv').config({ path: 'variables.env' });
 
-const rfs = require('rotating-file-stream');
-const mongoose = require('mongoose');
+import rfs from 'rotating-file-stream';
+import mongoose from 'mongoose';
 
-const api = require('./routers/api');
+import api from './routers/api';
 
 const app = express();
 const PORT = process.env.PORT || 3000;

@@ -1,6 +1,6 @@
-const Joi = require('joi');
+import Joi from 'joi';
 
-const filmCategoryJoi = require('../models/filmCategoryJoi');
+import filmCategoryJoi from '../models/filmCategoryJoi';
 
 const checkFilmCategoriesData = (req, res, next) => {
     const { error } = Joi.validate(req.body, filmCategoryJoi);
@@ -12,4 +12,4 @@ const checkFilmCategoriesData = (req, res, next) => {
     }
 }
 
-module.exports = checkFilmCategoriesData;
+export default checkFilmCategoriesData;

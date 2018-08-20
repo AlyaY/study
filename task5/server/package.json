@@ -2,7 +2,7 @@
   "name": "task5",
   "version": "0.0.0",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon starter.js"
   },
   "dependencies": {
     "body-parser": "^1.18.3",

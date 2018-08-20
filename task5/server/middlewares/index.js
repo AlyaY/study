@@ -1,7 +1,4 @@
-const checkFilmData = require('./checkFilmData');
-const checkFilmCategoriesData = require('./checkFilmCategoriesData');
+import checkFilmData from './checkFilmData';
+import checkFilmCategoriesData from './checkFilmCategoriesData';
 
-module.exports = {
-    checkFilmData,
-    checkFilmCategoriesData
-}
+export { checkFilmData, checkFilmCategoriesData };

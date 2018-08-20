@@ -1,6 +1,6 @@
-const Joi = require('joi');
+import Joi from 'joi';
 
-const filmJoi = require('../models/filmJoi');
+import filmJoi from '../models/filmJoi';
 
 const checkFilmData = (req, res, next) => {
     const { error } = Joi.validate(req.body, filmJoi);
@@ -12,4 +12,4 @@ const checkFilmData = (req, res, next) => {
     }
 }
 
-module.exports = checkFilmData;
+export default checkFilmData;
