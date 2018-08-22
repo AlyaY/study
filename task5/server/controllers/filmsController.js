@@ -1,66 +1,57 @@
-const Joi = require('joi');
+import Film from '../models/film';
+import Category from '../models/filmCategory';
+import {FILMS_PER_PAGE, INITIAL_PAGE} from '../constants/index';
 
-let films = require('../data/films');
-const filmSchema = require('../models/filmSchema');
-
-const validateFilm = (film) => {
-    return Joi.validate(film, filmSchema).error;
+const get = async (req, res) => {
+    const page = Number.parseInt(req.params.page) || INITIAL_PAGE;
+    const perPage = Number.parseInt(req.query.perpage) || FILMS_PER_PAGE;
+    
+    const films = await Film.find({})
+        .skip((perPage * page) - perPage)
+        .limit(perPage);
+    res.json(films);
 }
 
-const formErrorArray = (errors) => {
-    return errors.map(error => error.message)
-}
+const post = async(req, res) => {
+    const newFilm = req.body.category ? { ...req.body, hasCategory: true } : req.body;
+    const film = await Film.create(newFilm);
 
-const get = (req, res) => {
-    res.send(films);
-}
+    await Category.findByIdAndUpdate
 
-const post = (req, res) => {
-    const error = validateFilm(req.body);
-
-    if(error) {
-        res.status(400).json({ error: formErrorArray(error.details) });
-    } else {
-        films.push(req.body);
-        res.json(req.body);
-    }
-}
-
-const put = (req, res) => {
-    const { id } = req.params;
-    const film = films.find((film) => film.id === id);
-
-    if(film) {
-        res.send(film);
-    } else {
-        res.status(400).send({ error: 'There is no such film'})
-    }
-}
-
-const remove = (req, res) => {
-    const { id } = req.params;
-    let successDeleted = false;
-
-    films = films.reduce((allfFilms, film) => {
-        if(film.id === id) {
-            successDeleted = true;
-        } else {
-            allfilms.push(film);
+    if (film || film.category) { 
+        const category = await Category.findById(film.category);
+        
+        if (category) {
+            const films = [...category.films, film._id];
+            await Category.findByIdAndUpdate(film.category, { films });
         }
-
-        return allfFilms;
-    }, []);
-
-    if(successDeleted) {
-        res.send({ success: successDeleted, id });
-    } else {
-        res.status(400).send({ success: successDeleted, id });
     }
+
+    res.json(film);
 }
 
-module.exports = {
-    get,
-    post,
-    put,
-    remove
-};
+const put = async (req, res) => {
+    const { id } = req.params;
+
+    const film = await Film.findByIdAndUpdate(id, req.body);
+    res.json(film);
+}
+
+const remove = async (req, res) => {
+    const { id } = req.params;
+    
+    const film = await Film.findByIdAndRemove(id);
+    
+    if (film || film.category) { 
+        const category = await Category.findById(film.category);
+        
+        if (category) {
+            const films = category.films.filter((_id) => _id != id);
+            await Category.findByIdAndUpdate(film.category, { films: films });
+        }
+    }
+
+    res.send({ success: true, film });
+}
+
+export { get, post, put, remove };

@@ -1,15 +1,19 @@
-const express = require('express');
+import express from 'express';
 
-const { get, post, put, remove} = require('../controllers/filmsController');
+import asyncHandler from '../helpers/asyncHandler';
+import { checkFilmData } from '../middlewares';
+import { get, post, put, remove } from '../controllers/filmsController';
 
 const router = express.Router();
 
 router.route('/')
-    .get(get)
-    .post(post);
+    .post(checkFilmData, asyncHandler(post));
+
+router.route('/:page*?')
+    .get(asyncHandler(get));
 
 router.route('/:id')
-    .put(put)
-    .delete(remove);
-  
-module.exports = router;
+    .put(checkFilmData, asyncHandler(put))
+    .delete(asyncHandler(remove));
+
+export default router;

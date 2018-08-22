@@ -1,7 +1,6 @@
-const Joi = require('joi');
+import Joi from 'joi';
 
-const filmSchema = Joi.object().keys({
-    id: Joi.number().integer().required(),
+const filmJoi = Joi.object().keys({
     title: Joi.string().min(3).required(),
     description: Joi.string().min(3).max(500).required(),
     avatar: Joi.string().uri({
@@ -11,7 +10,7 @@ const filmSchema = Joi.object().keys({
         allowRelative: true
     }).required(),).required(),
     rating: Joi.number().integer().min(0).max(5),
-    category: Joi.number().integer()
+    category: Joi.string()
 });
 
-module.exports = filmSchema;
+export default filmJoi;

@@ -1,67 +1,49 @@
-const Joi = require('joi');
+import Film from '../models/film';
+import Category from '../models/filmCategory';
+import updateFilmsByCategory from '../helpers/updateFilmsByCategory';
 
-let categories = require('../data/categories');
-const categorySchema = require('../models/categorySchema');
-
-const validateCategory = (category) => {
-    return Joi.validate(category, categorySchema).error;
+const get = async (req, res) => {
+    const categories = await Category.find({});
+    res.json(categories);
 }
 
-const formErrorArray = (errors) => {
-    return errors.map(error => error.message)
+const getFilms = async (req, res) => {
+    const { id } = req.params;
+
+    const {films} = await Category.findById(id).populate('films');
+
+    res.json(films);
 }
 
-const get = (req, res) => {
-    res.send(categories);
+const post = async (req, res) => {
+    const category = await Category.create(req.body);
+
+    await updateFilmsByCategory(category, async (film) => {
+        await Film.findByIdAndUpdate(film._id,  { 'category': category._id, 'hasCategory': true });
+    });
+
+    res.json(category);
 }
 
-const post = (req, res) => {
-    const error = validateCategory(req.body);
+const put = async (req, res) => {
+    const { id } = req.params;
+
+    const category = await Category.findByIdAndUpdate(id, req.body);
+    res.json(category);
+}
+
+const remove = async (req, res) => {
+    const { id } = req.params;
     
-    if(error) {
-        res.status(400).json({ error: formErrorArray(error.details) });
-    } else {
-        categories.push(req.body);
-        res.json(req.body);
-    }
-}
+    const category = await Category.findByIdAndRemove(id);
 
-const put = (req, res) => {
-    const { id } = req.params;
-    const category = categories.find((category) => category.id === id);
-
-    if(category) {
-        res.send(category);
-    } else {
-        res.status(400).send({ error: 'There is no such category'})
-    }
-}
-
-const remove = (req, res) => {
-    const { id } = req.params;
-    let successDeleted = false;
-
-    categories = categories.reduce((allCategories, category) => {
-        if(category.id === id) {
-            successDeleted = true;
-        } else {
-            allCategories.push(category);
+    await updateFilmsByCategory(category, async (film) => {
+        if (film.category.equals(category._id)) {
+            await Film.findByIdAndUpdate(film._id,  { 'hasCategory': false });
         }
-
-        return allCategories;
-    }, []);
-
-
-    if(successDeleted) {
-        res.send({ success: successDeleted, id });
-    } else {
-        res.status(400).send({ success: successDeleted, id });
-    }
+    });
+ 
+    res.send({ success: true, id, category });
 }
 
-module.exports = {
-    get,
-    post,
-    put,
-    remove
-};
+export { get, getFilms, post, put, remove };

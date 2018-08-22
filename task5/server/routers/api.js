@@ -1,13 +1,13 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
-const helloWorld = require('./hello-world');
-const films = require('./films');
-const filmsCategories = require('./filmsCategories');
+import helloWorld from './hello-world';
+import films from './films';
+import filmsCategories from './filmsCategories';
 
 router
     .use('/hello-world', helloWorld)
     .use('/films/categories', filmsCategories)
-    .use('/films', films);
+    .use('/films', films );
   
-module.exports = router;
+export default router;
