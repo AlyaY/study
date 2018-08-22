@@ -1,5 +1,6 @@
 import Film from '../models/film';
 import Category from '../models/filmCategory';
+import updateFilmsByCategory from '../helpers/updateFilmsByCategory';
 
 const get = async (req, res) => {
     const categories = await Category.find({});
@@ -17,17 +18,9 @@ const getFilms = async (req, res) => {
 const post = async (req, res) => {
     const category = await Category.create(req.body);
 
-    if (category || category.films) { 
-        const films = await Film.find({
-            '_id': { $in: category.films}
-        });
-        
-        if (films.length) {
-            films.forEach(async (film) => {
-                await Film.findByIdAndUpdate(film._id, { 'category': category._id });
-            })
-        }
-    }
+    await updateFilmsByCategory(category, async (film) => {
+        await Film.findByIdAndUpdate(film._id,  { 'category': category._id, 'hasCategory': true });
+    });
 
     res.json(category);
 }
@@ -44,6 +37,12 @@ const remove = async (req, res) => {
     
     const category = await Category.findByIdAndRemove(id);
 
+    await updateFilmsByCategory(category, async (film) => {
+        if (film.category.equals(category._id)) {
+            await Film.findByIdAndUpdate(film._id,  { 'hasCategory': false });
+        }
+    });
+ 
     res.send({ success: true, id, category });
 }
 

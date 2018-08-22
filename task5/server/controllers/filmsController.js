@@ -13,7 +13,8 @@ const get = async (req, res) => {
 }
 
 const post = async(req, res) => {
-    const film = await Film.create(req.body);
+    const newFilm = req.body.category ? { ...req.body, hasCategory: true } : req.body;
+    const film = await Film.create(newFilm);
 
     await Category.findByIdAndUpdate
 

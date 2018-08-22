@@ -47,6 +47,10 @@ const FilmSchema = new Schema({
     category: { 
         type: Schema.Types.ObjectId,
         ref: 'filmCategory'
+    },
+    hasCategory: {
+        type: Boolean,
+        default: false
     }
 });
 
