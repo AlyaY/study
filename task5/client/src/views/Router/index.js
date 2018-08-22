@@ -8,7 +8,7 @@ import SubRouter from './SubRouter';
 const Router = () => {
   return (
     <div>
-        <h1>Hi</h1>
+        <h1>Header will be soon</h1>
         <Switch>
             {/* <Route path='/study/404' component={NotFound} /> */}
             <Route>
