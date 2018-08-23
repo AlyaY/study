@@ -3,10 +3,12 @@ import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import fs from 'fs';
 import path from 'path';
-require('dotenv').config({ path: 'variables.env' });
-
 import rfs from 'rotating-file-stream';
 import mongoose from 'mongoose';
+import cookieSession from 'cookie-session';
+import passport from 'passport';
+
+require('dotenv').config({ path: 'variables.env' });
 
 import api from './routers/api';
 
@@ -34,6 +36,11 @@ mongoose.Promise = global.Promise;
         res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
         next();
       })
+      .use(cookieSession({
+        maxAge: 24 * 60 * 60 *1000
+      }))
+      .use(passport.initialize())
+      .use(passport.session())
       .use(bodyParser.json())
       .use(morgan('combined', {stream: accessLogStream}))
       .use('/api', api);
