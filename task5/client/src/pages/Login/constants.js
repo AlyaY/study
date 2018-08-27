@@ -4,6 +4,8 @@ export const validations = {
 };
 
 export const errorMessages = {
+  name: '"Name" must be more than 4 symbols',
+  surname: '"Surname" must be more than 4 symbols',
   email: 'Envalid email',
   password: 'Envalid password',
 };

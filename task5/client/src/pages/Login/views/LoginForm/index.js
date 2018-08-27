@@ -22,6 +22,20 @@ const LoginForm = (props) => {
       <form className={classes.form} onSubmit={handleSubmit(onSubmit)} >
        <Field
           component={InputField}
+          name='name'
+          type='text'
+          label='Введите ваше имя'
+          validate={[requiredValidation]}
+        /> 
+       <Field
+          component={InputField}
+          name='surname'
+          type='text'
+          label='Введите вашу фамилию'
+          validate={[requiredValidation]}
+        /> 
+       <Field
+          component={InputField}
           name='email'
           type='email'
           label='Введите ваш email'
@@ -42,9 +56,11 @@ const LoginForm = (props) => {
 
 LoginForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  nameValidation: PropTypes.func.isRequired,
+  surnameValidation: PropTypes.func.isRequired,
   emailValidation: PropTypes.func.isRequired,
   passwordValidation: PropTypes.func.isRequired,
-  requiredValidation: PropTypes.func.isRequired
+  requiredValidation: PropTypes.func.isRequired,
 }
 
 const LoginFormWithStyle = withStyles(style)(LoginForm);

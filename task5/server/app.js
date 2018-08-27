@@ -1,5 +1,4 @@
 import bodyParser from 'body-parser';
-import cookieSession from 'cookie-session';
 import cors from  'cors'
 import express from 'express';
 import fs from 'fs';
