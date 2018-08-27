@@ -1,15 +1,11 @@
 import express from 'express';
 
 import asyncHandler from '../helpers/asyncHandler';
-import { checkFilmData } from '../middlewares';
-import { logout, login } from '../controllers/filmsController';
+import { auth, signIn, signUp } from '../controllers/authController';
 
 const router = express.Router();
 
-router.route('/login')
-    .post(checkFilmData, asyncHandler(login));
-
-router.route('/logout')
-    .post(checkFilmData, asyncHandler(logout));
+router.post('/', asyncHandler(signUp));
+router.post('/login', auth.optional, asyncHandler(signIn));
 
 export default router;
