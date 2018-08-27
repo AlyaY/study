@@ -14,13 +14,26 @@ const LoginForm = (props) => {
     requiredValidation,
     onSubmit,
     classes,
-    handleSubmit,
-    error
+    handleSubmit
   } = props;
 
   return (
     <div className={classes.root}>
       <form className={classes.form} onSubmit={handleSubmit(onSubmit)} >
+       <Field
+          component={InputField}
+          name='name'
+          type='text'
+          label='Введите ваше имя'
+          validate={[requiredValidation]}
+        /> 
+       <Field
+          component={InputField}
+          name='surname'
+          type='text'
+          label='Введите вашу фамилию'
+          validate={[requiredValidation]}
+        /> 
        <Field
           component={InputField}
           name='email'
@@ -35,7 +48,6 @@ const LoginForm = (props) => {
           label='Введите ваш пароль'
           validate={[requiredValidation, passwordValidation]}
         />
-        <p>{error}</p>
         <button className={classes.button}>Войти</button>
       </form>
     </div>
@@ -43,8 +55,9 @@ const LoginForm = (props) => {
 }
 
 LoginForm.propTypes = {
-  error: PropTypes.any.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  nameValidation: PropTypes.func.isRequired,
+  surnameValidation: PropTypes.func.isRequired,
   emailValidation: PropTypes.func.isRequired,
   passwordValidation: PropTypes.func.isRequired,
   requiredValidation: PropTypes.func.isRequired,

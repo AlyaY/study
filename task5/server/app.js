@@ -1,4 +1,5 @@
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 import cors from  'cors'
 import express from 'express';
 import fs from 'fs';
@@ -31,6 +32,9 @@ mongoose.Promise = global.Promise;
     await mongoose.connect(conncectUrl, { useNewUrlParser:true });
 
     app
+      .use(morgan('combined', {stream: accessLogStream}))
+      .use(cookieParser())
+      .use(bodyParser.json())
       .use(cors())
       .use(session({ 
         secret: 'passport-tutorial',
@@ -40,8 +44,6 @@ mongoose.Promise = global.Promise;
       }))
       .use(passport.initialize())
       .use(passport.session())
-      .use(bodyParser.json())
-      .use(morgan('combined', {stream: accessLogStream}))
       .use('/api', api);
   } catch(error) {
     app.get('/:name*?', function(req, res){

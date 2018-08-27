@@ -5,28 +5,36 @@ import axios from 'axios';
 
 import LoginForm from '../views/LoginForm';
 import { validations, errorMessages } from '../constants';
-import { submitForm, updateError } from '../actions';
-import { errorSelector, emailSelector, passwordSelector } from '../selectors';
+import { submitForm } from '../actions';
+import { nameSelector, surnameSelector, emailSelector, passwordSelector } from '../selectors';
 
-import { API_LOGIN } from '../../../constants';
-
+const API = 'https://films--library.herokuapp.com/api/auth/';
 class LoginContainer extends Component {
   handleSubmit = (user) => {
+    console.log(user); 
     this.props.submitForm(user);
+    axios.post(API, {user})
+    .then(({ data: { user: { token }} }) => {
+      localStorage.setItem('token', token);
 
-    axios.post(API_LOGIN, {user})
-      .then(({ data: { user: { token }} }) => {
-        localStorage.setItem('token', token);
+      this.props.history.push('/study/films');
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 
-        this.props.history.push('/study/films');
-      })
-      .catch( (error) => {
-        this.props.updateError({payload: error});
-      });
   }
 
   requiredValidation = (value) => {
     return value ? '' : 'Required';
+  }
+
+  nameValidation = (name) => {
+    return (name.length >= 4) ? '' : errorMessages.name;
+  }
+
+  surnameValidation = (surname) => {
+    return (surname.length >= 4) ? '' : errorMessages.surname;
   }
 
   emailValidation = (value) => {
@@ -39,8 +47,9 @@ class LoginContainer extends Component {
 
   render () {
     const props = {
-      error: this.props.error,
       onSubmit: this.handleSubmit,
+      nameValidation: this.nameValidation,
+      surnameValidation: this.surnameValidation,
       emailValidation: this.emailValidation,
       passwordValidation: this.passwordValidation,
       requiredValidation: this.requiredValidation
@@ -51,22 +60,22 @@ class LoginContainer extends Component {
 }
 
 LoginContainer.propTypes = {
-  error: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  surname: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   submitForm: PropTypes.func.isRequired,
-  updateError: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
-  error: errorSelector(state),
+  name: nameSelector(state),
+  surname: surnameSelector(state),
   email: emailSelector(state),
   password: passwordSelector(state),
 });
 
 const mapDispatchToProps = dispatch => ({
   submitForm: data => dispatch(submitForm(data)),
-  updateError: data => dispatch(updateError(data)),
 });
 
 export default connect(

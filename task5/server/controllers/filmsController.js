@@ -1,6 +1,6 @@
 import Film from '../models/film';
 import Category from '../models/filmCategory';
-import {FILMS_PER_PAGE, INITIAL_PAGE} from '../constants/index';
+import { FILMS_PER_PAGE, INITIAL_PAGE } from '../constants/index';
 
 const get = async (req, res) => {
     const page = Number.parseInt(req.params.page) || INITIAL_PAGE;

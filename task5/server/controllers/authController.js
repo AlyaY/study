@@ -1,30 +1,6 @@
-import jwt from 'express-jwt'; 
 import passport from 'passport';
 
 import User from '../models/user';
-
-const getTokenFromHeaders = (req) => {
-    const { headers: { authorization } } = req;
-  
-    if(authorization && authorization.split(' ')[0] === 'Token') {
-        return authorization.split(' ')[1];
-    }
-    return null;
-};
-  
-const auth = {
-    required: jwt({
-      secret: 'secret',
-      userProperty: 'payload',
-      getToken: getTokenFromHeaders,
-    }),
-    optional: jwt({
-      secret: 'secret',
-      userProperty: 'payload',
-      getToken: getTokenFromHeaders,
-      credentialsRequired: false,
-    }),
-};
 
 const signIn = async(req, res, next) => {
     const { body: { user } } = req;
@@ -56,8 +32,8 @@ const signIn = async(req, res, next) => {
   
         return res.json({ user: user.toAuthJSON() });
       }
-  
-      return status(400).info;
+
+      return res.status(400).json(info);
     })(req, res, next);
 }
 
@@ -84,7 +60,7 @@ const signUp = async(req, res) => {
     finalUser.setPassword(user.password);
   
     await finalUser.save()
-     res.json({ user: finalUser.toAuthJSON() });
+    res.json({ user: finalUser.toAuthJSON() });
 }
 
-export { auth, signIn, signUp };
+export { signIn, signUp };
