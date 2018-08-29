@@ -1,3 +1,3 @@
-import LoginContainer from './containers/LoginContainer';
+import SignUpContainer from './containers/SignUpContainer';
 
-export default LoginContainer;
+export default SignUpContainer;

@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import style from './styles';
 import InputField from '../InputField';
 
-const LoginForm = (props) => {
+const SignUpForm = (props) => {
   const { 
     emailValidation,
     passwordValidation,
@@ -48,13 +48,13 @@ const LoginForm = (props) => {
           label='Введите ваш пароль'
           validate={[requiredValidation, passwordValidation]}
         />
-        <button className={classes.button}>Войти</button>
+        <button className={classes.button}>Зарегестрироваться</button>
       </form>
     </div>
   )
 }
 
-LoginForm.propTypes = {
+SignUpForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   nameValidation: PropTypes.func.isRequired,
   surnameValidation: PropTypes.func.isRequired,
@@ -63,8 +63,8 @@ LoginForm.propTypes = {
   requiredValidation: PropTypes.func.isRequired,
 }
 
-const LoginFormWithStyle = withStyles(style)(LoginForm);
+const SignUpFormWithStyle = withStyles(style)(SignUpForm);
 
 export default reduxForm({
-  form: 'login',
-})(LoginFormWithStyle);
+  form: 'signUp',
+})(SignUpFormWithStyle);

@@ -13,9 +13,9 @@ const loginRoute = {
     path: '/study/login',
     name: 'Войти'
 };
-const signUp = {
+const signUpRoute = {
     path: '/study/signUp',
     name: 'Зарегестрироваться'
 };
 
-export { routers, loginRoute, signUp };
+export { routers, loginRoute, signUpRoute };

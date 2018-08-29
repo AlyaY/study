@@ -3,25 +3,27 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-import LoginForm from '../views/LoginForm';
+import SignUpForm from '../views/SignUpForm';
 import { validations, errorMessages } from '../constants';
 import { submitForm } from '../actions';
+import { setToken } from '../../../actions';
 import { nameSelector, surnameSelector, emailSelector, passwordSelector } from '../selectors';
 
-const API = 'https://films--library.herokuapp.com/api/auth/';
-class LoginContainer extends Component {
-  handleSubmit = (user) => {
-    console.log(user); 
-    this.props.submitForm(user);
-    axios.post(API, {user})
-    .then(({ data: { user: { token }} }) => {
-      localStorage.setItem('token', token);
+import { API_SIGNUP } from '../../../constants';
+import { routers } from '../../../modules/Header/constants';
 
-      this.props.history.push('/study/films');
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+class SignUpContainer extends Component {
+  handleSubmit = (user) => {
+    this.props.submitForm(user);
+
+    axios.post(API_SIGNUP, {user})
+      .then(({ data: { user: { token }} }) => {
+        this.props.setToken({ token });
+        this.props.history.push(routers[0].path);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
 
   }
 
@@ -55,16 +57,17 @@ class LoginContainer extends Component {
       requiredValidation: this.requiredValidation
     }
 
-    return <LoginForm {...props} />
+    return <SignUpForm {...props} />
   }
 }
 
-LoginContainer.propTypes = {
+SignUpContainer.propTypes = {
   name: PropTypes.string.isRequired,
   surname: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   submitForm: PropTypes.func.isRequired,
+  setToken: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -76,9 +79,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   submitForm: data => dispatch(submitForm(data)),
+  setToken: data => dispatch(setToken(data)),
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(LoginContainer);
+)(SignUpContainer);

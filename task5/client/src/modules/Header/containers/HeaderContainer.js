@@ -5,7 +5,10 @@ import PropTypes from 'prop-types';
 
 import Header from '../views/Header';
 import { routersSelector, currentRouteSelector } from '../selectors';
+import { tokenSelector } from '../../../selectors';
 import { setCurrentRoute } from '../actions';
+import { removeToken } from '../../../actions';
+import { loginRoute, signUpRoute } from '../constants';
 
 class HeaderContainer extends Component {
   constructor(props) {
@@ -23,11 +26,20 @@ class HeaderContainer extends Component {
     this.props.setCurrentRoute({ currentRoute });
   }
 
+  signOut = () => {
+    // redirect if we havent access to this routes
+    this.props.removeToken();
+  }
+
   render () {
     const props = {
       routers: this.props.routers,
       currentRoute: this.props.currentRoute,
       handleChange: this.handleChange,
+      loginRoute,
+      signUpRoute,
+      token: this.props.token,
+      signOut: this.signOut
     };
 
     return <Header {...props} />
@@ -35,18 +47,22 @@ class HeaderContainer extends Component {
 }
 
 HeaderContainer.propTypes = {
+  token: PropTypes.string.isRequired,
   routers: PropTypes.array.isRequired,
   currentRoute: PropTypes.string.isRequired,
   setCurrentRoute: PropTypes.func.isRequired,
+  removeToken: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
   routers: routersSelector(state),
   currentRoute: currentRouteSelector(state),
+  token: tokenSelector(state),
 });
 
 const mapDispatchToProps = dispatch => ({
   setCurrentRoute: data => dispatch(setCurrentRoute(data)),
+  removeToken: data => dispatch(removeToken(data)),
 });
 
 const HeaderWithRoute = withRouter(HeaderContainer)

@@ -6,22 +6,23 @@ import axios from 'axios';
 import LoginForm from '../views/LoginForm';
 import { validations, errorMessages } from '../constants';
 import { submitForm, updateError } from '../actions';
+import { setToken } from '../../../actions';
 import { errorSelector, emailSelector, passwordSelector } from '../selectors';
 
 import { API_LOGIN } from '../../../constants';
+import { routers } from '../../../modules/Header/constants';
 
 class LoginContainer extends Component {
   handleSubmit = (user) => {
     this.props.submitForm(user);
 
-    axios.post(API_LOGIN, {user})
+    axios.post(API_LOGIN, { user })
       .then(({ data: { user: { token }} }) => {
-        localStorage.setItem('token', token);
-
-        this.props.history.push('/study/films');
+        this.props.setToken({ token });
+        this.props.history.push(routers[0].path);
       })
-      .catch( (error) => {
-        this.props.updateError({payload: error});
+      .catch(({ response }) => {
+        this.props.updateError({ error: response.data.errors || '' });
       });
   }
 
@@ -56,6 +57,7 @@ LoginContainer.propTypes = {
   email: PropTypes.string.isRequired,
   submitForm: PropTypes.func.isRequired,
   updateError: PropTypes.func.isRequired,
+  setToken: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -67,6 +69,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   submitForm: data => dispatch(submitForm(data)),
   updateError: data => dispatch(updateError(data)),
+  setToken: data => dispatch(setToken(data)),
 });
 
 export default connect(
