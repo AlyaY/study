@@ -15,7 +15,7 @@ const LoginForm = (props) => {
     onSubmit,
     classes,
     handleSubmit,
-    error
+    err
   } = props;
 
   return (
@@ -35,7 +35,7 @@ const LoginForm = (props) => {
           label='Введите ваш пароль'
           validate={[requiredValidation, passwordValidation]}
         />
-        <p>{error}</p>
+        <p className={classes.error}>{err}</p>
         <button className={classes.button}>Войти</button>
       </form>
     </div>
@@ -43,7 +43,7 @@ const LoginForm = (props) => {
 }
 
 LoginForm.propTypes = {
-  error: PropTypes.any.isRequired,
+  err: PropTypes.any.isRequired,
   onSubmit: PropTypes.func.isRequired,
   emailValidation: PropTypes.func.isRequired,
   passwordValidation: PropTypes.func.isRequired,

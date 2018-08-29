@@ -1,28 +1,26 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import axios from 'axios';
 
 import LoginForm from '../views/LoginForm';
 import { validations, errorMessages } from '../constants';
 import { submitForm, updateError } from '../actions';
 import { setToken } from '../../../actions';
 import { errorSelector, emailSelector, passwordSelector } from '../selectors';
-
-import { API_LOGIN } from '../../../constants';
 import { routers } from '../../../modules/Header/constants';
+import { login } from '../../../services';
 
 class LoginContainer extends Component {
   handleSubmit = (user) => {
     this.props.submitForm(user);
 
-    axios.post(API_LOGIN, { user })
+    login(user)
       .then(({ data: { user: { token }} }) => {
         this.props.setToken({ token });
         this.props.history.push(routers[0].path);
       })
       .catch(({ response }) => {
-        this.props.updateError({ error: response.data.errors || '' });
+        this.props.updateError({ error: response.data.error || '' });
       });
   }
 
@@ -39,7 +37,10 @@ class LoginContainer extends Component {
   }
 
   render () {
+    const err = this.props.error;
+
     const props = {
+      err,
       error: this.props.error,
       onSubmit: this.handleSubmit,
       emailValidation: this.emailValidation,

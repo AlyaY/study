@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import axios from 'axios';
 
 import FilmList from '../views/FilmList';
 import { getFilms } from '../actions';
 import { filmsSelector } from '../selectors';
-const API = 'https://films--library.herokuapp.com/api/films/';
-const GET_QUERY = '';
-
+import { films } from '../../../services';
 class FilmsContainer extends Component {
   componentDidMount() {
-    axios(API + GET_QUERY)
+    films()
       .then(({ data }) => {
         this.props.getFilms({films: data})
       });

@@ -16,6 +16,11 @@ const styles = {
     fontSize: '18px',
     background: '#2196f3',
   },
+  error: {
+    color: '#ff1744',
+    fontSize: '12px',
+    fontFamily: 'sans-serif',
+  }
 }
 
 export default styles;

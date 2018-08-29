@@ -12,11 +12,11 @@ passport.use(new LocalStrategy({
         const user = await User.findOne({ email });
 
         if(!user) {
-            return done(null, false, { errors: { 'email': 'is invalid' } });
+            return done(null, false, { error: { 'email': 'is invalid' } });
         }
 
         if(!user.validatePassword(password)) {
-            return done(null, false, { errors: { 'password': 'is invalid' } });
+            return done(null, false, { error: { 'password': 'is invalid' } });
         }
     
         return done(null, user);

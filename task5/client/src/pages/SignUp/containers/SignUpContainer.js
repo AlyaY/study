@@ -1,28 +1,32 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import axios from 'axios';
 
 import SignUpForm from '../views/SignUpForm';
 import { validations, errorMessages } from '../constants';
-import { submitForm } from '../actions';
+import { submitForm, updateError } from '../actions';
 import { setToken } from '../../../actions';
-import { nameSelector, surnameSelector, emailSelector, passwordSelector } from '../selectors';
-
-import { API_SIGNUP } from '../../../constants';
+import { 
+  errorSelector,
+  nameSelector,
+  surnameSelector,
+  emailSelector,
+  passwordSelector
+} from '../selectors';
 import { routers } from '../../../modules/Header/constants';
+import { signup } from '../../../services';
 
 class SignUpContainer extends Component {
   handleSubmit = (user) => {
     this.props.submitForm(user);
 
-    axios.post(API_SIGNUP, {user})
+    signup(user)
       .then(({ data: { user: { token }} }) => {
         this.props.setToken({ token });
         this.props.history.push(routers[0].path);
       })
-      .catch(function (error) {
-        console.log(error);
+      .catch( ({ response }) => {
+        this.props.updateError({ error: response.data.error || '' });
       });
 
   }
@@ -48,7 +52,10 @@ class SignUpContainer extends Component {
   }
 
   render () {
+    const err = this.props.error;
+
     const props = {
+      err,
       onSubmit: this.handleSubmit,
       nameValidation: this.nameValidation,
       surnameValidation: this.surnameValidation,
@@ -62,6 +69,7 @@ class SignUpContainer extends Component {
 }
 
 SignUpContainer.propTypes = {
+  error: PropTypes.isRequired,
   name: PropTypes.string.isRequired,
   surname: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
@@ -71,6 +79,7 @@ SignUpContainer.propTypes = {
 }
 
 const mapStateToProps = state => ({
+  error: errorSelector(state),
   name: nameSelector(state),
   surname: surnameSelector(state),
   email: emailSelector(state),
@@ -79,6 +88,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   submitForm: data => dispatch(submitForm(data)),
+  updateError: data => dispatch(updateError(data)),
   setToken: data => dispatch(setToken(data)),
 });
 

@@ -14,7 +14,8 @@ const SignUpForm = (props) => {
     requiredValidation,
     onSubmit,
     classes,
-    handleSubmit
+    handleSubmit,
+    err
   } = props;
 
   return (
@@ -48,6 +49,7 @@ const SignUpForm = (props) => {
           label='Введите ваш пароль'
           validate={[requiredValidation, passwordValidation]}
         />
+        <p className={classes.error}>{err}</p>
         <button className={classes.button}>Зарегестрироваться</button>
       </form>
     </div>
@@ -55,6 +57,7 @@ const SignUpForm = (props) => {
 }
 
 SignUpForm.propTypes = {
+  err: PropTypes.isRequired,
   onSubmit: PropTypes.func.isRequired,
   nameValidation: PropTypes.func.isRequired,
   surnameValidation: PropTypes.func.isRequired,
