@@ -3,6 +3,7 @@ import Joi from 'joi';
 import filmJoi from '../models/filmJoi';
 
 const checkFilmData = (req, res, next) => {
+    console.log(req)
     const { error } = Joi.validate(req.body, filmJoi);
 
     if(error) {
