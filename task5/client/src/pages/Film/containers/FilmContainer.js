@@ -1,63 +1,58 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
-
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import FilmList from '../views/FilmList';
-import { addFilms, nextPage, prevPage, setFilmsPerPage } from '../actions';
-import { filmsSelector, perPageSelector, currentPageSelector } from '../selectors';
-import { getFilms } from '../../../services';
+import Film from '../views/Film';
+import { setFilm } from '../actions';
+import { filmSelector } from '../selectors';
+import { getFilm } from '../../../services';
 
 class FilmContainer extends Component {
   componentDidMount() {
-    // const { perPage, currentPage, addFilms, nextPage } = this.props;
-    console.log(this.props)
-    // getFilm()
-    //   .then(({ data }) => {
-    //     nextPage({currentPage: currentPage + 1});
-    //     addFilms({films: data});
-    //   });
+    const { setFilm, match: { params: { id }} } = this.props;
 
-    // window.addEventListener('scroll', this.scrollHandler);
+    getFilm(id)
+      .then(({ data }) => {
+        setFilm({film: data});
+      });
+  }
+
+  componentWillUnmount() {
+    const { setFilm } = this.props;
+
+    setFilm({film: {}});
   }
 
   render () {
-    const props = {
-      films:  this.props.films
-    }
+    const props = { ...this.props.film };
 
-    return <FilmList {...props} />
+    return <Film {...props} />
   }
 }
 
 FilmContainer.propTypes = {
-  films: PropTypes.array.isRequired,
-  perPage: PropTypes.number.isRequired,
-  currentPage: PropTypes.number.isRequired,
-  addFilms: PropTypes.func.isRequired,
-  nextPage: PropTypes.func.isRequired,
-  prevPage: PropTypes.func.isRequired,
-  setFilmsPerPage: PropTypes.func.isRequired,
+  film: PropTypes.object.isRequired,
+  setFilm: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
-  films: filmsSelector(state),
-  currentPage: currentPageSelector(state),
-  perPage: perPageSelector(state),
+  film: filmSelector(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-  addFilms: data => dispatch(addFilms(data)),
-  nextPage: data => dispatch(nextPage(data)),
-  prevPage: data => dispatch(prevPage(data)),
-  setFilmsPerPage: data => dispatch(setFilmsPerPage(data)),
+  setFilm: data => dispatch(setFilm(data)),
 });
 
-const FilmContainerWithRouter = withRouter(FilmContainer);
+// const FilmContainerWithRouter = withRouter(FilmContainer);
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(FilmContainerWithRouter);
+// export default connect(
+  //   mapStateToProps,
+  //   mapDispatchToProps,
+  // )(FilmContainerWithRouter);
+  
+  const FilmContainerWithRouter =  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(FilmContainer);;
+export default  withRouter(FilmContainerWithRouter);

@@ -21,9 +21,13 @@ class FilmsContainer extends Component {
     window.addEventListener('scroll', this.scrollHandler);
   }
 
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.scrollHandler);
+  }
+
   scrollHandler = () => {
     const elem = ReactDOM.findDOMNode(this)
-    const { height, top } = elem.getBoundingClientRect()
+    const { height, top } = elem.getBoundingClientRect();
     const windowHeight = window.innerHeight;
 
     if(windowHeight >= height + top) {
