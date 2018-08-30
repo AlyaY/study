@@ -15,3 +15,4 @@ export const getFilms = (page, perPage = 0) => {
 
     return axios.get(`${API.FILMS}${page}${filmsPerPage}`);
 };
+export const getFilm = (id) => axios.get(`${API.FILMS}/${id}`);

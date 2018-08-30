@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
+
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -10,31 +12,15 @@ import { getFilms } from '../../../services';
 
 class FilmContainer extends Component {
   componentDidMount() {
-    const { perPage, currentPage, addFilms, nextPage } = this.props;
+    // const { perPage, currentPage, addFilms, nextPage } = this.props;
+    console.log(this.props)
+    // getFilm()
+    //   .then(({ data }) => {
+    //     nextPage({currentPage: currentPage + 1});
+    //     addFilms({films: data});
+    //   });
 
-    getFilms(currentPage, perPage)
-      .then(({ data }) => {
-        nextPage({currentPage: currentPage + 1});
-        addFilms({films: data});
-      });
-
-    window.addEventListener('scroll', this.scrollHandler);
-  }
-
-  scrollHandler = () => {
-    const elem = ReactDOM.findDOMNode(this)
-    const { height, top } = elem.getBoundingClientRect()
-    const windowHeight = window.innerHeight;
-
-    if(windowHeight >= height + top) {
-      const { perPage, currentPage, addFilms, nextPage } = this.props;
-
-      getFilms(currentPage, perPage)
-        .then(({ data }) => {
-          nextPage({currentPage: currentPage + 1});
-          addFilms({films: data});
-        });
-    }
+    // window.addEventListener('scroll', this.scrollHandler);
   }
 
   render () {
@@ -69,7 +55,9 @@ const mapDispatchToProps = dispatch => ({
   setFilmsPerPage: data => dispatch(setFilmsPerPage(data)),
 });
 
+const FilmContainerWithRouter = withRouter(FilmContainer);
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(FilmContainer);
+)(FilmContainerWithRouter);

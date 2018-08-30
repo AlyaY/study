@@ -2,14 +2,7 @@ import Film from '../models/film';
 import Category from '../models/filmCategory';
 import { FILMS_PER_PAGE, INITIAL_PAGE } from '../constants/index';
 
-const getFilm = async (req, res) => {
-    const { id } = req.params;
-    
-    const film = await Film.findById(id, req.body);
-    res.json(film);
-}
-
-const getFilms = async (req, res) => {
+const get = async (req, res) => {
     const page = Number.parseInt(req.params.page) || INITIAL_PAGE;
     const perPage = Number.parseInt(req.query.perpage) || FILMS_PER_PAGE;
     
@@ -61,4 +54,4 @@ const remove = async (req, res) => {
     res.send({ success: true, film });
 }
 
-export { getFilms, getFilm, post, put, remove };
+export { get, post, put, remove };
