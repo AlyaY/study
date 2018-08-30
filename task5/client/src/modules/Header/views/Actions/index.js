@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 
 import style from './styles';
 
-const Actions = ({ loginRoute, signUpRoute, token, signOut, classes }) => {
+const Actions = ({ loginRoute, signUpRoute, isLogin, signOut, classes }) => {
   const signOutBtn = (
     <Button
         variant="contained"
@@ -40,7 +40,7 @@ const Actions = ({ loginRoute, signUpRoute, token, signOut, classes }) => {
 
   return (
     <div className={classes.root}>
-      { token ? signOutBtn : signInBtns }
+      { isLogin ? signOutBtn : signInBtns }
     </div>
   )
 }
@@ -48,7 +48,7 @@ const Actions = ({ loginRoute, signUpRoute, token, signOut, classes }) => {
 Actions.propTypes = {
   loginRoute: PropTypes.object.isRequired,
   signUpRoute: PropTypes.object.isRequired,
-  token: PropTypes.string.isRequired,
+  isLogin: PropTypes.string.isRequired,
   signOut: PropTypes.func.isRequired,
 }
 

@@ -3,14 +3,15 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import FilmList from '../views/FilmList';
-import { getFilms } from '../actions';
+import { setFilms } from '../actions';
 import { filmsSelector } from '../selectors';
-import { films } from '../../../services';
+import { getFilms } from '../../../services';
+
 class FilmsContainer extends Component {
   componentDidMount() {
-    films()
+    getFilms()
       .then(({ data }) => {
-        this.props.getFilms({films: data})
+        this.props.setFilms({films: data})
       });
   }
 

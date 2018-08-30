@@ -38,7 +38,7 @@ class HeaderContainer extends Component {
       handleChange: this.handleChange,
       loginRoute,
       signUpRoute,
-      token: this.props.token,
+      isLogin: (this.props.token.length !== 0),
       signOut: this.signOut
     };
 

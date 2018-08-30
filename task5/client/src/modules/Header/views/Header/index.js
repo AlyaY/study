@@ -17,7 +17,7 @@ const Header = (props) => {
     loginRoute, 
     signUpRoute, 
     signOut, 
-    token,
+    isLogin,
     classes
   } = props;
   const navProps = {
@@ -28,7 +28,7 @@ const Header = (props) => {
   const actionsProps = {
     loginRoute,
     signUpRoute,
-    token,
+    isLogin,
     signOut
   }
 
@@ -47,7 +47,7 @@ Header.propTypes = {
   loginRoute: PropTypes.object.isRequired,
   signUpRoute: PropTypes.object.isRequired,
   signOut: PropTypes.func.isRequired,
-  token: PropTypes.string.isRequired,
+  isLogin: PropTypes.string.isRequired,
 }
 
 export default withStyles(style)(Header);
