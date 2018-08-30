@@ -2,7 +2,7 @@ import express from 'express';
 
 import asyncHandler from '../helpers/asyncHandler';
 import { checkFilmData } from '../middlewares';
-import { get, post, put, remove } from '../controllers/filmsController';
+import { getFilms, getFilm, post, put, remove } from '../controllers/filmsController';
 import auth from '../helpers/auth';
 
 const router = express.Router();
@@ -18,11 +18,13 @@ router.route('/test')
 router.route('/')
     .post(checkFilmData, asyncHandler(post));
 
-router.route('/:page*?')
-    .get(asyncHandler(get));
-
+    
 router.route('/:id')
+    .get(asyncHandler(getFilm))
     .put(checkFilmData, asyncHandler(put))
     .delete(asyncHandler(remove));
+    
+router.route('/:page*?')
+    .get(asyncHandler(getFilms));
 
 export default router;
