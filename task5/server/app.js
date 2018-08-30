@@ -1,12 +1,17 @@
-import express from 'express';
 import bodyParser from 'body-parser';
-import morgan from 'morgan';
+import cookieParser from 'cookie-parser';
+import cors from  'cors'
+import express from 'express';
 import fs from 'fs';
-import path from 'path';
-require('dotenv').config({ path: 'variables.env' });
-
-import rfs from 'rotating-file-stream';
 import mongoose from 'mongoose';
+import morgan from 'morgan';
+import passport from 'passport';
+import path from 'path';
+import rfs from 'rotating-file-stream';
+import session from 'express-session';
+
+require('dotenv').config({ path: 'variables.env' });
+require('./config/passport');
 
 import api from './routers/api';
 
@@ -27,15 +32,18 @@ mongoose.Promise = global.Promise;
     await mongoose.connect(conncectUrl, { useNewUrlParser:true });
 
     app
-      .use(function(req, res, next) {
-        res.header("Access-Control-Allow-Origin", '*');
-        res.header("Access-Control-Allow-Credentials", true);
-        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-        res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
-        next();
-      })
-      .use(bodyParser.json())
       .use(morgan('combined', {stream: accessLogStream}))
+      .use(cookieParser())
+      .use(bodyParser.json())
+      .use(cors())
+      .use(session({ 
+        secret: 'passport-tutorial',
+        cookie: { maxAge: 60000 },
+        resave: false,
+        saveUninitialized: false 
+      }))
+      .use(passport.initialize())
+      .use(passport.session())
       .use('/api', api);
   } catch(error) {
     app.get('/:name*?', function(req, res){
