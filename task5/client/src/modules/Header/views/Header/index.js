@@ -47,7 +47,7 @@ Header.propTypes = {
   loginRoute: PropTypes.object.isRequired,
   signUpRoute: PropTypes.object.isRequired,
   signOut: PropTypes.func.isRequired,
-  isLogin: PropTypes.string.isRequired,
+  isLogin: PropTypes.bool.isRequired,
 }
 
 export default withStyles(style)(Header);

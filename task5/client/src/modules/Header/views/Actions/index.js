@@ -48,7 +48,7 @@ const Actions = ({ loginRoute, signUpRoute, isLogin, signOut, classes }) => {
 Actions.propTypes = {
   loginRoute: PropTypes.object.isRequired,
   signUpRoute: PropTypes.object.isRequired,
-  isLogin: PropTypes.string.isRequired,
+  isLogin: PropTypes.bool.isRequired,
   signOut: PropTypes.func.isRequired,
 }
 

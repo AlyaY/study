@@ -9,13 +9,13 @@ import Typography from '@material-ui/core/Typography';
 
 import style from './styles';
 
-const Film =  ({ gallery, title, description, classes }) => {
+const Film =  ({ avatar, title, description, classes }) => {
 
   return (
     <Card className={classes.card}>
       <CardMedia
         className={classes.img}
-        image={gallery[0]}
+        image={avatar}
         title={title}
       />
       <div className={classes.details}>

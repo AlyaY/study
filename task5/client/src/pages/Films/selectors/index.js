@@ -1,1 +1,3 @@
 export const filmsSelector = (state) => (state.films.films);
+export const currentPageSelector = (state) => (state.films.currentPage);
+export const perPageSelector = (state) => (state.films.perPage);

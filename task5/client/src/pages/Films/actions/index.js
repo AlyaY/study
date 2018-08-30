@@ -1,3 +1,7 @@
 import { createAction } from 'redux-actions';
 
 export const setFilms = createAction('SET_FILMS');
+export const addFilms = createAction('ADD_FILMS');
+export const nextPage = createAction('NEXT_FILMS_PAGE');
+export const prevPage = createAction('PREV_FILMS_PAGE');
+export const setFilmsPerPage = createAction('SET_FILMS_PER_PAGE');

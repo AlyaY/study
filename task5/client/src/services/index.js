@@ -10,4 +10,8 @@ const API = {
 
 export const login = (user) => (axios.post(API.LOGIN, { user }));
 export const signup = (user) => (axios.post(API.SIGNUP, { user }));
-export const getFilms = () => (axios.get(API.FILMS));
+export const getFilms = (page, perPage = 0) => {
+    const filmsPerPage = perPage > 0 ? `?perpage=${perPage}` : '';
+
+    return axios.get(`${API.FILMS}${page}${filmsPerPage}`);
+};
