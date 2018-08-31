@@ -13,8 +13,8 @@ import style from './styles';
 const Film =  ({ avatar, title, description, classes, _id }) => {
 
   return (
-    <Link to={`film/${_id}`} className={classes.root}>
-      <Card className={classes.card}>
+    <Card className={classes.root}>
+      <Link to={`film/${_id}`} className={classes.card}>
         <CardMedia
           className={classes.img}
           image={avatar}
@@ -25,13 +25,13 @@ const Film =  ({ avatar, title, description, classes, _id }) => {
             <Typography gutterBottom variant="headline" component="h2">
               {title}
             </Typography>
-            <Typography component="p">
+            <Typography component="p" className={classes.text}>
               {description}
             </Typography>
           </CardContent>
         </div>
-      </Card>
-    </Link>
+      </Link>
+    </Card>
   )
 }
 

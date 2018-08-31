@@ -8,7 +8,9 @@ import style from './styles';
 
 const FilmList = ({ films, classes }) => {
   const filmsContent = films.map(film => (
-    <Film key={film._id} {...film} />
+    <div className={classes.card}>
+      <Film key={film._id} {...film} />
+    </div>
   ));
   
   return (

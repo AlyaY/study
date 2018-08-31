@@ -10,34 +10,40 @@ import { getFilms } from '../../../services';
 
 class FilmsContainer extends Component {
   componentDidMount() {
-    const { perPage, currentPage, addFilms, nextPage } = this.props;
-
-    getFilms(currentPage, perPage)
-      .then(({ data }) => {
-        nextPage({currentPage: currentPage + 1});
-        addFilms({films: data});
-      });
-
-    window.addEventListener('scroll', this.scrollHandler);
+    this.getFilms();
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.scrollHandler);
+    this.removeEvent();
+  }
+
+  addEvent() {
+    window.addEventListener('wheel', this.scrollHandler);
+  }
+
+  removeEvent() {
+    window.removeEventListener('wheel', this.scrollHandler);
+  }
+
+  getFilms() {
+    const { perPage, currentPage, addFilms, nextPage } = this.props;
+
+    getFilms(currentPage, perPage)
+    .then(({ data }) => {
+      nextPage({currentPage: currentPage + 1});
+      addFilms({films: data});
+
+      this.addEvent();
+    });
   }
 
   scrollHandler = () => {
-    const elem = ReactDOM.findDOMNode(this)
-    const { height, top } = elem.getBoundingClientRect();
+    const { height, top } = ReactDOM.findDOMNode(this).getBoundingClientRect();
     const windowHeight = window.innerHeight;
 
     if(windowHeight >= height + top) {
-      const { perPage, currentPage, addFilms, nextPage } = this.props;
-
-      getFilms(currentPage, perPage)
-        .then(({ data }) => {
-          nextPage({currentPage: currentPage + 1});
-          addFilms({films: data});
-        });
+      this.removeEvent();
+      this.getFilms();
     }
   }
 

@@ -2,7 +2,6 @@ const styles = {
   card: {
     display: 'flex',
     alignItems: 'flex-start',
-    padding: '0 15px',
     margin: '0 0 20px'
   },
   img: {

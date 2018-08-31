@@ -1,19 +1,25 @@
 const styles = {
   root: {
-    textDecoration: 'none'
+    display: 'flex',
+    width: '100%',
+    height: '100%',
   },
   card: {
-    minHeight: '240px',
     display: 'flex',
-    margin: '0 0 20px',
+    width: '100%',
+    height: '100%',
+    textDecoration: 'none'
   },
   details: {
     display: 'flex',
     flexDirection: 'column',
   },
   img: {
-    width: '170px',
+    width: '33%',
     flexShrink: '0'
+  },
+  text: {
+    fontSize: '13px'
   }
 }
 
