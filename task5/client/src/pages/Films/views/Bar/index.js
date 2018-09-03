@@ -7,7 +7,15 @@ import { withStyles } from '@material-ui/core/styles';
 // import SearchField from '../SearchField';
 import style from './styles';
 
-const Bar =  ({ search, handleSearchSubmit, handleSearchChange, classes }) => {
+const Bar =  (props) => {
+  const { 
+    sort,
+    search,
+    handleSortChange, 
+    handleSearchSubmit,
+    handleSearchChange,
+    classes
+  } = props;
 
   return (
     <div className={classes.root}>
@@ -20,6 +28,13 @@ const Bar =  ({ search, handleSearchSubmit, handleSearchChange, classes }) => {
         />
         <button >Search</button>
       </form>
+      <select name='sort' 
+        value={sort}
+        onChange={handleSortChange}
+      >
+        <option value='year'>год</option>
+        <option value='name'>имя</option>
+      </select>
     </div>
   )
 }
@@ -28,6 +43,7 @@ Bar.propTypes = {
   search: PropTypes.string.isRequired,
   handleSearchChange: PropTypes.func.isRequired,
   handleSearchSubmit: PropTypes.func.isRequired,
+  handleSortChange: PropTypes.func.isRequired,
 }
 
 export default withStyles(style)(Bar);

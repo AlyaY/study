@@ -1,12 +1,16 @@
 import Film from '../models/film';
 import Category from '../models/filmCategory';
-import { FILMS_PER_PAGE, INITIAL_PAGE } from '../constants/index';
+import { FILMS_PER_PAGE, INITIAL_PAGE, SORT_FILMS } from '../constants/index';
 
 const get = async (req, res) => {
     const page = Number.parseInt(req.params.page) || INITIAL_PAGE;
     const perPage = Number.parseInt(req.query.perpage) || FILMS_PER_PAGE;
+    const sort = req.query.sort || SORT_FILMS;
     
+    console.log(sort)
+
     const films = await Film.find({})
+        .sort(sort)
         .skip((perPage * page) - perPage)
         .limit(perPage);
     res.json(films);

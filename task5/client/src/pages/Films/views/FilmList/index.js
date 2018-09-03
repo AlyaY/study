@@ -7,18 +7,32 @@ import Film from '../Film';
 import Bar from '../Bar';
 import style from './styles';
 
-const FilmList = ({ films, search, handleSearchChange, handleSearchSubmit, classes }) => {
+const FilmList = (props) => {
+  const {
+    films,
+    search,
+    handleSearchChange,
+    handleSearchSubmit,
+    handleSortChange,
+    classes
+  } = props;
+
   const filmsContent = films.map(film => (
     <div className={classes.card}>
       <Film key={film._id} {...film} />
     </div>
   ));
   
-  const props = { search, handleSearchChange, handleSearchSubmit };
+  const barProps = { 
+    search, 
+    handleSearchChange, 
+    handleSearchSubmit,
+    handleSortChange,
+  };
 
   return (
     <div className={classes.root}>
-      <Bar {...props} />
+      <Bar {...barProps} />
       <div className={classes.list}>
         {filmsContent}
       </div>
@@ -31,6 +45,7 @@ FilmList.propTypes = {
   search: PropTypes.string.isRequired,
   handleSearchChange: PropTypes.func.isRequired,
   handleSearchSubmit: PropTypes.func.isRequired,
+  handleSortChange: PropTypes.func.isRequired,
 }
 
 export default withStyles(style)(FilmList);

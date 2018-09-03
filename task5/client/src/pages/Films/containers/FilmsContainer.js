@@ -10,13 +10,15 @@ import {
   nextPage,
   prevPage,
   setFilmsPerPage,
-  setSearchString 
+  setSearchString,
+  setSortType,
 } from '../actions';
 import {
   filmsSelector,
   perPageSelector,
   currentPageSelector,
-  searchSelector 
+  searchSelector,
+  sortSelector,
 } from '../selectors';
 import { getFilms, findFilms } from '../../../services';
 
@@ -38,11 +40,11 @@ class FilmsContainer extends Component {
   }
 
   getFilms() {
-    const { perPage, currentPage, addFilms, setFilms, nextPage } = this.props;
+    const { perPage, currentPage, addFilms, setFilms, nextPage, sort } = this.props;
 
     (currentPage === 1) && setFilms({films: []});
 
-    getFilms(currentPage, perPage)
+    getFilms(sort, currentPage, perPage)
       .then(({ data }) => {
         nextPage({currentPage: currentPage + 1});
         addFilms({films: data});
@@ -71,14 +73,33 @@ class FilmsContainer extends Component {
     const { setSearchString, setFilms, nextPage, search } = this.props;
 
     findFilms(search)
-    .then(({ data }) => {
-      nextPage({currentPage: 1});
-      setFilms({films: data});
+      .then(({ data }) => {
+        nextPage({currentPage: 1});
+        setFilms({films: data});
 
-      this.removeEvent();
-    });
+        this.removeEvent();
+      });
 
     setSearchString({search: ''});
+  }
+
+  handleSortChange = (event) => {
+    const { setSortType, setFilms, nextPage } = this.props;
+    const newSortValue = event.target.value
+
+    setSortType({sort: newSortValue});
+   
+    getFilms(newSortValue)
+      .then(({ data }) => {
+        nextPage({currentPage: 1});
+        setFilms({films: data});
+
+        this.removeEvent();
+      });
+  }
+  
+  handleSortSubmit = (event) => {
+    event.preventDefault();
   }
 
   render () {
@@ -87,6 +108,7 @@ class FilmsContainer extends Component {
       search:  this.props.search,
       handleSearchChange:  this.handleSearchChange,
       handleSearchSubmit:  this.handleSearchSubmit,
+      handleSortChange:  this.handleSortChange,
     }
 
     return <FilmList {...props} />
@@ -94,6 +116,7 @@ class FilmsContainer extends Component {
 }
 
 FilmsContainer.propTypes = {
+  sort: PropTypes.string.isRequired,
   search: PropTypes.string.isRequired,
   films: PropTypes.array.isRequired,
   perPage: PropTypes.number.isRequired,
@@ -104,6 +127,7 @@ FilmsContainer.propTypes = {
   prevPage: PropTypes.func.isRequired,
   setFilmsPerPage: PropTypes.func.isRequired,
   setSearchString: PropTypes.func.isRequired,
+  setSortType: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -111,6 +135,7 @@ const mapStateToProps = state => ({
   currentPage: currentPageSelector(state),
   perPage: perPageSelector(state),
   search: searchSelector(state),
+  sort: sortSelector(state),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -120,6 +145,7 @@ const mapDispatchToProps = dispatch => ({
   prevPage: data => dispatch(prevPage(data)),
   setFilmsPerPage: data => dispatch(setFilmsPerPage(data)),
   setSearchString: data => dispatch(setSearchString(data)),
+  setSortType: data => dispatch(setSortType(data)),
 });
 
 export default connect(
