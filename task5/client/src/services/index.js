@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 const api = 'https://films--library.herokuapp.com/api/';
-// const api = 'http://localhost:3000/api/';
 
 const API = {
     LOGIN: api + 'auth/login/',

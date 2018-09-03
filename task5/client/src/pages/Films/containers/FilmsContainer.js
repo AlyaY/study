@@ -38,15 +38,17 @@ class FilmsContainer extends Component {
   }
 
   getFilms() {
-    const { perPage, currentPage, addFilms, nextPage } = this.props;
+    const { perPage, currentPage, addFilms, setFilms, nextPage } = this.props;
+
+    (currentPage === 1) && setFilms({films: []});
 
     getFilms(currentPage, perPage)
-    .then(({ data }) => {
-      nextPage({currentPage: currentPage + 1});
-      addFilms({films: data});
+      .then(({ data }) => {
+        nextPage({currentPage: currentPage + 1});
+        addFilms({films: data});
 
-      this.addEvent();
-    });
+        this.addEvent();
+      });
   }
 
   scrollHandler = () => {
@@ -64,17 +66,16 @@ class FilmsContainer extends Component {
   }
 
   handleSearchSubmit = (event) => {
-    const { setSearchString, search } = this.props;
     event.preventDefault();
-    console.log(search);
+    
+    const { setSearchString, setFilms, nextPage, search } = this.props;
 
     findFilms(search)
     .then(({ data }) => {
-      console.log(data)
       nextPage({currentPage: 1});
       setFilms({films: data});
 
-      this.addEvent();
+      this.removeEvent();
     });
 
     setSearchString({search: ''});
