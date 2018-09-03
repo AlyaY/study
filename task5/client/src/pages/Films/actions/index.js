@@ -5,3 +5,4 @@ export const addFilms = createAction('ADD_FILMS');
 export const nextPage = createAction('NEXT_FILMS_PAGE');
 export const prevPage = createAction('PREV_FILMS_PAGE');
 export const setFilmsPerPage = createAction('SET_FILMS_PER_PAGE');
+export const setSearchString = createAction('SET_SEARCH_STRING');

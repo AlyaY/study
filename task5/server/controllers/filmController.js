@@ -7,4 +7,12 @@ const getFilm = async (req, res) => {
     res.json(film);
 }
 
-export { getFilm };
+const findFilm = async (req, res) => {
+    const { search } = req.body;
+    
+    const film = await Film.find({ "title": { "$regex": search, "$options": "i" }});
+
+    res.json(film);
+}
+ 
+export { getFilm, findFilm };

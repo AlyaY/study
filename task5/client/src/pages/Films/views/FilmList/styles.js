@@ -1,5 +1,9 @@
 const styles = {
-  root: {
+  root: {},
+  bar: {
+    marginBottom: '20px'
+  },
+  list: {
     display: 'flex',
     flexWrap: 'wrap',
     marginRight: '-30px'
