@@ -7,12 +7,10 @@ const get = async (req, res) => {
     const perPage = Number.parseInt(req.query.perpage) || FILMS_PER_PAGE;
     const sort = req.query.sort || SORT_FILMS;
     
-    console.log(sort)
-
     const films = await Film.find({})
         .sort(sort)
         .skip((perPage * page) - perPage)
-        .limit(perPage);
+        .limit(perPage);  
     res.json(films);
 }
 

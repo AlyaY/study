@@ -33,7 +33,7 @@ const Bar =  (props) => {
         onChange={handleSortChange}
       >
         <option value='year'>год</option>
-        <option value='name'>имя</option>
+        <option value='title'>имя</option>
       </select>
     </div>
   )
