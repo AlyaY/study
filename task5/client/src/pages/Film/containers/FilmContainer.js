@@ -8,6 +8,7 @@ import { setFilm } from '../actions';
 import { filmSelector } from '../selectors';
 import { filmsSelector } from '../../Films/selectors';
 import { getFilm } from '../../../services';
+import { tokenSelector } from '../../../selectors';
 
 class FilmContainer extends Component {
   componentDidMount() {
@@ -33,19 +34,24 @@ class FilmContainer extends Component {
   }
 
   render () {
-    const props = { ...this.props.film };
+    const props = { 
+      ...this.props.film,  
+      isLogin: (this.props.token.length !== 0)
+    };
 
     return <Film {...props} />
   }
 }
 
 FilmContainer.propTypes = {
+  token: PropTypes.string.isRequired,
   film: PropTypes.object.isRequired,
   films: PropTypes.array.isRequired,
   setFilm: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
+  token: tokenSelector(state),
   film: filmSelector(state),
   films: filmsSelector(state),
 });

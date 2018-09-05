@@ -7,6 +7,7 @@ const API = {
     SIGNUP: api + 'auth/',
     FILMS: api + 'films/',
     FILM: api + 'film/',
+    RATE: api + 'rate/',
 }
 
 export const login = (user) => axios.post(API.LOGIN, { user });
@@ -19,3 +20,7 @@ export const getFilms = (sort = '', page = 1, perPage = 0) => {
 };
 export const getFilm = (id) => axios.get(`${API.FILM}${id}`);
 export const findFilms = (search) => axios.post(API.FILM,  { search });
+export const setRating = (token, rate) => axios.post(API.RATE,  { rate }, {
+    'Content-Type': 'application/json',
+    'Authorization': `Token ${token}` 
+});

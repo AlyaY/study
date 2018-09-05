@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 
 import style from './styles';
 
-const Film =  ({ avatar, title, description, classes, _id }) => {
+const Film =  ({ avatar, title, description, year, classes, _id }) => {
 
   return (
     <Card className={classes.root}>
@@ -24,6 +24,9 @@ const Film =  ({ avatar, title, description, classes, _id }) => {
           <CardContent>
             <Typography gutterBottom variant="headline" component="h2">
               {title}
+            </Typography>
+            <Typography gutterBottom component="h3">
+              {year}
             </Typography>
             <Typography component="p" className={classes.text}>
               {description}
@@ -40,7 +43,8 @@ Film.propTypes = {
   avatar: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  gallery: PropTypes.array.isRequired
+  gallery: PropTypes.array.isRequired,
+  year: PropTypes.number.isRequired,
 }
 
 export default withStyles(style)(Film);

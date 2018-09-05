@@ -18,7 +18,7 @@ const addRate = async(req, res) => {
     Film.findOne(rate.film, async (err, film) => {
         const rateArray = await Rate.find({film: rate.film});
         
-        film.rating = Math.round(rateArray.reduce((res, cur) => res + cur.rating, 0) / rateArray.length);
+        film.rating = (rateArray.reduce((res, {rating}) => res + rating, 0) / rateArray.length).toFixed(2);
         film.save();
     });
 

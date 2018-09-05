@@ -14,7 +14,7 @@ const styles = {
     flexDirection: 'column',
   },
   title: {
-    marginBottom: '.5em',
+    // marginBottom: '.5em',
   },
   description: {
     marginBottom: '1em',
@@ -30,6 +30,9 @@ const styles = {
     width: 'auto',
     marginRight: '1%',
     marginBottom: '1%'
+  },
+  rating: {
+    marginBottom: '20px'
   }
 }
 
