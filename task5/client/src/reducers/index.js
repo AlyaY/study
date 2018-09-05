@@ -6,6 +6,7 @@ import signUp from '../pages/SignUp/reducers';
 import films from '../pages/Films/reducers';
 import film from '../pages/Film/reducers';
 import header from '../modules/Header/reducers';
+import isLoading from './isLoading';
 import token from './token';
 
 export default combineReducers({
@@ -14,6 +15,7 @@ export default combineReducers({
   signUp,
   films,
   film,
+  isLoading,
   token,
   form: formReducer
 });

@@ -1,5 +1,7 @@
 const styles = {
-  root: {},
+  root: {
+    paddingBottom: '10px'
+  },
   bar: {
     marginBottom: '20px'
   },
@@ -14,6 +16,10 @@ const styles = {
     maxWidth: '50%',
     marginBottom: '30px',
     paddingRight: '30px'
+  },
+  progress: {
+    width: '100%',
+    textAlign: 'center',
   },
 }
 

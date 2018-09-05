@@ -1,26 +1,20 @@
 const styles = {
   root: {
     display: 'flex',
+    alignItems: 'center',
     width: '100%',
     height: '100%',
+    marginBottom: '20px',
   },
-  card: {
-    display: 'flex',
-    width: '100%',
-    height: '100%',
-    textDecoration: 'none'
+  col: {
+    marginRight: '30px',
   },
-  details: {
-    display: 'flex',
-    flexDirection: 'column',
+  select: {
+    minWidth: '120px',
   },
-  img: {
-    width: '33%',
-    flexShrink: '0'
+  field: {
+    marginRight: '15px',
   },
-  text: {
-    fontSize: '13px'
-  }
 }
 
 export default styles;
