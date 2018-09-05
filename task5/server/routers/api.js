@@ -5,6 +5,8 @@ import auth from './auth';
 import helloWorld from './hello-world';
 import films from './films';
 import film from './film';
+import rate from './rate';
+import comment from './comment';
 import filmsCategories from './filmsCategories';
 
 router
@@ -12,6 +14,8 @@ router
     .use('/films/categories', filmsCategories)
     .use('/films', films)
     .use('/film', film)
+    .use('/rate', rate)
+    .use('/comment', comment)
     .use('/auth', auth);
   
 export default router;

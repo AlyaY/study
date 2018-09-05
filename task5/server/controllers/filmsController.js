@@ -6,7 +6,7 @@ const get = async (req, res) => {
     const page = Number.parseInt(req.params.page) || INITIAL_PAGE;
     const perPage = Number.parseInt(req.query.perpage) || FILMS_PER_PAGE;
     const sort = req.query.sort || SORT_FILMS;
-    
+
     const films = await Film.find({})
         .sort(sort)
         .skip((perPage * page) - perPage)
@@ -18,7 +18,7 @@ const post = async(req, res) => {
     const newFilm = req.body.category ? { ...req.body, hasCategory: true } : req.body;
     const film = await Film.create(newFilm);
 
-    await Category.findByIdAndUpdate
+    // await Category.findByIdAndUpdate
 
     if (film || film.category) { 
         const category = await Category.findById(film.category);
