@@ -1,14 +1,13 @@
 import express from 'express';
 
+import { checkCommentData } from '../middlewares';
 import asyncHandler from '../helpers/asyncHandler';
-import { getFilm, findFilm } from '../controllers/filmController';
+import { addComment } from '../controllers/commentController';
+import auth from '../helpers/auth';
 
 const router = express.Router();
 
-router.route('/:id')
-    .get(asyncHandler(getFilm));
-
 router.route('/')
-    .post(asyncHandler(findFilm));
+    .post(auth.required, checkCommentData, asyncHandler(addComment));
 
 export default router;

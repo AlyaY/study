@@ -17,6 +17,10 @@ import { routers } from '../../../modules/Header/constants';
 import { signup } from '../../../services';
 
 class SignUpContainer extends Component {
+  componentWillUnmount() {
+    this.props.updateError({ error: '' })
+  }
+
   handleSubmit = (user) => {
     const { submitForm, setToken, setUserId, updateError, history} = this.props;
     submitForm(user);

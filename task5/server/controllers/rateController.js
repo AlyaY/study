@@ -2,6 +2,11 @@ import Film from '../models/film';
 import User from '../models/user';
 import Rate from '../models/rate';
 
+
+const average = (arr) => {
+    return arr.reduce((res, {rating}) => res + rating, 0) / arr.length;
+}
+
 const addRate = async(req, res) => {
     const newRate = req.body;
     const rate = await Rate.findOneAndUpdate({film: newRate.film, user: newRate.user}, {rating: newRate.rating});
@@ -9,16 +14,16 @@ const addRate = async(req, res) => {
     if (!rate) { 
         rate = await Rate.create(newRate)
 
-        User.findOne(rate.user, (err, user) => {
+        await User.findOne(rate.user, (err, user) => {
             user.filmRate = [...user.filmRate, rate._id]
             user.save();
         });
     }
 
-    Film.findOne(rate.film, async (err, film) => {
+    await Film.findOne(rate.film, async (err, film) => {
         const rateArray = await Rate.find({film: rate.film});
         
-        film.rating = (rateArray.reduce((res, {rating}) => res + rating, 0) / rateArray.length).toFixed(2);
+        film.rating = average(rateArray).toFixed(2);
         film.save();
     });
 

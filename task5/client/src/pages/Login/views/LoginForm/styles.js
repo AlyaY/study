@@ -17,6 +17,8 @@ const styles = {
     background: '#2196f3',
   },
   error: {
+    marginBottom: '10px', 
+    textAlign: 'center',
     color: '#ff1744',
     fontSize: '12px',
     fontFamily: 'sans-serif',

@@ -11,6 +11,10 @@ import { routers } from '../../../modules/Header/constants';
 import { login } from '../../../services';
 
 class LoginContainer extends Component {
+  componentWillUnmount() {
+    this.props.updateError({ error: '' })
+  }
+
   handleSubmit = (user) => {
     const { submitForm, setToken, setUserId, updateError, history} = this.props;
     submitForm(user);
@@ -23,7 +27,7 @@ class LoginContainer extends Component {
         history.push(routers[0].path);
       })
       .catch(({ response }) => {
-        updateError({ error: response || '' });
+        updateError({ error: response.data.error || '' });
       });
   }
 
@@ -43,8 +47,7 @@ class LoginContainer extends Component {
     const err = this.props.error;
 
     const props = {
-      err,
-      error: this.props.error,
+      err: this.props.error,
       onSubmit: this.handleSubmit,
       emailValidation: this.emailValidation,
       passwordValidation: this.passwordValidation,
