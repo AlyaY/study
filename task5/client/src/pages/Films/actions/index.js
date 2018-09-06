@@ -8,3 +8,5 @@ export const prevPage = createAction('PREV_FILMS_PAGE');
 export const setFilmsPerPage = createAction('SET_FILMS_PER_PAGE');
 export const setSearchString = createAction('SET_SEARCH_STRING');
 export const setSortType = createAction('SET_SORT_TYPE');
+export const setCategories = createAction('SET_CATEGORIES');
+export const setCategory = createAction('SET_CATEGORY');

@@ -11,6 +11,6 @@ const SORT_LIST = [
         name: 'рейтинг',
         value: 'rating',
     },
-]
+];
 
 export { SORT_LIST };

@@ -8,35 +8,34 @@ import TextField from '@material-ui/core/TextField';
 import style from './styles';
 import { SORT_LIST } from '../../constants';
 
-const Bar =  (props) => {
+const Sort =  (props) => {
   const { 
     sort,
     handleSortChange, 
-    classes
+    classes,
   } = props;
 
   return (
     <TextField
-        select
-        label="Сортировка"
-        name='sort' 
-        value={sort}
-        onChange={handleSortChange}
-        className={classes.select}
-      >
-        {SORT_LIST.map(option => (
-          <MenuItem key={option.value} value={option.value}>
-            {option.name}
-          </MenuItem>
-        ))}
+      select
+      label="Сортировка"
+      name='sort' 
+      value={sort}
+      onChange={handleSortChange}
+      className={classes.select}
+    >
+      {SORT_LIST.map(({ value, name }) => (
+        <MenuItem key={value} value={value}>
+          {name}
+        </MenuItem>)
+      )}
     </TextField>
-      
   )
 }
 
-Bar.propTypes = {
+Sort.propTypes = {
   sort: PropTypes.string.isRequired,
   handleSortChange: PropTypes.func.isRequired,
 }
 
-export default withStyles(style)(Bar);
+export default withStyles(style)(Sort);

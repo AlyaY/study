@@ -14,10 +14,13 @@ const FilmList = (props) => {
     sort,
     films,
     search,
+    category,
+    categories,
     handleSearchChange,
     handleSearchSubmit,
     handleSortChange,
-    classes
+    handleCategoryChange,
+    classes,
   } = props;
 
   const filmsContent = films.map(film => (
@@ -31,7 +34,10 @@ const FilmList = (props) => {
     search, 
     handleSearchChange, 
     handleSearchSubmit,
-    handleSortChange,
+    handleSortChange, 
+    handleCategoryChange,
+    category,
+    categories,
   };
 
   const progressElem = (
@@ -52,12 +58,15 @@ const FilmList = (props) => {
 }
 
 FilmList.propTypes = {
+  category: PropTypes.string.isRequired,
+  categories: PropTypes.array.isRequired,
   isLoading: PropTypes.bool.isRequired,
   films: PropTypes.array.isRequired,
   search: PropTypes.string.isRequired,
   handleSearchChange: PropTypes.func.isRequired,
   handleSearchSubmit: PropTypes.func.isRequired,
   handleSortChange: PropTypes.func.isRequired,
+  handleCategoryChange: PropTypes.func.isRequired,
 }
 
 export default withStyles(style)(FilmList);
