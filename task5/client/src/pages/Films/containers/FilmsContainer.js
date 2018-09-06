@@ -35,11 +35,15 @@ import {
 
 class FilmsContainer extends Component {
   componentDidMount() {
-    this.getFilms();
+    const {categories, setCategories, setCategory} = this.props;
     
-    (this.props.categories.length === 1) && getCategories()
+    this.getFilms();
+
+    setCategory({category: categories[0]._id});
+    
+    (categories.length === 1) && getCategories()
       .then(({data}) => {
-        this.props.setCategories({categories: data})
+        setCategories({categories: data})
       });
   }
 
@@ -141,7 +145,7 @@ class FilmsContainer extends Component {
     if(currentCategory) {
       getFilmsByCategories(currentCategory)
       .then(({ data }) => {
-        nextPage({currentPage: 2});
+        nextPage({currentPage: 1});
         setFilms({films: data});
         setLoadingState({isLoading: false});
 
