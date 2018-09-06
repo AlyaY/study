@@ -44,8 +44,6 @@ class LoginContainer extends Component {
   }
 
   render () {
-    const err = this.props.error;
-
     const props = {
       err: this.props.error,
       onSubmit: this.handleSubmit,

@@ -22,8 +22,11 @@ const styles = {
     lineHeight: '1.35'
   },
   rating: {
+  },
+  ratingText: {
+    fontStyle: 'italic',
     marginBottom: '20px'
-  }
+  },
 }
 
 export default styles;

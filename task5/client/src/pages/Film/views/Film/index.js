@@ -7,12 +7,17 @@ import { withStyles } from '@material-ui/core/styles';
 
 import style from './styles';
 
-const Film =  ({ avatar, gallery, title, description, rating, isLogin, classes, ratingChanged }) => {
-
-  const galleryList = gallery && gallery.map(
-    (img) => (<img src={img} alt={title} className={classes.galleryItem} />)
-  );
-
+const Film =  (props) => {
+  const {
+    avatar,
+    gallery,
+    title,
+    description,
+    rating,
+    isLogin,
+    classes,
+    ratingChanged,
+  } = props;
   const images = gallery && gallery.map((src) => ({
       original: src,
       thumbnail: src,
@@ -25,7 +30,7 @@ const Film =  ({ avatar, gallery, title, description, rating, isLogin, classes, 
         <h1 className={classes.title}>{title}</h1>
         <Stars
           className={classes.rating}
-          value={rating}
+          value={Math.round(rating)}
           count={5}
           size={48}
           color2={'#ffd700'}
@@ -33,6 +38,7 @@ const Film =  ({ avatar, gallery, title, description, rating, isLogin, classes, 
           half={false}
           onChange={ratingChanged}
         />
+        <p className={classes.ratingText}>Средний рейтинг: {rating}</p>
         <p className={classes.description}>{description}</p>
         <ImageGallery items={images} rowHeight={180} maxRows={1} margin={0} />
       </div>
