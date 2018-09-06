@@ -13,7 +13,9 @@ const Router = () => {
             <Route>
                 <div>
                     <Header />
-                    <SubRouter />
+                    <div class="wrapper">
+                        <SubRouter  />
+                    </div>
                 </div>
             </Route>
         </Switch>

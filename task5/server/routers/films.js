@@ -19,10 +19,11 @@ router.route('/')
     .post(checkFilmData, asyncHandler(post));
 
 router.route('/:page*?')
-    .get(asyncHandler(get));
-
+        .get(asyncHandler(get));
+    
 router.route('/:id')
     .put(checkFilmData, asyncHandler(put))
     .delete(asyncHandler(remove));
+    
 
 export default router;

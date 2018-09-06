@@ -4,6 +4,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Login from '../../pages/Login';
 import SignUp from '../../pages/SignUp';
 import Films from '../../pages/Films';
+import Film from '../../pages/Film';
 // import Success from '../pages/LoginRedux/pages/Success';
 
 const SubRouter = () => {
@@ -14,6 +15,7 @@ const SubRouter = () => {
         <Route path='/study/login' component={Login} />
         <Route path='/study/signup' component={SignUp} />
         <Route path='/study/films' component={Films} />
+        <Route path='/study/film/:id' component={Film} />
         {/* <Route path='/study/login/success' component={Success} />
         <Redirect from='*' to='/study/404' /> */}
       </Switch>

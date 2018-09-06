@@ -12,15 +12,17 @@ import { login } from '../../../services';
 
 class LoginContainer extends Component {
   handleSubmit = (user) => {
-    this.props.submitForm(user);
+    const { submitForm, setToken, updateError, history} = this.props;
+    submitForm(user);
 
     login(user)
       .then(({ data: { user: { token }} }) => {
-        this.props.setToken({ token });
-        this.props.history.push(routers[0].path);
+        setToken({ token });
+        updateError({ error: '' })
+        history.push(routers[0].path);
       })
       .catch(({ response }) => {
-        this.props.updateError({ error: response.data.error || '' });
+        updateError({ error: response.data.error || '' });
       });
   }
 

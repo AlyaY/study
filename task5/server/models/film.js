@@ -44,11 +44,11 @@ const FilmSchema = new Schema({
         },
         required: [true, 'Avatar field is required']
     },
-    rating: [{
+    rating: {
         type: Number,
         min: [0, 'Rating should be between 0 & 5'],
         max: [5, 'Too few eggs']
-    }],
+    },
     comment: [{
         type: Schema.Types.ObjectId,
         ref: 'comment'

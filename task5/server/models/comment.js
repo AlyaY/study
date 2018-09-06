@@ -15,6 +15,10 @@ const CommentSchema = new Schema({
     user: { 
         type: Schema.Types.Object, 
         ref: 'user'
+    },
+    film: {
+        type: Schema.Types.Object, 
+        ref: 'film'
     }
 });
 

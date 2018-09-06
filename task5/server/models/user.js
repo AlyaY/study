@@ -20,30 +20,20 @@ const UserSchema = new Schema({
         unique : true,
         required: [true, 'email field is required']
     },
+    filmRate: [{ 
+        type: Schema.Types.Object, 
+        ref: 'rate'
+    }],
+    comment: [{ 
+        type: Schema.Types.Object, 
+        ref: 'comment'
+    }],
     hash: {
         type: String
     },
     salt: {
         type: String
     },
-    // avatar: {
-    //     type: String,
-    //     validate: {
-    //         validator: function(value) {
-    //             return urlRegex({exact: true, strict: false}).test(value);
-    //         },
-    //         message: props => `${props.value} is not a valid link!`
-    //     },
-    //     required: [true, 'Avatar field is required']
-    // },
-    films: [{ 
-        type: Schema.Types.Object, 
-        ref: 'film'
-    }],
-    comments: [{ 
-        type: Schema.Types.ObjectId, 
-        ref: 'comment'
-    }]
 });
 
 UserSchema.methods.setPassword = function(password) {
