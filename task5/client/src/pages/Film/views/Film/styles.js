@@ -10,6 +10,7 @@ const styles = {
     marginRight: '20px'
   },
   details: {
+    width: '68%',
     display: 'flex',
     flexDirection: 'column',
   },
@@ -19,17 +20,6 @@ const styles = {
   description: {
     marginBottom: '1em',
     lineHeight: '1.35'
-  },
-  gallery: {
-    display: 'flex',
-    alignItems: 'flex-start',
-    flexWrap: 'wrap'
-  },
-  galleryItem: {
-    height: '180px',
-    width: 'auto',
-    marginRight: '1%',
-    marginBottom: '1%'
   },
   rating: {
     marginBottom: '20px'

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Stars from 'react-stars'
+import ImageGallery from 'react-image-gallery';
 
 import { withStyles } from '@material-ui/core/styles';
 
@@ -11,6 +12,11 @@ const Film =  ({ avatar, gallery, title, description, rating, isLogin, classes, 
   const galleryList = gallery && gallery.map(
     (img) => (<img src={img} alt={title} className={classes.galleryItem} />)
   );
+
+  const images = gallery && gallery.map((src) => ({
+      original: src,
+      thumbnail: src,
+  }));
 
   return (
     <div className={classes.card}>
@@ -28,11 +34,7 @@ const Film =  ({ avatar, gallery, title, description, rating, isLogin, classes, 
           onChange={ratingChanged}
         />
         <p className={classes.description}>{description}</p>
-        { galleryList && 
-          <div className={classes.gallery}>
-            { galleryList }
-          </div>
-        }
+        <ImageGallery items={images} rowHeight={180} maxRows={1} margin={0} />
       </div>
     </div>
   )
