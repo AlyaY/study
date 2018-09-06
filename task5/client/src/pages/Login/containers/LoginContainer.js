@@ -5,24 +5,25 @@ import { connect } from 'react-redux';
 import LoginForm from '../views/LoginForm';
 import { validations, errorMessages } from '../constants';
 import { submitForm, updateError } from '../actions';
-import { setToken } from '../../../actions';
+import { setToken, setUserId } from '../../../actions';
 import { errorSelector, emailSelector, passwordSelector } from '../selectors';
 import { routers } from '../../../modules/Header/constants';
 import { login } from '../../../services';
 
 class LoginContainer extends Component {
   handleSubmit = (user) => {
-    const { submitForm, setToken, updateError, history} = this.props;
+    const { submitForm, setToken, setUserId, updateError, history} = this.props;
     submitForm(user);
 
     login(user)
-      .then(({ data: { user: { token }} }) => {
+      .then(({ data: { user: { token, _id }} }) => {
         setToken({ token });
+        setUserId({ userId: _id });
         updateError({ error: '' })
         history.push(routers[0].path);
       })
       .catch(({ response }) => {
-        updateError({ error: response.data.error || '' });
+        updateError({ error: response || '' });
       });
   }
 
@@ -61,6 +62,7 @@ LoginContainer.propTypes = {
   submitForm: PropTypes.func.isRequired,
   updateError: PropTypes.func.isRequired,
   setToken: PropTypes.func.isRequired,
+  setUserId: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -73,6 +75,7 @@ const mapDispatchToProps = dispatch => ({
   submitForm: data => dispatch(submitForm(data)),
   updateError: data => dispatch(updateError(data)),
   setToken: data => dispatch(setToken(data)),
+  setUserId: data => dispatch(setUserId(data)),
 });
 
 export default connect(

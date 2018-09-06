@@ -8,7 +8,8 @@ import { setFilm } from '../actions';
 import { filmSelector } from '../selectors';
 import { filmsSelector } from '../../Films/selectors';
 import { getFilm } from '../../../services';
-import { tokenSelector } from '../../../selectors';
+import { tokenSelector, userIdSelector } from '../../../selectors';
+import { setRating } from '../../../services';
 
 class FilmContainer extends Component {
   componentDidMount() {
@@ -33,10 +34,17 @@ class FilmContainer extends Component {
     setFilm({film: {}});
   }
 
+  ratingChanged = (rating) => {
+    const { userId, token, film } = this.props;
+    const body = { rating, user: userId, film: film._id}
+    setRating(token, body);
+  }
+
   render () {
     const props = { 
       ...this.props.film,  
-      isLogin: (this.props.token.length !== 0)
+      isLogin: (this.props.token.length !== 0),
+      ratingChanged: this.ratingChanged,
     };
 
     return <Film {...props} />
@@ -45,6 +53,7 @@ class FilmContainer extends Component {
 
 FilmContainer.propTypes = {
   token: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired,
   film: PropTypes.object.isRequired,
   films: PropTypes.array.isRequired,
   setFilm: PropTypes.func.isRequired,
@@ -52,6 +61,7 @@ FilmContainer.propTypes = {
 
 const mapStateToProps = state => ({
   token: tokenSelector(state),
+  userId: userIdSelector(state),
   film: filmSelector(state),
   films: filmsSelector(state),
 });

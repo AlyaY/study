@@ -20,7 +20,11 @@ export const getFilms = (sort = '', page = 1, perPage = 0) => {
 };
 export const getFilm = (id) => axios.get(`${API.FILM}${id}`);
 export const findFilms = (search) => axios.post(API.FILM,  { search });
-export const setRating = (token, rate) => axios.post(API.RATE,  { rate }, {
-    'Content-Type': 'application/json',
-    'Authorization': `Token ${token}` 
+export const setRating = (token, body) => axios.post(
+    API.RATE, 
+    { ...body }, 
+    { headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${token}` 
+    }
 });

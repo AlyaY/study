@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import style from './styles';
 
-const Film =  ({ avatar, gallery, title, description, rating, isLogin, classes }) => {
+const Film =  ({ avatar, gallery, title, description, rating, isLogin, classes, ratingChanged }) => {
 
   const galleryList = gallery && gallery.map(
     (img) => (<img src={img} alt={title} className={classes.galleryItem} />)
@@ -45,6 +45,7 @@ Film.propTypes = {
   gallery: PropTypes.array.isRequired,
   rating: PropTypes.number.isRequired,
   isLogin: PropTypes.bool.isRequired,
+  ratingChanged: PropTypes.func.isRequired,
 }
 
 export default withStyles(style)(Film);
