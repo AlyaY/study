@@ -9,12 +9,6 @@ const styles = {
   col: {
     marginRight: '30px',
   },
-  select: {
-    minWidth: '120px',
-  },
-  field: {
-    marginRight: '15px',
-  },
 }
 
 export default styles;

@@ -25,5 +25,4 @@ router.route('/:id')
     .put(checkFilmData, asyncHandler(put))
     .delete(asyncHandler(remove));
     
-
 export default router;

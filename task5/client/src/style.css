@@ -1,3 +1,5 @@
+/* @import "../node_modules/react-image-gallery/styles/css/image-gallery.css"; */
+
 html,
 body {
     padding: 0;
@@ -20,4 +22,18 @@ h1, h2, h3, h4, h5, h6, p {
     max-width: 1200px;
     margin: 0 auto;
     padding: 10px 15px;
+}
+
+.image-gallery-thumbnail {
+    width: auto;
+}
+
+.image-gallery-thumbnail img {
+    width: auto;
+    height: 100px;
+}
+
+.image-gallery-slide-wrapper {
+    max-height: 560px;
+    overflow: hidden;
 }

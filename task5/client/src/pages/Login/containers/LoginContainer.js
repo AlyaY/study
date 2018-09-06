@@ -5,19 +5,24 @@ import { connect } from 'react-redux';
 import LoginForm from '../views/LoginForm';
 import { validations, errorMessages } from '../constants';
 import { submitForm, updateError } from '../actions';
-import { setToken } from '../../../actions';
+import { setToken, setUserId } from '../../../actions';
 import { errorSelector, emailSelector, passwordSelector } from '../selectors';
 import { routers } from '../../../modules/Header/constants';
 import { login } from '../../../services';
 
 class LoginContainer extends Component {
+  componentWillUnmount() {
+    this.props.updateError({ error: '' })
+  }
+
   handleSubmit = (user) => {
-    const { submitForm, setToken, updateError, history} = this.props;
+    const { submitForm, setToken, setUserId, updateError, history} = this.props;
     submitForm(user);
 
     login(user)
-      .then(({ data: { user: { token }} }) => {
+      .then(({ data: { user: { token, _id }} }) => {
         setToken({ token });
+        setUserId({ userId: _id });
         updateError({ error: '' })
         history.push(routers[0].path);
       })
@@ -39,11 +44,8 @@ class LoginContainer extends Component {
   }
 
   render () {
-    const err = this.props.error;
-
     const props = {
-      err,
-      error: this.props.error,
+      err: this.props.error,
       onSubmit: this.handleSubmit,
       emailValidation: this.emailValidation,
       passwordValidation: this.passwordValidation,
@@ -61,6 +63,7 @@ LoginContainer.propTypes = {
   submitForm: PropTypes.func.isRequired,
   updateError: PropTypes.func.isRequired,
   setToken: PropTypes.func.isRequired,
+  setUserId: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -73,6 +76,7 @@ const mapDispatchToProps = dispatch => ({
   submitForm: data => dispatch(submitForm(data)),
   updateError: data => dispatch(updateError(data)),
   setToken: data => dispatch(setToken(data)),
+  setUserId: data => dispatch(setUserId(data)),
 });
 
 export default connect(

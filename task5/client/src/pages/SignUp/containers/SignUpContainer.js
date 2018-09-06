@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import SignUpForm from '../views/SignUpForm';
 import { validations, errorMessages } from '../constants';
 import { submitForm, updateError } from '../actions';
-import { setToken } from '../../../actions';
+import { setToken, setUserId } from '../../../actions';
 import { 
   errorSelector,
   nameSelector,
@@ -17,16 +17,22 @@ import { routers } from '../../../modules/Header/constants';
 import { signup } from '../../../services';
 
 class SignUpContainer extends Component {
+  componentWillUnmount() {
+    this.props.updateError({ error: '' })
+  }
+
   handleSubmit = (user) => {
-    this.props.submitForm(user);
+    const { submitForm, setToken, setUserId, updateError, history} = this.props;
+    submitForm(user);
 
     signup(user)
-      .then(({ data: { user: { token }} }) => {
-        this.props.setToken({ token });
-        this.props.history.push(routers[0].path);
+      .then(({ data: { user: { token, _id }} }) => {
+        setToken({ token });
+        setUserId({ userId: _id });
+        history.push(routers[0].path);
       })
       .catch( ({ response }) => {
-        this.props.updateError({ error: response.data.error || '' });
+        updateError({ error: response.data.error || '' });
       });
 
   }
@@ -76,6 +82,7 @@ SignUpContainer.propTypes = {
   email: PropTypes.string.isRequired,
   submitForm: PropTypes.func.isRequired,
   setToken: PropTypes.func.isRequired,
+  setUserId: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -90,6 +97,7 @@ const mapDispatchToProps = dispatch => ({
   submitForm: data => dispatch(submitForm(data)),
   updateError: data => dispatch(updateError(data)),
   setToken: data => dispatch(setToken(data)),
+  setUserId: data => dispatch(setUserId(data)),
 });
 
 export default connect(

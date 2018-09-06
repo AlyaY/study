@@ -35,7 +35,7 @@ const LoginForm = (props) => {
           label='Введите ваш пароль'
           validate={[requiredValidation, passwordValidation]}
         />
-        <p className={classes.error}>{err}</p>
+        <p className={classes.error}>{err && JSON.stringify(err)}</p>
         <button className={classes.button}>Войти</button>
       </form>
     </div>

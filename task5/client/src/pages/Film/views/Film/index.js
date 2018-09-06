@@ -1,16 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Stars from 'react-stars'
+import ImageGallery from 'react-image-gallery';
 
 import { withStyles } from '@material-ui/core/styles';
 
 import style from './styles';
 
-const Film =  ({ avatar, gallery, title, description, rating, isLogin, classes }) => {
-
-  const galleryList = gallery && gallery.map(
-    (img) => (<img src={img} alt={title} className={classes.galleryItem} />)
-  );
+const Film =  (props) => {
+  const {
+    avatar,
+    gallery,
+    title,
+    description,
+    rating,
+    isLogin,
+    classes,
+    ratingChanged,
+  } = props;
+  const images = gallery && gallery.map((src) => ({
+      original: src,
+      thumbnail: src,
+  }));
 
   return (
     <div className={classes.card}>
@@ -19,7 +30,7 @@ const Film =  ({ avatar, gallery, title, description, rating, isLogin, classes }
         <h1 className={classes.title}>{title}</h1>
         <Stars
           className={classes.rating}
-          value={rating}
+          value={Math.round(rating)}
           count={5}
           size={48}
           color2={'#ffd700'}
@@ -27,12 +38,9 @@ const Film =  ({ avatar, gallery, title, description, rating, isLogin, classes }
           half={false}
           onChange={ratingChanged}
         />
+        <p className={classes.ratingText}>Средний рейтинг: {rating}</p>
         <p className={classes.description}>{description}</p>
-        { galleryList && 
-          <div className={classes.gallery}>
-            { galleryList }
-          </div>
-        }
+        <ImageGallery items={images} rowHeight={180} maxRows={1} margin={0} />
       </div>
     </div>
   )
@@ -45,6 +53,7 @@ Film.propTypes = {
   gallery: PropTypes.array.isRequired,
   rating: PropTypes.number.isRequired,
   isLogin: PropTypes.bool.isRequired,
+  ratingChanged: PropTypes.func.isRequired,
 }
 
 export default withStyles(style)(Film);
